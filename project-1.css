@@ -4,5 +4,28 @@
 }
 
 body {
-    color: red;
+    background-color: #ffffff;
+    color: #ffffff;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+#logo {
+    text-transform: uppercase;
+    font-size: 100px;
+    background-color: #409452;
+    padding: 0px 0px;
+    width: 300px;
+    height: 100px;
+    margin: 40px 0px 20px 100px;
+    font-style: italic;
+    transform: rotate(-10deg);
+    position: relative;
+}
+
+#check {
+    font-size: 100px;
+    position: absolute;
+    left: 154px;
+    transform: rotate(6deg);
 }
