@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    --main-text-color: #f5ef9d;
 }
 
 body {
@@ -10,7 +11,7 @@ body {
     overflow-x: hidden;
 }
 
-#logo:hover {
+#site-head:hover {
     font-size: 85px;
     transition: font-size 1s;
 }
@@ -27,6 +28,7 @@ body {
     text-transform: uppercase;
     letter-spacing: -0.1em;
     transform: rotate(-10deg);
+    color: var(--main-text-color);
 }
 
 #search {
@@ -48,11 +50,27 @@ body {
     transition: background-color 1s;
 }
 
+#search::placeholder {
+    color: #40945249;
+}
+
+#search-btn {
+    margin: 20px 40px;
+    background-color: #409452;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 0px;
+}
+
 #check {
-    font-size: 108px;
+    font-size: 107px;
     position: absolute;
-    left: 168px;
-    transform: rotate(6deg);
+    left: 167px;
+    color: var(--main-text-color);
+    transform: rotate(4deg);
 }
 
 .medo {
@@ -70,6 +88,7 @@ body {
     text-transform: uppercase;
     letter-spacing: -0.1em;
     transform: rotate(-10deg);
+    color: var(--main-text-color);
 }
 
 .new-media {
