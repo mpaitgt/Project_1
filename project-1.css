@@ -2,28 +2,17 @@
     margin: 0;
     padding: 0;
     --main-text-color: #f5ef9d;
+    --main-green: #409452;
 }
 
 body {
     background-color: #ffffff;
-    color: #ffffff;
     text-align: center;
     overflow-x: hidden;
 }
 
-#logo:hover {
-    font-size: 85px;
-    transition: font-size 1s;
-}
-
-#logo {
-    transition: font-size 1s;
-    font-size: 100px;
-    background-color: #409452;
-    padding: 0px 0px;
-    width: 300px;
-    height: 100px;
-    margin: 40px 0px 20px 100px;
+/* ---------- Branded styling ---------- */
+.medo-style {
     font-style: italic;
     text-transform: uppercase;
     letter-spacing: -0.1em;
@@ -31,15 +20,33 @@ body {
     color: var(--main-text-color);
 }
 
+#logo {
+    font-size: 100px;
+    background-color: var(--main-green);
+    padding: 0px 0px;
+    width: 300px;
+    height: 100px;
+    margin: 40px 0px 20px 100px;
+}
+
+#check {
+    font-size: 107px;
+    position: absolute;
+    left: 167px;
+    color: var(--main-text-color);
+    transform: rotate(4deg);
+}
+
+/* ---------- Search bar ---------- */
 #search {
     margin: 20px 40px;
     font-size: 74px;
     font-style: italic;
     border: none;
-    border-bottom: 10px solid #409452!important;
+    border-bottom: 10px solid var(--main-green)!important;
     font-weight: bolder;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--main-green);
     transition: background-color 1s;
     background-color: #ffffff;
 }
@@ -56,46 +63,34 @@ body {
 
 #search-btn {
     margin: 20px 40px;
-    background-color: #409452;
+    background-color: var(--main-green);
     border: none;
     color: #ffffff;
     text-transform: uppercase;
     font-size: 28px;
     font-weight: bold;
     padding: 0px;
+    transition: background-color 0.5s, color 0.25s, border 0.5s;
 }
 
-#check {
-    font-size: 107px;
-    position: absolute;
-    left: 167px;
-    color: var(--main-text-color);
-    transform: rotate(4deg);
+#search-btn:hover {
+    background-color: var(--main-text-color);
+    color: var(--main-green);
+    border: 3px solid var(--main-green);
+    transition: background-color 0.5s, color 0.25s, border 0.5s;
 }
 
+/* ---------- Medo boxes ---------- */
 .medo {
     margin-top: 60px;
-    background-color: #409452;
-    height: auto;
+    background-color: var(--main-green);
+    height: 100px;
     font-size: 60px;
-    transition: font-size 0.5s;
 }
 
-.medo:hover {
-    font-size: 62px;
-    transition: font-size 0.5s;
-}
-
-.medo-category {
-    text-transform: uppercase;
+.medo-box {
     width: 100%;
-    margin: 0 auto;
-    font-style: italic;
     font-size: inherit;
-    text-transform: uppercase;
-    letter-spacing: -0.1em;
-    transform: rotate(-10deg);
-    color: var(--main-text-color);
 }
 
 .new-media {
