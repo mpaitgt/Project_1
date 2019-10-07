@@ -11,7 +11,7 @@ body {
     overflow-x: hidden;
 }
 
-#site-head:hover {
+#logo:hover {
     font-size: 85px;
     transition: font-size 1s;
 }
@@ -76,7 +76,14 @@ body {
 .medo {
     margin-top: 60px;
     background-color: #409452;
-    height: 400px;
+    height: auto;
+    font-size: 60px;
+    transition: font-size 0.5s;
+}
+
+.medo:hover {
+    font-size: 62px;
+    transition: font-size 0.5s;
 }
 
 .medo-category {
@@ -84,7 +91,7 @@ body {
     width: 100%;
     margin: 0 auto;
     font-style: italic;
-    font-size: 60px;
+    font-size: inherit;
     text-transform: uppercase;
     letter-spacing: -0.1em;
     transform: rotate(-10deg);
