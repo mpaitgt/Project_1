@@ -40,7 +40,7 @@ body {
 /* ---------- Search bar ---------- */
 #search {
     margin: 20px 40px;
-    font-size: 74px;
+    font-size: 60px;
     font-style: italic;
     border: none;
     border-bottom: 10px solid var(--main-green)!important;
@@ -93,10 +93,8 @@ body {
     font-size: inherit;
 }
 
-.new-media {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    list-style: none;
+.medo-item {
+    font-size: 20px;
 }
 
 @media screen and (max-width: 1068px) {
