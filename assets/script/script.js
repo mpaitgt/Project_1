@@ -1,23 +1,9 @@
 // // Global variables
-// requirejs.config({
-//     baseUrl: 'js/lib',
-//     paths: {
-//         // the left side is the module ID,
-//         // the right side is the path to
-//         // the jQuery file, relative to baseUrl.
-//         // Also, the path should NOT include
-//         // the '.js' file extension. This example
-//         // is using jQuery 1.9.0 located at
-//         // js/lib/jquery-1.9.0.js, relative to
-//         // the HTML page.
-//         jquery: 'jquery-3.4.1'
-//     }
-// });
-// var Spotify, s, spotifyApi;
-const movieBtn = $('#movie-btn').on('click', addMovie);
-const musicBtn = $('#music-btn').on('click', addMusic);
-let movieArray = [];
-let musicArray = [];
+const movieSelector = $('#movie-btn').on('click', addMovie);
+const musicSelector = $('#music-btn').on('click', addMusic);
+const musicBtn = $(document).on('click', '.music-item', musicMEDO);
+const removeBtn = $(document).on('click', '.remove', removeItem);
+var musicSelection;
 
 // ------------------------------------------------------------ Firebase configuration
   // Your web app's Firebase configuration
@@ -34,79 +20,6 @@ let musicArray = [];
   firebase.initializeApp(firebaseConfig);
 
 
-// require(['spotify-web-api-js'], function (Spotify) {
-//     // foo is now loaded.
-//     spotifyApi = new SpotifyWebApi();
-//     spotifyApi.setAccessToken('2bc509995dmsh8326cbc86baf20dp1bcc38jsnf0bffeeb17c5');
-//     // spotifyApi.setPromiseImplementation(Q);
-
-//     // get Elvis' albums, passing a callback. When a callback is passed, no Promise is returned
-//     spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE', function(err, data) {
-//         if (err) console.error(err);
-//         else console.log('Artist albums', data);
-//     });
-//     // get Elvis' albums, using Promises through Promise, Q or when
-//     spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
-//     .then(function(data) {
-//         console.log('Artist albums', data);
-//     }, function(err) {
-//         console.error(err);
-//     });
-// });
-
-// authorizeSpotify();
-// function authorizeSpotify() {
-//     $.ajax({
-
-//     }), function() {
-//         'client_id': '',
-//         'response_type': '',
-//         'redirect_url': ''
-//     }, function(result) {
-
-//     }
-// }
-
-// function requestToken() {
-//     $.ajax(
-//         {
-//           method: "POST",
-//           url: "https://accounts.spotify.com/api/token",
-//           data: {
-//             "grant_type":    "authorization_code",
-//             "code":          code,
-//             "redirect_uri":  "localhost",
-//             "client_secret": "",
-//             "client_id":     "",
-//           },
-//           success: function(result) {
-//                 configureSpotify(result)
-//           },
-//         }
-//       );
-// }
-
-// function configureSpotify(token){
-//     require(['spotify-web-api-js'], function (Spotify) {
-//         // foo is now loaded.
-//         spotifyApi = new SpotifyWebApi();
-//         console.log(spotifyApi);
-//         spotifyApi.setAccessToken('BQBcYS-E2-ce6qSORz3v-a9Vh3JRwQb73aCHTsZIQDnU64gprfI_zUS-lyli9YSeMEVaVpuPIU0WGjugmpji_ip7ox3JMvzGkDySN4Dpt3O352Xs7wVjKPXqxB91SlmXQRXDIOw5pIkSZOLV8ZFCWicipOOHnixx9IuIaRtNQQ03UO7B6WXswUaAVYfda0Ay0AATLMFusJA0iXaj41YSf5FMtMOJija8OF13OQJD33yaz9ILeo8AXHe2PLZVhtOqH1b6kTPJvh6-');
-//         // spotifyApi.setPromiseImplementation(Q);
-//         // get Elvis' albums, passing a callback. When a callback is passed, no Promise is returned
-//         spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE', function(err, data) {
-//             if (err) console.error(err);
-//             else console.log('Artist albums', data);
-//         });
-//         // get Elvis' albums, using Promises through Promise, Q or when
-//         spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
-//         .then(function(data) {
-//             console.log('Artist albums', data);
-//         }, function(err) {
-//             console.error(err);
-//         });
-//     });
-// }
 
 // ---------------------------------------------------------TMDB
 var APIkey = '95a6c9d4de568b3ebaa4ea26320798b4';
@@ -124,28 +37,30 @@ $.ajax({
         url: detailsURL,
         method: 'GET'
     }).then(function(response) {
-        console.log(response);
+
         var userChoice = response.videos.results[3].key;
         var youTube = 'http://www.youtube.com/embed/' + userChoice;
-        console.log(youTube);
+
     });
 });
-// ---------------------------------------------------------
+
 
 function addMovie() {
     if ( $('#search').val() === '') {
         return;
     } else {
         var userInput = $('#search').val();                 // define the search value
-        movieArray.push(userInput);                         // push the value of the search bar to the musicArray
-        var newRow = $('<tr>').attr('class', 'medo-item');  // create a table row dynamically, add 'medo-item' class
+        // movieArray.push(userInput);                         // push the value of the search bar to the musicArray
+        var newRow = $('<tr>').attr('class', 'movie-item');  // create a table row dynamically, add 'medo-item' class
         var newItem = $('<td>').attr({                      // create a new table data, add the modal attributes
+            'class': 'movie-item',
             'data-toggle': "modal", 
-            'data-target': "#movieModal"
+            'data-target': "#movieModal",
+            'data-name': userInput
         });    
 
         newItem.text(userInput);                            // take the value in the search bar and make it the text of the table data
-        var newButton = $('<button>').text('X');            // create a button give it an id of remove
+        var newButton = $('<button>').text('X').attr('class', 'remove');            // create a button give it an id of remove
         $('#search').val('');                               // empty the input value of the search bar
         newRow.append(newItem, newButton);                  // append the search term and the button the newly created table row
         $('#movie-medo').prepend(newRow);                   // prepend the table tow to the t-body id 'music-medo'
@@ -159,14 +74,17 @@ function addMusic() {
         return;
     } else {
         var userInput = $('#search').val();                 // define the search value
-        musicArray.push(userInput);                         // push the value of the search bar to the musicArray
-        var newRow = $('<tr>').attr('class', 'medo-item');  // create a table row dynamically, add 'medo-item' class
+        // musicArray.push(userInput);                         // push the value of the search bar to the musicArray
+        var newRow = $('<tr>');                             // create a table row dynamically, add 'medo-item' class
         var newItem = $('<td>').attr({                      // create a new table data, add the modal attributes
+            'class': 'music-item',
             'data-toggle': "modal", 
-            'data-target': "#musicModal"
-        });                
+            'data-target': "#musicModal",
+            'data-name': userInput
+        });     
+                   
         newItem.text(userInput);                            // take the value in the search bar and make it the text of the table data
-        var newButton = $('<button>').text('X');            // create a button give it an id of remove
+        var newButton = $('<button>').text('X').attr('class', 'remove');             // create a button give it an id of remove
         $('#search').val('');                               // empty the input value of the search bar
         newRow.append(newItem, newButton);                  // append the search term and the button the newly created table row
         $('#music-medo').prepend(newRow);                   // prepend the table tow to the t-body id 'music-medo'
@@ -184,6 +102,39 @@ function movieMEDO() {
 }
 
 function musicMEDO() {
+    var musicSelector = $(this).attr('data-name');
+    console.log(musicSelector);
+    console.log($(this));
+    console.log(this);
+    var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
+    var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + musicSelector + '&api_key=' + lastfmKEY + '&format=json';
+
+    $.ajax({
+        url: lastfmURL,
+        method: 'GET'
+    }).then(function(response) {
+ 
+        var bandName = response.artist.name;
+        var bandBio = response.artist.bio.summary;
+        var genre = response.artist.tags.tag;                   // array
+        var bandPhoto = response.artist.image[1];               // array
+        var similarBands = response.artist.similar.artist;      // array
+
+        $('#band-name').text(bandName);                             // filling in the band name
+        $('#band-bio').html(bandBio);                               // filling in the band bio
+
+        $('#genre').empty();
+        for (var j = 0; j < genre.length; j++) {                    // filling in all of the genre tags
+            var genreLoop = $('<span>').text(genre[j].name + ' ');
+            $('#genre').append(genreLoop);
+        }
+
+        $('#similar-bands').empty();
+        for (var i = 0; i < similarBands.length; i++) {             // filling in all of the similar bands
+            var bandLoop = $('<h6>').text(similarBands[i].name);
+            $('#similar-bands').append(bandLoop);
+        }
+    });
     // make an ajax call to Spotify and pull the responses you want
     // add the fields you'd like to pull to the modal so that the content can just fill in the blanks
     // include name of the band/artist, genre, a press photo, a small bio, and top 5 tracks from that artist / *music video*?
@@ -193,7 +144,7 @@ function musicMEDO() {
 
 function removeItem() {
     // create a variable // var key = medoItem.attr('data-name);
-    // detach $(this) table row (use the closest method)
+    $(this).closest('tr').detach();
     // remove this item from Firebase
 }
 

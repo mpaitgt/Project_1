@@ -102,3 +102,7 @@ body {
         font-size: 48px;
     }
 }
+
+.custom-modal {
+    padding: 50px;
+}
