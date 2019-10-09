@@ -41,6 +41,13 @@ $.ajax({
         var userChoice = response.videos.results[3].key;
         var youTube = 'http://www.youtube.com/embed/' + userChoice;
 
+        var newVideo = $('<iframe>').attr({
+            'src': youTube,
+            'height': '400px',
+            'width': '600px'
+        });
+
+        $('body').append(newVideo);
     });
 });
 
@@ -113,16 +120,12 @@ function musicMEDO() {
         url: lastfmURL,
         method: 'GET'
     }).then(function(response) {
- 
         var bandName = response.artist.name;
         var bandBio = response.artist.bio.summary;
         var genre = response.artist.tags.tag;                   // array
-        var bandPhoto = response.artist.image[1];               // array
         var similarBands = response.artist.similar.artist;      // array
 
-        $('#band-name').text(bandName);                             // filling in the band name
         $('#band-bio').html(bandBio);                               // filling in the band bio
-
         $('#genre').empty();
         for (var j = 0; j < genre.length; j++) {                    // filling in all of the genre tags
             var genreLoop = $('<span>').text(genre[j].name + ' ');
@@ -134,6 +137,23 @@ function musicMEDO() {
             var bandLoop = $('<h6>').text(similarBands[i].name);
             $('#similar-bands').append(bandLoop);
         }
+
+        var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + musicSelector + '&api_key=' + lastfmKEY + '&format=json';
+        $.ajax({
+            url: lastfmDetails,
+            method: 'GET'
+        }).then(function(response) {
+            console.log(response);
+            $('#band-name').text(bandName);                             // filling in the band name
+
+            var bandPhoto = response.topalbums.album[0].image[0]['#text'];      // array
+            console.log(bandPhoto);
+            $('#band-image').attr({
+                'src': bandPhoto,
+                'height': '250px',
+                'width': '250px'
+            })
+        })
     });
     // make an ajax call to Spotify and pull the responses you want
     // add the fields you'd like to pull to the modal so that the content can just fill in the blanks
