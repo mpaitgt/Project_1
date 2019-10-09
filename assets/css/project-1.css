@@ -1,106 +1,328 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,400|Syncopate:400,700&display=swap');
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Raleway', sans-serif;
+    /*Color Scheme*/
     --main-text-color: #f5ef9d;
     --main-green: #409452;
+    --mint-green: rgba(171, 232, 198, 1);
+    --sub-green: rgba(185, 209, 125, 1);
+    --main-red: rgba(137, 88, 104, 1);
+    /*alternate scheme, navy gold, green*/
+    --navy: #293250;
+    --blue: #210070;
+    --gold: #ffd55a;
+    --green: #6dd47e;
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #fffddc;
     text-align: center;
     overflow-x: hidden;
 }
 
+
 /* ---------- Branded styling ---------- */
+
 .medo-style {
-    font-style: italic;
-    text-transform: uppercase;
-    letter-spacing: -0.1em;
+    /*font-style: italic;*/
+    /*text-transform: uppercase;*/
+    /*letter-spacing: -0.1em;*/
     /* transform: rotate(-10deg); */
-    color: var(--main-text-color);
+    color: var(--gold);
 }
 
 #logo {
-    font-size: 100px;
-    background-color: var(--main-green);
-    padding: 0px 0px;
-    width: 300px;
-    height: 100px;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    background-color: var(--blue);
+    padding: 5px;
+    width: 275px;
+    /*height: 75px;*/
     margin: 40px 0px 20px 100px;
 }
 
-/* #check {
-    font-size: 107px;
+.medo-inline {
+    font-family: 'Syncopate', sans-serif;
+    font-weight: bold;
+    color: var(--gold);
+    background-color: var(--blue);
+    padding: 5px;
+    margin: 0px 5px;
+    /*height: 75px;*/
+}
+
+
+/*#check {
+    font-size: 56px;
     position: absolute;
     left: 167px;
-    color: var(--main-text-color);
+    color: var(--green);
     transform: rotate(4deg);
-} */
+}*/
+
 
 /* ---------- Search bar ---------- */
+
 #search {
     margin: 20px 40px;
-    font-size: 74px;
-    font-style: italic;
+    padding: 10px;
+    font-size: 24px;
+    /*font-style: italic;*/
     border: none;
-    border-bottom: 10px solid var(--main-green)!important;
-    font-weight: bolder;
+    border-bottom: 3.5px solid var(--blue)!important;
     text-transform: uppercase;
-    color: var(--main-green);
+    color: var(--navy);
     transition: background-color 1s;
     background-color: #ffffff;
     text-align: center;
 }
 
-#search:active {
+#search:focus {
     outline: none !important;
-    background-color: #40945249;
+    background-color: #9dd6a6;
     transition: background-color 1s;
 }
 
 #search::placeholder {
-    color: #40945249;
+    font-family: 'Raleway', sans-serif;
+    color: #2932506c;
 }
 
-#search-btn {
+
+/*#search-btn {
     margin: 20px 40px;
-    background-color: var(--main-green);
+    background-color: var(--navy);
     border: none;
-    color: #ffffff;
+    color: var(--gold);
     text-transform: uppercase;
     font-size: 42px;
     font-weight: bold;
     padding: 0px;
     transition: background-color 0.5s, color 0.25s, border 0.5s;
-}
+}*/
 
-#search-btn:hover {
-    background-color: var(--main-text-color);
-    color: var(--main-green);
-    border: 3px solid var(--main-green);
+#search-btn:focus {
+    background-color: var(--gold);
+    color: var(--navy);
+    border: 3px solid var(--navy);
     transition: background-color 0.5s, color 0.25s, border 0.5s;
 }
 
+
 /* ---------- Medo boxes ---------- */
+
 .medo {
+    width: 100%;
     margin-top: 60px;
-    background-color: var(--main-green);
-    font-size: 60px;
+    background-color: var(--blue);
+    font-size: 56px;
 }
 
 .medo-box {
     width: 100%;
-    font-size: inherit;
+    font-size: 40px;
 }
 
 .new-media {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    list-style: none;
+    width: 100%;
+    color: var(--navy);
+    background-color: var(--gold);
+    border: solid 1.5px var(--navy);
+    border-bottom: solid 3px var(--navy);
+    border-top: none;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+footer {
+    border-top: solid 4px var(--gold);
+    font-size: 10px;
+    background-color: var(--navy);
+    color: white;
 }
 
 @media screen and (max-width: 1068px) {
     #search {
         font-size: 48px;
     }
+}
+
+
+/*Hover.css Transitions*/
+
+
+/*Hover.css Transitions*/
+
+
+/*Hover.css Transitions*/
+
+
+/*Hover.css Transitions*/
+
+
+/*Hover.css Transitions*/
+
+
+/* Ripple In */
+
+@-webkit-keyframes hvr-ripple-in {
+    100% {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes hvr-ripple-in {
+    100% {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 1;
+    }
+}
+
+.hvr-ripple-in {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+}
+
+.hvr-ripple-in:before {
+    content: '';
+    position: absolute;
+    border: var(--green) solid 4px;
+    top: -12px;
+    right: -12px;
+    bottom: -12px;
+    left: -12px;
+    opacity: 0;
+    -webkit-animation-duration: 2s;
+    animation-duration: 1s;
+}
+
+.hvr-ripple-in:hover:before,
+.hvr-ripple-in:focus:before,
+.hvr-ripple-in:active:before {
+    -webkit-animation-name: hvr-ripple-in;
+    animation-name: hvr-ripple-in;
+}
+
+
+/* Float Shadow */
+
+.hvr-float-shadow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.hvr-float-shadow:before {
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height: 10px;
+    width: 80%;
+    opacity: 0;
+    background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
+    /* W3C */
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-property: transform, opacity;
+    transition-property: transform, opacity;
+}
+
+.hvr-float-shadow:hover,
+.hvr-float-shadow:focus,
+.hvr-float-shadow:active {
+    -webkit-transform: translateY(-7px);
+    transform: translateY(-7px);
+    /* move the element up by 5px */
+}
+
+.hvr-float-shadow:hover:before,
+.hvr-float-shadow:focus:before,
+.hvr-float-shadow:active:before {
+    opacity: 1;
+    -webkit-transform: translateY(7px);
+    transform: translateY(7px);
+    /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+
+/* Shutter Out Vertical */
+
+.hvr-shutter-out-vertical {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    background: #ffffff;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.hvr-shutter-out-vertical:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--gold);
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.hvr-shutter-out-vertical:hover,
+.hvr-shutter-out-vertical:focus,
+.hvr-shutter-out-vertical:active {
+    color: var(--navy);
+    font-style: italic;
+    font-weight: 400;
+    transition: color, .2s;
+    transition: font-style, .2s;
+    transition: font-weight, .2s;
+}
+
+.hvr-shutter-out-vertical:hover:before,
+.hvr-shutter-out-vertical:focus:before,
+.hvr-shutter-out-vertical:active:before {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
 }
