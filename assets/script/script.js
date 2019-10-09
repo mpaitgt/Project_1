@@ -88,7 +88,8 @@ function addMusic() {
         // musicArray.push(userInput);                         // push the value of the search bar to the musicArray
         var newRow = $('<tr>');                             // create a table row dynamically, add 'medo-item' class
         var newItem = $('<td>').attr({                      // create a new table data, add the modal attributes
-            'class': 'music-item',
+            'class': 'music-item list-group-item hvr-shutter-out-vertical',
+
             'data-toggle': "modal", 
             'data-target': "#musicModal",
             'data-name': userInput

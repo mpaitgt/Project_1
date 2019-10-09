@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
-<link rel="stylesheet" href="assets/css/project-1.css">
-<title>
-</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+
+    <head>
+        <!--This is ref to animate.css-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    </head>
+    <!--<link href="css/hover-min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="assets/css/project-1.css">
+    <title>
+    </title>
 </head>
+
 <body>
 
 <!-- Movie Modal -->
@@ -38,41 +46,46 @@
 
 <!-- Site Header and search bar -->
     <div class="container-fluid">
-        <div class="row site-head">
-            <h1 id="logo" class="medo-style mx-auto">Medo</h1>
+        <div class="row site-head rounded">
+            <h1 id="logo" class="medo-style mx-auto animated lightSpeedIn delay-.5s rounded">medo</h1>
         </div>
         <div class="row col-lg-12">
-                <input type="text" id="search" class="col-lg-8 mx-auto" autocomplete="off" placeholder="add a recommendation">
+                <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
+        </div>
+
+<!-- Instruction -->
+        <div class="row col-lg-12 mx-auto justify-content-center">
+            <p class="animated fadeIn delay-2s">Type in items for your
+                <span class="medo-inline rounded">MeDo</span> list above,<br> then click on the List you would like it to appear in!</p>
+        </div>
 
 <!-- MEDO containers -->
-        </div>
-        <div class="container">
-            <div class="row">
-                <!-- Movies -->
-                <div class="col-5 mx-auto medo">
-                    <table>
-                        <thead>
-                            <h2 id="movie-btn" class="medo-box text-center medo-style">Movies</h2>
-                        </thead>
-                        <tbody id="movie-medo">
-                        </tbody>
-                    </table>
+    <div class="container-fluid">
+            <!-- Movies -->
+            <div class="row animated slideInLeft delay-1.25s">
+                <div class="col-4 mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
+                    <div class="col-4 mx-auto text-left rounded">
+                        <table class="list-group list-group-flush px-1 pb-2 new-media">
+                            <tbody id="movie-medo">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <!-- Music -->
-                <div class="col-5 mx-auto medo">
-                    <table>
-                        <thead>
-                           <tr>
-                            <h2 id="music-btn" class="medo-box text-center medo-style">Music</h2>
-                           </tr> 
-                        </thead>
-                        <tbody id="music-medo">
-                        </tbody>
-                    </table>
+            <!-- Music -->
+                <div class="col-4 mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
+                    <div class="col-4 mx-auto text-left rounded">
+                        <table class="list-group list-group-flush px-1 pb-2 new-media">
+                            <tbody id="music-medo">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+<footer class="row col-lg-12 justify-content-center mx-auto py-4 ">
+<hr>Copyright Yo Mamma, 2019-Present. We'll find you!</footer>
 
 <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
@@ -83,4 +96,5 @@
 <script src='js/lib/spotify-web-api-js.js'></script> -->
 <script src="assets/script/script.js"></script>
 </body>
+
 </html>
