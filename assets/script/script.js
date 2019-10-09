@@ -128,8 +128,8 @@ function musicMEDO() {
     }).then(function(response) {
         var bandName = response.artist.name;
         var bandBio = response.artist.bio.summary;
-        var genre = response.artist.tags.tag;                   // array
-        var similarBands = response.artist.similar.artist;      // array
+        var genre = response.artist.tags.tag;                       // array
+        var similarBands = response.artist.similar.artist;          // array
 
         $('#band-bio').html(bandBio);                               // filling in the band bio
         $('#genre').empty();
@@ -161,11 +161,6 @@ function musicMEDO() {
             })
         })
     });
-    // make an ajax call to Spotify and pull the responses you want
-    // add the fields you'd like to pull to the modal so that the content can just fill in the blanks
-    // include name of the band/artist, genre, a press photo, a small bio, and top 5 tracks from that artist / *music video*?
-    // also any cool content you can find!
-    // make the modal appear when the item is clicked
 }
 
 function removeItem() {
