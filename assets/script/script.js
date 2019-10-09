@@ -30,14 +30,16 @@ $.ajax({
     method: 'GET'
 }).then(function(response) {
     var movieObject = response.results[0];
+    console.log(movieObject);
     var queryDetails = movieObject.id;
-    var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
+    var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
+    // var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
 
     $.ajax({
         url: detailsURL,
         method: 'GET'
     }).then(function(response) {
-
+        console.log(response);
         var userChoice = response.videos.results[3].key;
         var youTube = 'http://www.youtube.com/embed/' + userChoice;
 
