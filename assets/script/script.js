@@ -70,8 +70,9 @@ function addMovie() {
 
         newItem.text(userInput);                            // take the value in the search bar and make it the text of the table data
         var newButton = $('<button>').text('X').attr('class', 'remove');            // create a button give it an id of remove
+        var newLike = $('<button>').text('Recs').attr('class', 'recs');
         $('#search').val('');                               // empty the input value of the search bar
-        newRow.append(newItem, newButton);                  // append the search term and the button the newly created table row
+        newRow.append(newItem, newLike, newButton);                  // append the search term and the button the newly created table row
         $('#movie-medo').prepend(newRow);                   // prepend the table tow to the t-body id 'music-medo'
 
         // do this with Firebase configuration *IF YOU CAN* Also give the new item a data-name of the Firebase key
@@ -93,9 +94,11 @@ function addMusic() {
         });     
                    
         newItem.text(userInput);                            // take the value in the search bar and make it the text of the table data
-        var newButton = $('<button>').text('X').attr('class', 'remove');             // create a button give it an id of remove
+        var newButton = $('<button>').text('X').attr('class', 'remove');      // create a button give it an id of remove
+        var newLike = $('<button>').text('Recs').attr('class', 'recs');
+        
         $('#search').val('');                               // empty the input value of the search bar
-        newRow.append(newItem, newButton);                  // append the search term and the button the newly created table row
+        newRow.append(newItem, newLike, newButton);                  // append the search term and the button the newly created table row
         $('#music-medo').prepend(newRow);                   // prepend the table tow to the t-body id 'music-medo'
 
         // do this with Firebase configuration *IF YOU CAN* Also give the new item a data-name of the Firebase key
