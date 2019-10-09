@@ -106,3 +106,8 @@ body {
 .custom-modal {
     padding: 50px;
 }
+
+#band-image {
+    text-align: center;
+    margin: 0 auto;
+}

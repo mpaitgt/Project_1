@@ -29,6 +29,7 @@ $.ajax({
     url: queryURL,
     method: 'GET'
 }).then(function(response) {
+    
     var movieObject = response.results[0];
     console.log(movieObject);
     var queryDetails = movieObject.id;
@@ -151,7 +152,7 @@ function musicMEDO() {
             console.log(response);
             $('#band-name').text(bandName);                             // filling in the band name
 
-            var bandPhoto = response.topalbums.album[0].image[0]['#text'];      // array
+            var bandPhoto = response.topalbums.album[0].image[3]['#text'];      // array
             console.log(bandPhoto);
             $('#band-image').attr({
                 'src': bandPhoto,
