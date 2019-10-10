@@ -101,7 +101,7 @@ function addMusic() {
         
         $('#search').val('');                               // empty the input value of the search bar
         newRow.append(newItem, newLike, newButton);                  // append the search term and the button the newly created table row
-        $('#music-medo').prepend(newRow);                   // prepend the table tow to the t-body id 'music-medo'
+        $('#music-medo').prepend(newRow);                  // prepend the table tow to the t-body id 'music-medo'
 
         // do this with Firebase configuration *IF YOU CAN* Also give the new item a data-name of the Firebase key
     }
