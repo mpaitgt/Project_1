@@ -70,7 +70,6 @@ body {
     margin: 20px 40px;
     padding: 10px;
     font-size: 24px;
-    /*font-style: italic;*/
     border: none;
     border-bottom: 3.5px solid var(--blue)!important;
     text-transform: uppercase;
@@ -90,7 +89,6 @@ body {
     font-family: 'Raleway', sans-serif;
     color: #2932506c;
 }
-
 
 /*#search-btn {
     margin: 20px 40px;
@@ -124,19 +122,7 @@ body {
 .medo-box {
     width: 100%;
     font-size: 40px;
-}
-
-.new-media {
-    width: 100%;
-    color: var(--navy);
-    background-color: var(--gold);
-    border: solid 1.5px var(--navy);
-    border-bottom: solid 3px var(--navy);
-    border-top: none;
-    font-size: 18px;
-    font-weight: 400;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 footer {
@@ -144,6 +130,7 @@ footer {
     font-size: 10px;
     background-color: var(--navy);
     color: white;
+    width: 100%;
 }
 
 @media screen and (max-width: 1068px) {
@@ -152,18 +139,34 @@ footer {
     }
 }
 
+.custom-modal {
+    padding: 50px;
+}
 
-/*Hover.css Transitions*/
+#band-image {
+    text-align: center;
+    margin: 0 auto;
+}
 
+ul {
+    width: 100%;
+}
 
-/*Hover.css Transitions*/
+li {
+    list-style: none;
+    width: 100%;
+    cursor: pointer;
+}
 
+button {
+    background-color: transparent;
+    border: none;
+    color: var(--blue);
+}
 
-/*Hover.css Transitions*/
-
-
-/*Hover.css Transitions*/
-
+.remove {
+    text-align: right;
+}
 
 /*Hover.css Transitions*/
 
