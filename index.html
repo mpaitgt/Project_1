@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
-<link rel="stylesheet" href="assets/css/project-1.css">
-<title>
-</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/project-1.css">
+    <title>
+    </title>
 </head>
+
 <body>
-    <div class="container-fluid">
+    <!--<div class="container-fluid">
         <div class="row site-head">
             <h1 id="logo" class="medo-style mx-auto">Medo</h1>
         </div>
@@ -32,10 +34,70 @@
             </div>
         </div>
     </div>
+ -->
+<!--Latest Attempt-->
+ <div class="container">
+        <h1>Movie Search</h1>
+    
+        <!--Rendered Buttons will get Dumped Here -->
+        <div id="buttons-view"></div>
+    
+        <form id="movie-form">
+          <label for="movie-input">Add a Movie, Yo!</label>
+          <input type="text" id="movie-input">
+          <br>
+    
+          Button triggers new movie to be added 
+          <input id="add-movie" type="submit" value="Add a Movie, Yo!">
+        </form>
+    
+        Movies will Get Dumped Here 
+        <div id="movies-view"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="assets/script/script.js"></script>
+<!-- MDB code - just pulls the image
+    <div class="container">
+        <h2>Latest Attempt</h2>
+
+        <form>
+
+            <div class="form-group">
+                <input type="text" id="inputValue">
+            </div>
+
+            <button type="submit" id="search">Search a movie</button>
+        </form>
+    </div>
+
+      //contains movie data
+    <div id="movie-searchable"></div>
+  
+-->  
+    
+
+    <!-- OMDB - THIS Works
+       <div class="container">
+        <h1>Movie Search</h1>
+    
+        <Rendered Buttons will get Dumped Here  
+        <div id="buttons-view"></div>
+    
+        <form id="movie-form">
+          <label for="movie-input">Add a Movie, Yo!</label>
+          <input type="text" id="movie-input">
+          <br>
+    
+          Button triggers new movie to be added 
+          <input id="add-movie" type="submit" value="Add a Movie, Yo!">
+        </form>
+    
+        Movies will Get Dumped Here 
+        <div id="movies-view"></div>
+    -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="assets/script/script.js"></script>
 </body>
+
 </html>
