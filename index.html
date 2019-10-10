@@ -61,31 +61,25 @@
 
 <!-- MEDO containers -->
     <div class="container-fluid">
-            <!-- Movies -->
+            <!-- Movie button -->
             <div class="row animated slideInLeft delay-1.25s">
                 <div class="col-4 mx-auto medo hvr-float-shadow rounded">
                     <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
-
                 </div>
-            <!-- Music -->
+            <!-- Music button -->
                 <div class="col-4 mx-auto medo hvr-float-shadow rounded">
                     <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
-
                 </div>
             </div>
-            <div class="row  animated slideInRight delay-1.25s">
-                    <div class="col-4 mx-auto text-left rounded">
-                            <table class="table px-1 pb-2">
-                                <tbody id="movie-medo">
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-4 mx-auto text-left rounded">
-                                <table class="table px-1 pb-2">
-                                    <tbody id="music-medo">
-                                    </tbody>
-                                </table>
-                            </div>
+            <div class="row animated slideInRight delay-1.25s">
+            <!-- Movie List -->
+                <div class="col-4 mx-auto text-left rounded">
+                    <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                </div>
+            <!-- Music List -->
+                <div class="col-4 mx-auto text-left rounded">
+                    <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                </div>
             </div>
         </div>
 
@@ -97,8 +91,6 @@
 <script src="assets/script/vendor/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- <script src="assets/script/vendor/require.js"></script>
-<script src='js/lib/spotify-web-api-js.js'></script> -->
 <script src="assets/script/script.js"></script>
 </body>
 

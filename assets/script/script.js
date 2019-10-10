@@ -59,51 +59,42 @@ function addMovie() {
     if ( $('#search').val() === '') {
         return;
     } else {
-        var userInput = $('#search').val();                 // define the search value
-        // movieArray.push(userInput);                         // push the value of the search bar to the musicArray
-        var newRow = $('<tr>').attr('class', 'movie-item');  // create a table row dynamically, add 'medo-item' class
-        var newItem = $('<td>').attr({                      // create a new table data, add the modal attributes
+        var userInput = $('#search').val();
+        var newRow = $('<tr>').attr('class', 'movie-item');
+        var newItem = $('<td>').attr({            
             'class': 'movie-item',
             'data-toggle': "modal", 
             'data-target': "#movieModal",
             'data-name': userInput
         });    
 
-        newItem.text(userInput);                            // take the value in the search bar and make it the text of the table data
-        var newButton = $('<button>').text('X').attr('class', 'remove');            // create a button give it an id of remove
-        var newLike = $('<button>').text('Recs').attr('class', 'recs');
-        $('#search').val('');                               // empty the input value of the search bar
-        newRow.append(newItem, newLike, newButton);                  // append the search term and the button the newly created table row
-        $('#movie-medo').prepend(newRow);                   // prepend the table tow to the t-body id 'music-medo'
-
-        // do this with Firebase configuration *IF YOU CAN* Also give the new item a data-name of the Firebase key
+        newItem.text(userInput);                        
+        var newButton = $('<button>').text('X').attr('class', 'remove');
+   ;     var newLike = $('<button>').text('Recs').attr('class', 'recs');
+        $('#search').val('');                            
+        newRow.append(newItem, newLike, newButton);       
+        $('#movie-medo').prepend(newRow);     
     }
 }   
 
-function addMusic() {
+function addMusic() {                       // this function adds a music item to the music medo
     if ( $('#search').val() === '') {
         return;
     } else {
-        var userInput = $('#search').val();                 // define the search value
-        // musicArray.push(userInput);                         // push the value of the search bar to the musicArray
-        var newRow = $('<tr>');                             // create a table row dynamically, add 'medo-item' class
-        var newItem = $('<td>').attr({                      // create a new table data, add the modal attributes
-            'class': 'music-item list-group-item hvr-shutter-out-vertical',
-
+        var userInput = $('#search').val();                 
+        var newListItem = $('<li>').attr('class', 'list-group-item hvr-shutter-out-vertical');
+        var newBand = $('<span>').attr({                  
+            'class': 'music-item col-11',
             'data-toggle': "modal", 
             'data-target': "#musicModal",
             'data-name': userInput
         });     
-                   
-        newItem.text(userInput);                            // take the value in the search bar and make it the text of the table data
-        var newButton = $('<button>').text('X').attr('class', 'remove');      // create a button give it an id of remove
-        var newLike = $('<button>').text('Recs').attr('class', 'recs');
-        
-        $('#search').val('');                               // empty the input value of the search bar
-        newRow.append(newItem, newLike, newButton);                  // append the search term and the button the newly created table row
-        $('#music-medo').prepend(newRow);                  // prepend the table tow to the t-body id 'music-medo'
+        var newRemove = $('<button>').text('X').attr('class', 'remove col-1'); 
 
-        // do this with Firebase configuration *IF YOU CAN* Also give the new item a data-name of the Firebase key
+        newBand.text(userInput);                                              
+        newListItem.append(newBand, newRemove);
+        $('#music-medo').prepend(newListItem);
+        $('#search').val('');
     }
 }
 
@@ -117,9 +108,7 @@ function movieMEDO() {
 
 function musicMEDO() {
     var musicSelector = $(this).attr('data-name');
-    console.log(musicSelector);
-    console.log($(this));
-    console.log(this);
+    console.log('hellohello');
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
     var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + musicSelector + '&api_key=' + lastfmKEY + '&format=json';
 
@@ -166,7 +155,7 @@ function musicMEDO() {
 
 function removeItem() {
     // create a variable // var key = medoItem.attr('data-name);
-    $(this).closest('tr').detach();
+    $(this).closest('li').detach();
     // remove this item from Firebase
 }
 
