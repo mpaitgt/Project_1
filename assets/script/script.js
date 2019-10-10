@@ -1,25 +1,28 @@
-// // Global variables
+// Global variables and event listeners
 const movieSelector = $('#movie-btn').on('click', addMovie);
 const musicSelector = $('#music-btn').on('click', addMusic);
 const musicBtn = $(document).on('click', '.music-item', musicMEDO);
+const movieBtn = $(document).on('click', '.movie-item', movieMEDO);
 const removeBtn = $(document).on('click', '.remove', removeItem);
+const likeBtn = $(document).on('click', '.like', recommendedMedia);
 var musicSelection;
+var movieSelection;
+var musicArray = [];
+var movieArray = [];
 
-// ------------------------------------------------------------ Firebase configuration
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyC3YGy5JfZHdYFNGh8PRicPvSJnXPEtryc",
-    authDomain: "medo-3c7b5.firebaseapp.com",
-    databaseURL: "https://medo-3c7b5.firebaseio.com",
-    projectId: "medo-3c7b5",
-    storageBucket: "",
-    messagingSenderId: "759891052026",
-    appId: "1:759891052026:web:28e21af9c79d0bc71bd043"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-
+// Your web app's Firebase configuration
+var firebaseConfig = {
+apiKey: "AIzaSyC3YGy5JfZHdYFNGh8PRicPvSJnXPEtryc",
+authDomain: "medo-3c7b5.firebaseapp.com",
+databaseURL: "https://medo-3c7b5.firebaseio.com",
+projectId: "medo-3c7b5",
+storageBucket: "medo-3c7b5.appspot.com",
+messagingSenderId: "759891052026",
+appId: "1:759891052026:web:28e21af9c79d0bc71bd043"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var database = firebase.database();
 
 // ---------------------------------------------------------TMDB
 var APIkey = '95a6c9d4de568b3ebaa4ea26320798b4';
@@ -56,10 +59,16 @@ $.ajax({
 
 
 function addMovie() {
+    var userInput = $('#search').val();
+
+    database.ref('Watch/').push({
+        movie: userInput
+    });
+
     if ( $('#search').val() === '') {
         return;
     } else {
-        var userInput = $('#search').val();
+    
         var newRow = $('<tr>').attr('class', 'movie-item');
         var newItem = $('<td>').attr({            
             'class': 'movie-item',
@@ -78,21 +87,30 @@ function addMovie() {
 }   
 
 function addMusic() {                       // this function adds a music item to the music medo
+    var userInput = $('#search').val();   
+
     if ( $('#search').val() === '') {
         return;
-    } else {
-        var userInput = $('#search').val();                 
+    } else if (musicArray.includes(userInput)) {
+        return;
+    } else {  
+
+        database.ref('Listen/').push({
+            artist: userInput
+        });
+
+        musicArray.push(userInput);              
         var newListItem = $('<li>').attr('class', 'list-group-item hvr-shutter-out-vertical');
         var newBand = $('<span>').attr({                  
-            'class': 'music-item col-11',
+            'class': 'music-item col-10',
             'data-toggle': "modal", 
             'data-target': "#musicModal",
             'data-name': userInput
         });     
         var newRemove = $('<button>').text('X').attr('class', 'remove col-1'); 
-
+        var newLike = $('<button>').text('Like').attr('class', 'like col-1'); 
         newBand.text(userInput);                                              
-        newListItem.append(newBand, newRemove);
+        newListItem.append(newBand, newLike, newRemove);
         $('#music-medo').prepend(newListItem);
         $('#search').val('');
     }
@@ -154,10 +172,32 @@ function musicMEDO() {
 }
 
 function removeItem() {
-    // create a variable // var key = medoItem.attr('data-name);
+    // create a variable // var key = medoItem.attr('data-name');
     $(this).closest('li').detach();
+    // musicArray.splice()
     // remove this item from Firebase
 }
 
+// recommended function
 
-// if we can, add if/else statements so that we can match movies or music based on what someone watches or listens to
+function recommendedMedia() {
+// make it an event listener that fires when the like button is pressed
+// detach the clicked list item and append it - not prepend as it was before - to the list
+    var thisItem = $(this).closest('li');
+    thisItem.detach();
+    $('#music-medo').append(thisItem);
+// populate the recommended list by calling the musicMEDO function
+// may need to create an array so that these band names stay static on the page
+// rather than being pulled from the API on every page load
+// when the like button is clicked, grab the recommended artists from the JSON object with a for loop (grab 3)
+// push the three into an array (find a method that puts them first in the array)
+// have the array populate the recommended field
+// give each of the list items in the recommended field the music or movie medo class so that the modal works for them too
+// concatinate what category it is 
+// i.e.
+// userInput;
+// var category = $('<span>').attr('class', 'category'); - style this so that it stands out clearly as a marker
+// category.text(' Listen/Watch');
+// var newRec = userInput + category;
+
+}
