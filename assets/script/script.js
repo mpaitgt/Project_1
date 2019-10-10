@@ -3,7 +3,7 @@ const movieSelector = $('#movie-btn').on('click', addMovie);
 const musicSelector = $('#music-btn').on('click', addMusic);
 const musicBtn = $(document).on('click', '.music-item', musicMEDO);
 const movieBtn = $(document).on('click', '.movie-item', movieMEDO);
-const removeBtn = $(document).on('click', '.remove', removeItem);
+const removeBtn = $(document).on('click', '.remove', removeMusicItem);
 const likeBtn = $(document).on('click', '.like', recommendedMedia);
 var musicSelection;
 var movieSelection;
@@ -34,7 +34,6 @@ $.ajax({
 }).then(function(response) {
     
     var movieObject = response.results[0];
-    console.log(movieObject);
     var queryDetails = movieObject.id;
     var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
     // var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
@@ -43,7 +42,6 @@ $.ajax({
         url: detailsURL,
         method: 'GET'
     }).then(function(response) {
-        console.log(response);
         var userChoice = response.videos.results[3].key;
         var youTube = 'http://www.youtube.com/embed/' + userChoice;
 
@@ -79,7 +77,7 @@ function addMovie() {
 
         newItem.text(userInput);                        
         var newButton = $('<button>').text('X').attr('class', 'remove');
-   ;     var newLike = $('<button>').text('Recs').attr('class', 'recs');
+        var newLike = $('<button>').text('Recs').attr('class', 'recs');
         $('#search').val('');                            
         newRow.append(newItem, newLike, newButton);       
         $('#movie-medo').prepend(newRow);     
@@ -88,32 +86,17 @@ function addMovie() {
 
 function addMusic() {                       // this function adds a music item to the music medo
     var userInput = $('#search').val();   
-
     if ( $('#search').val() === '') {
         return;
-    } else if (musicArray.includes(userInput)) {
+    } else if (musicArray.includes(userInput)) {        // need to check the database, not the array!
         return;
     } else {  
-
         database.ref('Listen/').push({
             artist: userInput
         });
-
-        musicArray.push(userInput);              
-        var newListItem = $('<li>').attr('class', 'list-group-item hvr-shutter-out-vertical');
-        var newBand = $('<span>').attr({                  
-            'class': 'music-item col-10',
-            'data-toggle': "modal", 
-            'data-target': "#musicModal",
-            'data-name': userInput
-        });     
-        var newRemove = $('<button>').text('X').attr('class', 'remove col-1'); 
-        var newLike = $('<button>').text('Like').attr('class', 'like col-1'); 
-        newBand.text(userInput);                                              
-        newListItem.append(newBand, newLike, newRemove);
-        $('#music-medo').prepend(newListItem);
-        $('#search').val('');
+        musicArray.push(userInput);            
     }
+    console.log(musicArray);
 }
 
 function movieMEDO() {
@@ -126,7 +109,6 @@ function movieMEDO() {
 
 function musicMEDO() {
     var musicSelector = $(this).attr('data-name');
-    console.log('hellohello');
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
     var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + musicSelector + '&api_key=' + lastfmKEY + '&format=json';
 
@@ -136,32 +118,28 @@ function musicMEDO() {
     }).then(function(response) {
         var bandName = response.artist.name;
         var bandBio = response.artist.bio.summary;
-        var genre = response.artist.tags.tag;                       // array
-        var similarBands = response.artist.similar.artist;          // array
+        var genre = response.artist.tags.tag;                       
+        var similarBands = response.artist.similar.artist;    
 
-        $('#band-bio').html(bandBio);                               // filling in the band bio
+        $('#band-bio').html(bandBio);                               
         $('#genre').empty();
-        for (var j = 0; j < genre.length; j++) {                    // filling in all of the genre tags
+        for (var j = 0; j < genre.length; j++) {                    
             var genreLoop = $('<span>').text(genre[j].name + ' ');
             $('#genre').append(genreLoop);
         }
-
         $('#similar-bands').empty();
-        for (var i = 0; i < similarBands.length; i++) {             // filling in all of the similar bands
+        for (var i = 0; i < similarBands.length; i++) {             
             var bandLoop = $('<h6>').text(similarBands[i].name);
             $('#similar-bands').append(bandLoop);
         }
-
         var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + musicSelector + '&api_key=' + lastfmKEY + '&format=json';
         $.ajax({
             url: lastfmDetails,
             method: 'GET'
         }).then(function(response) {
-            console.log(response);
-            $('#band-name').text(bandName);                             // filling in the band name
+            $('#band-name').text(bandName);
 
-            var bandPhoto = response.topalbums.album[0].image[3]['#text'];      // array
-            console.log(bandPhoto);
+            var bandPhoto = response.topalbums.album[0].image[3]['#text'];
             $('#band-image').attr({
                 'src': bandPhoto,
                 'height': '250px',
@@ -171,11 +149,40 @@ function musicMEDO() {
     });
 }
 
-function removeItem() {
-    // create a variable // var key = medoItem.attr('data-name');
+database.ref('Listen/').on('child_added', function(data) {      // retrieves data from Firebase on page load
+    var newArtist = data.val().artist;
+    var name = data.key;
+    var newListItem = $('<li>').attr('class', 'list-group-item hvr-shutter-out-vertical');
+    var newBand = $('<span>').attr({                  
+        'class': 'music-item col-10',
+        'data-toggle': "modal", 
+        'data-target': "#musicModal",
+        'data-name': newArtist
+    });     
+    var newRemove = $('<button>').text('X').attr({
+        'class': 'remove col-1',
+        'data-name': name,
+        'data-ref': newArtist
+    }); 
+    var newLike = $('<button>').text('Like').attr('class', 'like col-1'); 
+    newBand.text(newArtist);                                              
+    newListItem.append(newBand, newLike, newRemove);
+    $('#music-medo').prepend(newListItem);
+    $('#search').val('');
+})
+
+function removeMusicItem() {
+    var key = $(this).attr('data-name');
+    var ref = $(this).attr('data-ref');
     $(this).closest('li').detach();
-    // musicArray.splice()
-    // remove this item from Firebase
+    database.ref('Listen/' + key).remove();
+    musicArray.splice(musicArray.indexOf(ref), 1);
+}
+
+function removeMovieItem() {
+    var key = $(this).attr('data-name');
+    $(this).closest('li').detach();
+    database.ref('Watch/' + key).remove();
 }
 
 // recommended function
