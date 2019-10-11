@@ -85,7 +85,10 @@ function addMovie() {
 }   
 
 function addMusic() {                       // this function adds a music item to the music medo
-    var userInput = $('#search').val();   
+    var userInput = $('#search').val(); 
+    var key = database.ref('Listen/artist').child();
+    console.log(key);
+
     if ( $('#search').val() === '') {
         return;
     } else if (musicArray.includes(userInput)) {        // need to check the database, not the array!
@@ -96,7 +99,6 @@ function addMusic() {                       // this function adds a music item t
         });
         musicArray.push(userInput);            
     }
-    console.log(musicArray);
 }
 
 function movieMEDO() {
@@ -151,39 +153,44 @@ function musicMEDO() {
 
 database.ref('Listen/').on('child_added', function(data) {      // retrieves data from Firebase on page load
     var newArtist = data.val().artist;
-    var name = data.key;
+    var key = data.key;
     var newListItem = $('<li>').attr('class', 'list-group-item hvr-shutter-out-vertical');
     var newBand = $('<span>').attr({                  
         'class': 'music-item col-10',
         'data-toggle': "modal", 
         'data-target': "#musicModal",
-        'data-name': newArtist
+        'data-name': newArtist, 
+        'data-ref': key
     });     
     var newRemove = $('<button>').text('X').attr({
         'class': 'remove col-1',
-        'data-name': name,
-        'data-ref': newArtist
+        'data-name': newArtist,
+        'data-ref': key
     }); 
-    var newLike = $('<button>').text('Like').attr('class', 'like col-1'); 
+    var newLike = $('<button>').text('Like').attr({
+        'class': 'like col-1',
+        'data-name': newArtist,
+        'data-ref': key
+    }); 
     newBand.text(newArtist);                                              
     newListItem.append(newBand, newLike, newRemove);
     $('#music-medo').prepend(newListItem);
     $('#search').val('');
-})
+});
 
 function removeMusicItem() {
-    var key = $(this).attr('data-name');
-    var ref = $(this).attr('data-ref');
+    var key = $(this).attr('data-ref');
+    var name = $(this).attr('data-name');
     $(this).closest('li').detach();
     database.ref('Listen/' + key).remove();
-    musicArray.splice(musicArray.indexOf(ref), 1);
-}
+    musicArray.splice(musicArray.indexOf(name), 1);
+};
 
 function removeMovieItem() {
     var key = $(this).attr('data-name');
     $(this).closest('li').detach();
     database.ref('Watch/' + key).remove();
-}
+};
 
 // recommended function
 
