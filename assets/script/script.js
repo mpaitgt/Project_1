@@ -147,6 +147,7 @@ function musicMEDO() {
             $('#similar-bands').append(newLink);
         }
         var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+        
         $.ajax({
             url: lastfmDetails,
             method: 'GET'
