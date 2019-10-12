@@ -119,6 +119,7 @@ function musicMEDO() {
     var artistPicked = $(this).attr('data-name');
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
     var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
 
     $.ajax({
         url: lastfmURL,
@@ -146,7 +147,6 @@ function musicMEDO() {
             newLink.append(bandLoop);
             $('#similar-bands').append(newLink);
         }
-        var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
         
         $.ajax({
             url: lastfmDetails,
@@ -302,6 +302,16 @@ function favoriteMedia() {                  // when the like button fires, this 
     // when like button is clicked, use the ajax call to access the related artists
     // store those related artists in the database
     // pull the related artists from the database and display them prepended in the recommended id
+    $.ajax({
+        url: recommendationsURL,
+        method: 'GET'
+    }).then(function(recResponse) {
+        console.log(recResponse);
+        var recObject = response.results;
+        for (var x = 0; x < recObject.length; x++) {
+
+        }
+    });
 }
 
 // recommended function
