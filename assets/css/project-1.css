@@ -126,9 +126,13 @@ body {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 #movie-medo,
 #music-medo,
 #favorites-list {
+=======
+#movie-medo, #music-medo, #favorites-list {
+>>>>>>> 5a2f2cc4dc8dc5d209d684263136ec4cdcad20b2
     overflow-y: scroll;
 }
 
@@ -143,7 +147,11 @@ footer {
     color: white;
     width: 100%;
     position: absolute !important;
+<<<<<<< HEAD
     bottom: 0 !important;
+=======
+    bottom: 0 !important;   
+>>>>>>> 5a2f2cc4dc8dc5d209d684263136ec4cdcad20b2
 }
 
 .watch-tag {
@@ -193,13 +201,19 @@ button {
     text-align: right;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5a2f2cc4dc8dc5d209d684263136ec4cdcad20b2
 /* .page-load-items {
     opacity: 1;
     transition: opacity 2s;
 } */
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5a2f2cc4dc8dc5d209d684263136ec4cdcad20b2
 /*Hover.css Transitions*/
 
 
