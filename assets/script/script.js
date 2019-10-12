@@ -188,8 +188,12 @@ function musicMEDO() {
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
     var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
 <<<<<<< HEAD
+<<<<<<< HEAD
     var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
 =======
+=======
+    var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+>>>>>>> 97055187eb6c199399f93076693b4ff0c336738c
 
 >>>>>>> 5a2f2cc4dc8dc5d209d684263136ec4cdcad20b2
     $.ajax({
@@ -231,9 +235,12 @@ function musicMEDO() {
             $('#similar-bands').append(newLink);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+=======
+>>>>>>> 97055187eb6c199399f93076693b4ff0c336738c
         
 >>>>>>> 5a2f2cc4dc8dc5d209d684263136ec4cdcad20b2
         $.ajax({
@@ -526,6 +533,16 @@ function favoriteMedia() {                  // when the like button fires, this 
     // when like button is clicked, use the ajax call to access the related artists
     // store those related artists in the database
     // pull the related artists from the database and display them prepended in the recommended id
+    $.ajax({
+        url: recommendationsURL,
+        method: 'GET'
+    }).then(function(recResponse) {
+        console.log(recResponse);
+        var recObject = response.results;
+        for (var x = 0; x < recObject.length; x++) {
+
+        }
+    });
 }
 
 // recommended function
