@@ -20,6 +20,14 @@ body {
     background-color: #fffddc;
     text-align: center;
     overflow-x: hidden;
+   
+}
+.custom-control-label{
+    font-size: 40px;
+    color: green;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 19px;
 }
 
 
@@ -148,10 +156,14 @@ footer {
     width: 100%;
     position: absolute !important;
 <<<<<<< HEAD
+<<<<<<< HEAD
     bottom: 0 !important;
 =======
     bottom: 0 !important;   
 >>>>>>> 5a2f2cc4dc8dc5d209d684263136ec4cdcad20b2
+=======
+       
+>>>>>>> e4290cd782b0150f6cd6d19a7a185758068ffc25
 }
 
 .watch-tag {
