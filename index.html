@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+​
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css"> ​
 
     <head>
         <!--This is ref to animate.css-->
@@ -17,44 +18,21 @@
     <title>
     </title>
 </head>
-
-<nav class="navbar navbar-expand-md navbar-light bg-faded">
-    <ul class="navbar-nav mx-auto">
-        <li class="nav-item dropdown text-center">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Favorites
-                </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>
-
-        <li class="nav-item text-center">
-            <a class="nav-link" href="#">MeDo</a>
-        </li>
-
-        <li class="nav-item dropdown text-center">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Recommended
-        </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>
-    </ul>
-</nav>
+​
 
 <body>
-
+    ​
     <!-- Movie Modal -->
     <div id="movieModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
-                This is the movie modal
+                <h2 id="movie-title"></h2>
+                <img id="movie-image" src="" alt="movie-poster">
+                <h4>Summary</h4>
+                <p id="movie-summary"></p>
+                <h4>Release Date: <span id="release-date"></span></h4>
+                <h4>Video Content</h4>
+                <div id="youtube-content"></div>
             </div>
         </div>
     </div>
@@ -66,14 +44,14 @@
                 <h2 id="band-name"></h2>
                 <img id="band-image" src="" alt="album-cover">
                 <div id="genre"></div>
-                <h4>Summary</h4>
+                <h4>Band Bio</h4>
                 <p id="band-bio"></p>
                 <h4>Similar Bands</h4>
                 <div id="similar-bands"></div>
             </div>
         </div>
     </div>
-
+    ​
     <!-- Site Header and search bar -->
     <div class="container-fluid">
         <div class="row site-head rounded">
@@ -82,13 +60,13 @@
         <div class="row col-lg-12">
             <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
         </div>
-
+        ​
         <!-- Instruction -->
         <div class="row col-lg-12 mx-auto justify-content-center">
             <p class="animated fadeIn delay-2s">Type in items for your
                 <span class="medo-inline rounded">MeDo</span> list above,<br> then click on the List you would like it to appear in!</p>
         </div>
-
+        ​
         <!-- MEDO containers -->
         <div class="container-fluid">
             <!-- Movie button -->
@@ -104,22 +82,44 @@
             <div class="row animated slideInRight delay-1.25s">
                 <!-- Movie List -->
                 <div class="col-4 mx-auto text-left rounded">
-                    <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                    <div class="row">
+                        <ul id="movie-medo" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
                 </div>
                 <!-- Music List -->
                 <div class="col-4 mx-auto text-left rounded">
-                    <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                    <div class="row">
+                        <ul id="music-medo" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <footer class="row col-lg-12 justify-content-center mx-auto py-4 ">
-            <hr>Copyright Yo Mamma, 2019-Present. We'll find you!</footer>
-
-        <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
-        <script src="assets/script/vendor/jquery-3.4.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="assets/script/script.js"></script>
+        ​
+        <div class="row animated slideInLeft delay-1.25s">
+            <div class="col-4 mx-auto medo hvr-float-shadow rounded">
+                <h2 id="favorites" class=" medo-box text-center medo-style">Favorites</h2>
+            </div>
+        </div>
+        <div class="row animated slideInRight delay-1.25s"></div>
+        <div class="col-4 mx-auto text-left rounded">
+            <ul id="favorites-list" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
+        </div>
+    </div>
+    ​
+    <div id="recommended"></div>
+    ​
+    <div class="mb-5"></div>
+    ​ ​ ​
+    <!-- <footer class="row col-lg-12 justify-content-center mx-auto py-4 ">
+<hr>Copyright Yo Mamma, 2019-Present. We'll find you!</footer> -->
+    ​
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="assets/script/script.js"></script>
 </body>
+​
+
+</html>
