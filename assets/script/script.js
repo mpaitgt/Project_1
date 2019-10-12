@@ -6,8 +6,8 @@ const removeBtn = $(document).on('click', '.remove', removeItem);
 var musicSelection;
 
 // ------------------------------------------------------------ Firebase configuration
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
+// Your web app's Firebase configuration
+var firebaseConfig = {
     apiKey: "AIzaSyC3YGy5JfZHdYFNGh8PRicPvSJnXPEtryc",
     authDomain: "medo-3c7b5.firebaseapp.com",
     databaseURL: "https://medo-3c7b5.firebaseio.com",
@@ -15,9 +15,9 @@ var musicSelection;
     storageBucket: "",
     messagingSenderId: "759891052026",
     appId: "1:759891052026:web:28e21af9c79d0bc71bd043"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 
 
@@ -29,11 +29,11 @@ $.ajax({
     url: queryURL,
     method: 'GET'
 }).then(function(response) {
-    
+
     var movieObject = response.results[0];
     console.log(movieObject);
     var queryDetails = movieObject.id;
-    var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
+    var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey + '&language=en-US&page=1';
     // var detailsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
 
     $.ajax({
@@ -54,48 +54,55 @@ $.ajax({
     });
 });
 
+const addRec = function(userInput) {
+    newListItem.append(userInput)
+}
+
 
 function addMovie() {
-    if ( $('#search').val() === '') {
+    if ($('#search').val() === '') {
         return;
     } else {
         var userInput = $('#search').val();
-        var newRow = $('<tr>').attr('class', 'movie-item');
-        var newItem = $('<td>').attr({            
-            'class': 'movie-item',
-            'data-toggle': "modal", 
+        var newListItem = $('<li>').attr('class', 'list-group-item hvr-shutter-out-vertical', 'movie-item');
+        var newItem = $('<span>').attr({
+            'class': 'movie-item col-10',
+            'data-toggle': "modal",
             'data-target': "#movieModal",
             'data-name': userInput
-        });    
+        });
 
-        newItem.text(userInput);                        
+        newItem.text(userInput);
         var newButton = $('<button>').text('X').attr('class', 'remove');
-   ;     var newLike = $('<button>').text('Recs').attr('class', 'recs');
-        $('#search').val('');                            
-        newRow.append(newItem, newLike, newButton);       
-        $('#movie-medo').prepend(newRow);     
+        var newLike = $('<button>').text('Recs').attr('class', 'recs');
+        $('#search').val('');
+        newListItem.append(newItem, newLike, newButton);
+        $('#movie-medo').prepend(newListItem);
     }
-}   
+}
 
-function addMusic() {                       // this function adds a music item to the music medo
-    if ( $('#search').val() === '') {
+function addMusic(addRec, musicMEDO) { // this function adds a music item to the music medo
+    if ($('#search').val() === '') {
         return;
     } else {
-        var userInput = $('#search').val();                 
+        var userInput = $('#search').val();
         var newListItem = $('<li>').attr('class', 'list-group-item hvr-shutter-out-vertical');
-        var newBand = $('<span>').attr({                  
-            'class': 'music-item col-11',
-            'data-toggle': "modal", 
+        var newBand = $('<span>').attr({
+            'class': 'music-item col-10',
+            'data-toggle': "modal",
             'data-target': "#musicModal",
             'data-name': userInput
-        });     
-        var newRemove = $('<button>').text('X').attr('class', 'remove col-1'); 
+        });
+        var newRemove = $('<button>').text('X').attr('class', 'remove col-1');
+        var newLike = $('<button>').text('Recs').attr('class', 'recs');
 
-        newBand.text(userInput);                                              
-        newListItem.append(newBand, newRemove);
+        newBand.text(userInput);
+        newListItem.append(newBand, newRemove, newLike);
         $('#music-medo').prepend(newListItem);
         $('#search').val('');
     }
+    addRec(musicMEDO, userInput);
+
 }
 
 function movieMEDO() {
@@ -118,18 +125,18 @@ function musicMEDO() {
     }).then(function(response) {
         var bandName = response.artist.name;
         var bandBio = response.artist.bio.summary;
-        var genre = response.artist.tags.tag;                       // array
-        var similarBands = response.artist.similar.artist;          // array
+        var genre = response.artist.tags.tag; // array
+        var similarBands = response.artist.similar.artist; // array
 
-        $('#band-bio').html(bandBio);                               // filling in the band bio
+        $('#band-bio').html(bandBio); // filling in the band bio
         $('#genre').empty();
-        for (var j = 0; j < genre.length; j++) {                    // filling in all of the genre tags
+        for (var j = 0; j < genre.length; j++) { // filling in all of the genre tags
             var genreLoop = $('<span>').text(genre[j].name + ' ');
             $('#genre').append(genreLoop);
         }
 
         $('#similar-bands').empty();
-        for (var i = 0; i < similarBands.length; i++) {             // filling in all of the similar bands
+        for (var i = 0; i < similarBands.length; i++) { // filling in all of the similar bands
             var bandLoop = $('<h6>').text(similarBands[i].name);
             $('#similar-bands').append(bandLoop);
         }
@@ -140,9 +147,9 @@ function musicMEDO() {
             method: 'GET'
         }).then(function(response) {
             console.log(response);
-            $('#band-name').text(bandName);                             // filling in the band name
+            $('#band-name').text(bandName); // filling in the band name
 
-            var bandPhoto = response.topalbums.album[0].image[3]['#text'];      // array
+            var bandPhoto = response.topalbums.album[0].image[3]['#text']; // array
             console.log(bandPhoto);
             $('#band-image').attr({
                 'src': bandPhoto,
