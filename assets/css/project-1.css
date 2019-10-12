@@ -10,6 +10,13 @@ body {
     text-align: center;
     overflow-x: hidden;
 }
+.custom-control-label{
+    font-size: 40px;
+    color: green;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 19px;
+}
 
 /* ---------- Branded styling ---------- */
 .medo-style {
