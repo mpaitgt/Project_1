@@ -24,13 +24,20 @@
     <div id="movieModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
-                <h2 id="movie-title"></h2>
-                <img id="movie-image" src="" alt="movie-poster">
-                <h4>Summary</h4>
-                <p id="movie-summary"></p>
-                <h4>Release Date: <span id="release-date"></span></h4>
-                <h4>Video Content</h4>
-                <div id="youtube-content"></div>
+
+                <div class="row">
+                    <img id="movie-image" src="" alt="movie-poster" class="col-3 d-flex align-center">
+                    <div class="col-9">
+                        <h2 id="movie-title"></h2>
+                        <h4>Summary</h4>
+                        <p id="movie-summary"></p>
+                        <h4>Release Date: <span id="release-date"></span></h4>
+                    </div>
+                </div>
+                <div class="row mx-auto">
+                    <h4>Video Content</h4>
+                    <div id="youtube-content"></div>
+                </div>
             </div>
         </div>
     </div>

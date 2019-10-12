@@ -73,10 +73,14 @@ function movieMEDO() {
         var movieRelease = movieObject.release_date;
         var basePosterURL = 'http://image.tmdb.org/t/p/w185';
         var moviePoster = movieObject.poster_path;
-        
+        var posterExt = basePosterURL + moviePoster;
         console.log(basePosterURL + moviePoster);
         $('#movie-title').text(movieTitle);
-        $('#movie-poster').attr('src', basePosterURL + moviePoster);
+        $('#movie-image').attr({
+            'src': posterExt.toString(),
+            'width': '25%', 
+            'height': '25%'
+            });
         $('#movie-summary').html(movieSummary);
         $('#release-date').text(movieRelease);
 
