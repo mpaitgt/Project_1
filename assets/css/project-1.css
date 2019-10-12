@@ -20,6 +20,14 @@ body {
     background-color: #fffddc;
     text-align: center;
     overflow-x: hidden;
+   
+}
+.custom-control-label{
+    font-size: 40px;
+    color: green;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 19px;
 }
 
 
@@ -70,7 +78,6 @@ body {
     margin: 20px 40px;
     padding: 10px;
     font-size: 24px;
-    /*font-style: italic;*/
     border: none;
     border-bottom: 3.5px solid var(--blue)!important;
     text-transform: uppercase;
@@ -90,7 +97,6 @@ body {
     font-family: 'Raleway', sans-serif;
     color: #2932506c;
 }
-
 
 /*#search-btn {
     margin: 20px 40px;
@@ -124,19 +130,15 @@ body {
 .medo-box {
     width: 100%;
     font-size: 40px;
+    cursor: pointer;
 }
 
-.new-media {
-    width: 100%;
-    color: var(--navy);
-    background-color: var(--gold);
-    border: solid 1.5px var(--navy);
-    border-bottom: solid 3px var(--navy);
-    border-top: none;
-    font-size: 18px;
-    font-weight: 400;
-    margin-top: 10px;
-    margin-bottom: 10px;
+#movie-medo, #music-medo, #favorites-list {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 footer {
@@ -144,26 +146,62 @@ footer {
     font-size: 10px;
     background-color: var(--navy);
     color: white;
+    width: 100%;
+    position: absolute !important;
+       
 }
 
-@media screen and (max-width: 1068px) {
-    #search {
-        font-size: 48px;
-    }
+.watch-tag {
+    color: blue;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 20px;
 }
 
+.listen-tag {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 20px;
+}
 
-/*Hover.css Transitions*/
+.custom-modal {
+    padding: 50px;
+}
 
+#band-image {
+    text-align: center;
+    margin: 0 auto;
+}
 
-/*Hover.css Transitions*/
+ul {
+    width: 100%;
+}
 
+li {
+    list-style: none;
+    width: 100%;
+    cursor: pointer;
+    /* opacity: 0; */
+}
 
-/*Hover.css Transitions*/
+button {
+    background-color: transparent;
+    border: none;
+    color: var(--blue);
+    margin-left: 20px;
+    margin-right: 10px;
+    right: 0;
+}
 
+.remove {
+    text-align: right;
+}
 
-/*Hover.css Transitions*/
-
+/* .page-load-items {
+    opacity: 1;
+    transition: opacity 2s;
+} */
 
 /*Hover.css Transitions*/
 

@@ -19,88 +19,126 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <!--THIS CONTAINS THE LOGO AND INPUT BAR-->
-        <!--THIS CONTAINS THE LOGO AND INPUT BAR-->
-        <!--THIS CONTAINS THE LOGO AND INPUT BAR-->
-        <!--THIS CONTAINS THE LOGO AND INPUT BAR-->
-        <div class="row site-head rounded">
 
-            <h1 id="logo" class="medo-style mx-auto animated lightSpeedIn delay-.5s rounded">
-
-                <!--<div class="animated heartBeat delay-2s">-->
-
-
-                MeDo
-
-                <!--</div>-->
-
-            </h1>
-
+<<<<<<< HEAD
 >>>>>>> b490ec8fcbcbc9de5e2fd859b2dfa300914505e0
+=======
+<!-- Movie Modal -->
+    <div id="movieModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content custom-modal">
+                <h2 id="movie-title"></h2>
+                <img id="movie-image" src="" alt="movie-poster">
+                <h4>Summary</h4>
+                    <p id="movie-summary"></p>
+                <h4>Release Date: <span id="release-date"></span></h4>
+                <h4>Video Content</h4>
+                    <div id="youtube-content"></div>
+            </div>
+>>>>>>> e4290cd782b0150f6cd6d19a7a185758068ffc25
         </div>
-        <div class="row col-lg-12 ">
-            <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="Stranger Things">
+    </div>
+    
+<!-- Music Modal -->
+    <div id="musicModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content custom-modal">
+                <h2 id="band-name"></h2>
+                <img id="band-image" src="" alt="album-cover">
+                    <div id="genre"></div>
+                <h4>Band Bio</h4>
+                    <p id="band-bio"></p>
+                <h4>Similar Bands</h4>
+                    <div id="similar-bands"></div>
+            </div>
+        </div>
+    </div>
 
+<!-- Site Header and search bar -->
+    <div class="container-fluid">
+        <div class="row site-head rounded">
+            <h1 id="logo" class="medo-style mx-auto animated lightSpeedIn delay-.5s rounded">medo</h1>
         </div>
+        <div class="row col-lg-12">
+                <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
+        </div>
+
+<!-- Instruction -->
         <div class="row col-lg-12 mx-auto justify-content-center">
             <p class="animated fadeIn delay-2s">Type in items for your
                 <span class="medo-inline rounded">MeDo</span> list above,<br> then click on the List you would like it to appear in!</p>
         </div>
-    </div>
 
+<!-- MEDO containers -->
     <div class="container-fluid">
-        <!--CONTAINS MEDO HEADERS AND SAMPLE/DYNAMIC LISTS-->
-        <!--CONTAINS MEDO HEADERS AND SAMPLE/DYNAMIC LISTS-->
-        <!--CONTAINS MEDO HEADERS AND SAMPLE/DYNAMIC LISTS-->
-        <!--CONTAINS MEDO HEADERS AND SAMPLE/DYNAMIC LISTS-->
+            <!-- Movie button -->
+            <div class="row animated slideInLeft delay-1.25s">
+                <div class="col-4 mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
+                </div>
+            <!-- Music button -->
+                <div class="col-4 mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
+                </div>
+            </div>
+            <div class="row animated slideInRight delay-1.25s">
+            <!-- Movie List -->
+                <div class="col-4 mx-auto text-left rounded">
+                    <div class="row">
+                        <ul id="movie-medo" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
+                </div>
+            <!-- Music List -->
+                <div class="col-4 mx-auto text-left rounded">
+                    <div class="row">
+                        <ul id="music-medo" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row animated slideInLeft delay-1.25s">
             <div class="col-4 mx-auto medo hvr-float-shadow rounded">
-                <h2 id="movies" class=" medo-box text-center medo-style">Watch</h2>
+                <h2 id="favorites" class=" medo-box text-center medo-style">Favorites</h2>
             </div>
-
-            <div class="col-4 mx-auto medo hvr-float-shadow rounded">
-                <h2 id="music" class="medo-box text-center  medo-style">Listen</h2>
-                <table id="music-medo"></table>
+        </div>
+        <div class="row animated slideInRight delay-1.25s"></div>
+            <div class="col-4 mx-auto text-left rounded">
+                <ul id="favorites-list" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
             </div>
         </div>
 
-        <div class="row mb-5 animated slideInRight delay-1.5s" ">
-            <!--SAMPLE LIST FOR DEMO PURPOSES, THIS DOES NOT HAVE TO STAY-->
-            <!--SAMPLE LIST FOR DEMO PURPOSES, THIS DOES NOT HAVE TO STAY-->
-            <div class="col-4 mx-auto text-left rounded ">
-                <ul class="list-group list-group-flush px-1 pb-2 new-media ">
-                    <li class="list-group-item hvr-shutter-out-vertical ">Let the Right One In</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">The Shinning</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">The Devils Rejects</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">The Exorcist</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">Nightmare on Elm Street</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">Children of the Corn</li>
-                </ul>
-            </div>
-            <!--THIS IS GENERAL BOOTSTRAP LIST STYLING WITH ONHOVER EFFECTS-->
-            <!--THIS IS GENERAL BOOTSTRAP LIST STYLING WITH ONHOVER EFFECTS-->
-            <div class="col-4 mx-auto text-left rounded ">
-                <ul class="list-group list-group-flush ">
-                    <li class="list-group-item hvr-shutter-out-vertical ">Pavement</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">Nine Inch Nails</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">Thundercat</li>
-                    <li class="list-group-item hvr-shutter-out-vertical ">Chicago</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <footer class="row col-lg-12 justify-content-center mx-auto py-4 ">
-        <hr>Copyright Yo Mamma, 2019-Present. We'll find you!</footer>
+        <div id="recommended"></div>
+
+        <div class="mb-5"></div>
 
 
-
-
+<<<<<<< HEAD
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js "></script>
     <script src="assets/script/script.js "></script>
 
+=======
+        <footer class="footer mt-auto py-3">
+            <div class="container-fluid padding">
+                <div class="row alert text-center">
+                   <div class="col-12">
+                        <h6>Copyright&copy;Yo Mamma, 2019-Present. We'll find you!</h6>
+                    </div>
+                </div>
+            </div>
+        </footer>
+<!-- <footer class="row col-lg-12 justify-content-center mx-auto py-4 ">
+<hr>Copyright Yo Mamma, 2019-Present. We'll find you!</footer> -->
+
+<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="assets/script/script.js"></script>
+>>>>>>> e4290cd782b0150f6cd6d19a7a185758068ffc25
 </body>
 
 </html>
