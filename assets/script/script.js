@@ -30,7 +30,8 @@ var database = firebase.database();
 // Functions
 function addMovie() {                       // Adds a movie item to the music medo
     var userInput = $('#search').val();
-    
+    var dateAdded = moment().format('LLLL');
+
     if ($('#search').val() === '') {
         return;
     } else if (movieArray.includes(userInput)) {        
@@ -38,13 +39,15 @@ function addMovie() {                       // Adds a movie item to the music me
     } else {  
         movieArray.push(userInput);  
         database.ref('Watch/').push({
-            movie: userInput
+            movie: userInput,
+            date_added: dateAdded
         });       
     }   
 }  
 
 function addMusic() {                       // Adds a music item to the music medo
     var userInput = $('#search').val(); 
+    var dateAdded = moment().format('LLLL');
 
     if ($('#search').val() === '') {
         return;
@@ -53,7 +56,8 @@ function addMusic() {                       // Adds a music item to the music me
     } else {  
         musicArray.push(userInput);  
         database.ref('Listen/').push({
-            artist: userInput
+            artist: userInput,
+            date_added: dateAdded
         });       
     }
 }
@@ -289,17 +293,20 @@ function favoriteMedia() {                  // when the like button fires, this 
     var key = $(this).attr('data-ref');
     var name = $(this).attr('data-name');
     var thisItem = $(this).closest('li');
+    var dateFavorited = moment().format('LLLL');
     thisItem.detach();
 
     if (thisItem.hasClass('music-item')) {
         database.ref('Favorites/').push({
-            favorite_artist: name
+            favorite_artist: name,
+            date_favorited: dateFavorited
         });
         database.ref('Listen/' + key).remove();
 
     } else if (thisItem.hasClass('movie-item')) {
         database.ref('Favorites/').push({
-            favorite_movie: name
+            favorite_movie: name,
+            date_favorited: dateFavorited
         });
         database.ref('Watch/' + key).remove();
     }
@@ -336,3 +343,4 @@ function favoriteMedia() {                  // when the like button fires, this 
 // var category = $('<span>').attr('class', 'category'); - style this so that it stands out clearly as a marker
 // category.text(' Listen/Watch');
 // var newRec = userInput + category;
+
