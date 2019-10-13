@@ -48,13 +48,19 @@
     <div id="musicModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
-                <h2 id="band-name"></h2>
-                <img id="band-image" src="" alt="album-cover">
-                    <div id="genre"></div>
-                <h4>Band Bio</h4>
-                    <p id="band-bio"></p>
-                <h4>Similar Bands</h4>
-                    <div id="similar-bands"></div>
+                <div class="row">
+                    <img id="band-image" src="" alt="album-cover" class="col-4">
+                    <div class="col-8">
+                        <h2 id="band-name"></h2>
+                        <div id="genre"></div>
+                    </div>
+                        <div class="middle-content">
+                        <h4>Band Bio</h4>
+                        <p id="band-bio"></p>
+                        <h4>Similar Bands</h4>
+                        <div id="similar-bands"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -84,7 +90,7 @@
 
 <!-- Instruction -->
         <div class="row col-lg-12 mx-auto justify-content-center">
-            <p class="animated fadeIn delay-1s">Type in items for your
+            <p class="animated fadeIn delay-1s instruct-paragraph">Type in items for your
                 <span class="medo-inline rounded">MeDo</span> list above,<br> then click on the List you would like it to appear in!</p>
         </div>
 
@@ -92,23 +98,25 @@
     <div class="container">
         <!-- Movie button -->
         <div class="row animated slideInLeft delay-1.25s">
-            <div class="col-6 mx-auto medo hvr-float-shadow rounded">
+            <div class="col-5 mx-auto medo hvr-float-shadow rounded">
                 <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
             </div>
+            <div class="offset-1"></div>
         <!-- Music button -->
-            <div class="col-6 mx-auto medo hvr-float-shadow rounded">
+            <div class="col-5 mx-auto medo hvr-float-shadow rounded">
                 <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
             </div>
         </div>
         <div class="row animated slideInRight delay-1.25s">
         <!-- Movie List -->
-            <div class="col-6 mx-auto rounded">
+            <div class="col-5 mx-auto rounded">
                 <div class="">
                     <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
                 </div>
             </div>
+            <div class="offset-1"></div>
         <!-- Music List -->
-            <div class="col-6 mx-auto rounded">
+            <div class="col-5 mx-auto rounded">
                 <div class="">
                     <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
                 </div>
@@ -122,18 +130,18 @@
 
         <div class="mb-5"></div>
 
+    </div>
 
-        <footer class="footer mt-auto py-3">
-            <div class="container-fluid padding">
-                <div class="row alert text-center">
-                   <div class="col-12">
-                        <h6>Copyright&copy;Yo Mamma, 2019-Present. We'll find you!</h6>
-                    </div>
+    <footer class="footer mt-auto py-3">
+        <div class="container-fluid padding">
+            <div class="row alert text-center">
+                <div class="col-12">
+                    <h6>Copyright&copy;Yo Mamma, 2019-Present. We'll find you!</h6>
                 </div>
             </div>
+        </div>
+    </footer>
         
-    </div>
-        </footer>
 
 <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>

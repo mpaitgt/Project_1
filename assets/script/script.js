@@ -155,9 +155,7 @@ function musicMEDO() {
             $('#band-name').text(bandName);
             var bandPhoto = data.topalbums.album[0].image[3]['#text'];
             $('#band-image').attr({
-                'src': bandPhoto,
-                'height': '250px',
-                'width': '250px'
+                'src': bandPhoto
             })
         })
     });
@@ -354,7 +352,7 @@ function favoriteMedia() {                  // when the like button fires, this 
                 for (var x = 0; x < 3; x++) {
                     var randomMovie = Math.floor(Math.random() * recObject.length);
                     var movieName = recObject[randomMovie].title;
-                    var medoRec = $('<h3>').text(movieName).addClass('recommendations animated slideInLeft delay-1.25s');
+                    var medoRec = $('<h3>').text(movieName).addClass('recommendations animated slideInLeft delay-1s');
                     medoRec.attr({
                         'data-name': movieName,
                         'data-toggle': "modal", 

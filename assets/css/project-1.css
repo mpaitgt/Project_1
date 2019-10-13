@@ -98,23 +98,16 @@ body {
     color: #2932506c;
 }
 
-/*#search-btn {
-    margin: 20px 40px;
-    background-color: var(--navy);
-    border: none;
-    color: var(--gold);
-    text-transform: uppercase;
-    font-size: 42px;
-    font-weight: bold;
-    padding: 0px;
-    transition: background-color 0.5s, color 0.25s, border 0.5s;
-}*/
-
 #search-btn:focus {
     background-color: var(--gold);
     color: var(--navy);
     border: 3px solid var(--navy);
     transition: background-color 0.5s, color 0.25s, border 0.5s;
+}
+
+.instruct-paragraph {
+    letter-spacing: 0.05em;
+    line-height: 2em;
 }
 
 
@@ -141,6 +134,15 @@ body {
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.favorites-btn {
+    letter-spacing: 0.05em;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--blue) !important;
+    opacity: 0.7;
 }
 
 .favorites-btn:focus {
@@ -194,22 +196,13 @@ body {
     text-align: center;
 }
 
-/* footer {
-    border-top: solid 4px var(--gold);
-    font-size: 10px;
-    background-color: var(--navy);
-    color: white;
-    width: 100%;
-    position: absolute !important;
-    bottom: 0 !important;   
-} */
 footer {
     border-top: solid 4px var(--gold);
-    background-color: var(--navy);
-    color: white;
+    background-color: transparent;
+    color: var(--blue);
     width: 100%;
-    
     height: 100px;
+    position: relative;
     bottom: 0;
     left: 0px;
     
@@ -262,11 +255,22 @@ button {
 
 #rec-message {
     margin-top: 50px;
+    letter-spacing: 0.05em;
+}
+
+#recommended {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
 }
 
 .recommendations {
-    margin: 50px;
+    margin: 25px;
+    font-size: 30px;
     cursor: pointer;
+    color: var(--blue);
+    text-shadow: 5px 5px 7px rgba(0,0,0,0.20);
 }
 
 .recommendations:hover {
