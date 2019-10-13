@@ -20,9 +20,9 @@ body {
     background-color: #fffddc;
     text-align: center;
     overflow-x: hidden;
-   
 }
-.custom-control-label{
+
+.custom-control-label {
     font-size: 40px;
     color: green;
     padding-top: 0px;
@@ -98,6 +98,7 @@ body {
     color: #2932506c;
 }
 
+
 /*#search-btn {
     margin: 20px 40px;
     background-color: var(--navy);
@@ -133,13 +134,16 @@ body {
     cursor: pointer;
 }
 
-#movie-medo, #music-medo, #favorites-list {
+#movie-medo,
+#music-medo,
+#favorites-list {
     overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
+
 
 /* footer {
     border-top: solid 4px var(--gold);
@@ -150,16 +154,15 @@ body {
     position: absolute !important;
     bottom: 0 !important;   
 } */
+
 footer {
     border-top: solid 4px var(--gold);
     background-color: var(--navy);
     color: white;
     width: 100%;
-    
     height: 100px;
     bottom: 0;
     left: 0px;
-    
 }
 
 .watch-tag {
@@ -209,10 +212,12 @@ button {
     text-align: right;
 }
 
+
 /* .page-load-items {
     opacity: 1;
     transition: opacity 2s;
 } */
+
 
 /*Hover.css Transitions*/
 
