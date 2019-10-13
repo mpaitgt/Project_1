@@ -5,6 +5,8 @@ const musicBtn = $(document).on('click', '.music-name', musicMEDO);
 const movieBtn = $(document).on('click', '.movie-name', movieMEDO);
 const removeBtn = $(document).on('click', '.remove', removeItem);
 const likeBtn = $(document).on('click', '.like', favoriteMedia);
+const musicRecBtn = $(document).on('click', '.recommendations', musicMEDO);
+const movieRecBtn = $(document).on('click', '.recommendations', movieMEDO);
 var musicSelection;
 var movieSelection;
 var musicArray = [];
@@ -107,17 +109,6 @@ function movieMEDO() {
                     'width': '600px'
                 });
                 $('#youtube-content').append(newVideo);
-            }
-        });
-
-        $.ajax({
-            url: recommendationsURL,
-            method: 'GET'
-        }).then(function(recResponse) {
-            console.log(recResponse);
-            var recObject = response.results;
-            for (var x = 0; x < recObject.length; x++) {
-
             }
         });
     });
@@ -293,54 +284,84 @@ function favoriteMedia() {                  // when the like button fires, this 
     var key = $(this).attr('data-ref');
     var name = $(this).attr('data-name');
     var thisItem = $(this).closest('li');
-    var dateFavorited = moment().format('LLLL');
     thisItem.detach();
+    var recText = $('<h2>').text('Since you liked ' + name + '').attr({
+        'id': 'rec-prompt'
+    });
+    $('#recommended').empty();
+    $('#rec-message').empty();
+    $('#rec-message').prepend(recText);
 
     if (thisItem.hasClass('music-item')) {
         database.ref('Favorites/').push({
-            favorite_artist: name,
-            date_favorited: dateFavorited
+            favorite_artist: name
         });
         database.ref('Listen/' + key).remove();
 
+        var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
+        var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
+    
+        $.ajax({
+            url: lastfmURL,
+            method: 'GET'
+        }).then(function(response) {
+            var similarBands = response.similarartists.artist;  
+        
+            for (var x = 0; x < 3; x++) {
+                var randomBand = Math.floor(Math.random() * similarBands.length);
+                var bandName = similarBands[randomBand].name;
+                var medoRec = $('<h3>').text(bandName).addClass('recommendations animated slideInLeft delay-1.25s');
+                medoRec.attr({
+                    'data-name': bandName,
+                    'data-toggle': "modal", 
+                    'data-target': "#musicModal"
+                });
+                $('#recommended').append(medoRec);
+            };
+        });
+
     } else if (thisItem.hasClass('movie-item')) {
         database.ref('Favorites/').push({
-            favorite_movie: name,
-            date_favorited: dateFavorited
+            favorite_movie: name
         });
         database.ref('Watch/' + key).remove();
+
+    // MOVIE RECOMMENDED AJAX CALL
+        var moviePicked = $(this).attr('data-name');
+        var APIkey = '95a6c9d4de568b3ebaa4ea26320798b4';
+        var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + APIkey + '&query=' + name;
+        
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function(response) {
+            console.log(response);
+            var movieObject = response.results[0];
+    
+            // start here
+            var queryDetails = movieObject.id;
+            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
+            var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
+
+            $.ajax({
+                url: recommendationsURL,
+                method: 'GET'
+            }).then(function(recResponse) {
+
+                console.log(recResponse);
+                var recObject = recResponse.results;
+                for (var x = 0; x < 3; x++) {
+                    var randomMovie = Math.floor(Math.random() * recObject.length);
+                    var movieName = recObject[randomMovie].title;
+                    var medoRec = $('<h3>').text(movieName).addClass('recommendations animated slideInLeft delay-1.25s');
+                    medoRec.attr({
+                        'data-name': movieName,
+                        'data-toggle': "modal", 
+                        'data-target': "#movieModal"
+                    });
+                    $('#recommended').append(medoRec);
+                };
+            });
+        });
     }
-    // when like button is clicked, use the ajax call to access the related artists
-    // store those related artists in the database
-    // pull the related artists from the database and display them prepended in the recommended id
-    $.ajax({
-        url: recommendationsURL,
-        method: 'GET'
-    }).then(function(recResponse) {
-        console.log(recResponse);
-        var recObject = response.results;
-        for (var x = 0; x < recObject.length; x++) {
-
-        }
-    });
 }
-
-// recommended function
-// make it an event listener that fires when the like button is pressed
-
-
-// detach the clicked list item and append it - not prepend as it was before - to the list
-// populate the recommended list by calling the musicMEDO function
-// may need to create an array so that these band names stay static on the page
-// rather than being pulled from the API on every page load
-// when the like button is clicked, grab the recommended artists from the JSON object with a for loop (grab 3)
-// push the three into an array (find a method that puts them first in the array)
-// have the array populate the recommended field
-// give each of the list items in the recommended field the music or movie medo class so that the modal works for them too
-// concatinate what category it is 
-// i.e.
-// userInput;
-// var category = $('<span>').attr('class', 'category'); - style this so that it stands out clearly as a marker
-// category.text(' Listen/Watch');
-// var newRec = userInput + category;
-
