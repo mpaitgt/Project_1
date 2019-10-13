@@ -166,21 +166,21 @@ function musicMEDO() {
 database.ref('Listen/').on('child_added', function(data) {      // LISTEN retrieves data from Firebase on page load
     var newArtist = data.val().artist;
     var key = data.key;
-    var newListItem = $('<li>').attr('class', 'row mx-auto music-item list-group-item hvr-shutter-out-vertical');
+    var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical');
     var newListen = $('<span>').attr({                  
-        'class': 'music-name',
+        'class': 'music-name col-10',
         'data-name': newArtist, 
         'data-ref': key,
         'data-toggle': "modal", 
         'data-target': "#musicModal"
     });     
     var newRemove = $('<button>').text('X').attr({
-        'class': 'remove listen',
+        'class': 'remove listen col-1',
         'data-name': newArtist,
         'data-ref': key
     }); 
     var newLike = $('<button>').text('Like').attr({
-        'class': 'like listen',
+        'class': 'like listen col-1',
         'data-name': newArtist,
         'data-ref': key
     }); 
@@ -196,19 +196,19 @@ database.ref('Watch/').on('child_added', function(data) {      // WATCH retrieve
     var key = data.key;
     var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical');
     var newWatch = $('<span>').attr({                  
-        'class': 'movie-name',
+        'class': 'movie-name col-10',
         'data-name': newMovie, 
         'data-ref': key,
         'data-toggle': "modal", 
         'data-target': "#movieModal"
     });     
     var newRemove = $('<button>').text('X').attr({
-        'class': 'remove watch',
+        'class': 'remove watch col-1',
         'data-name': newMovie,
         'data-ref': key
     }); 
     var newLike = $('<button>').text('Like').attr({
-        'class': 'like watch',
+        'class': 'like watch col-1',
         'data-name': newMovie,
         'data-ref': key
     }); 
@@ -228,7 +228,7 @@ database.ref('Favorites/').on('child_added', function(data) {      // FAVORITES 
     if (category.favorite_artist) {
         var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical');
         var newListen = $('<span>').attr({                  
-            'class': 'music-name',
+            'class': 'music-name col-10',
             'data-name': newFavoriteArtist, 
             'data-ref': key,
             'data-toggle': "modal", 
@@ -236,7 +236,7 @@ database.ref('Favorites/').on('child_added', function(data) {      // FAVORITES 
         });     
         var musicTag = $('<span>').text('listened').attr('class', 'listen-tag'); 
         var newRemove = $('<button>').text('X').attr({
-            'class': 'remove listen',
+            'class': 'remove listen col-2',
             'data-name': newFavoriteArtist,
             'data-ref': key
         }); 
@@ -246,7 +246,7 @@ database.ref('Favorites/').on('child_added', function(data) {      // FAVORITES 
     } else if (category.favorite_movie) {
         var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical');
         var newWatch = $('<span>').attr({                  
-            'class': 'movie-name',
+            'class': 'movie-name col-10',
             'data-name': newFavoriteMovie, 
             'data-ref': key,
             'data-toggle': "modal", 
@@ -254,7 +254,7 @@ database.ref('Favorites/').on('child_added', function(data) {      // FAVORITES 
         });  
         var movieTag = $('<span>').text('watched').attr('class', 'watch-tag');   
         var newRemove = $('<button>').text('X').attr({
-            'class': 'remove watch',
+            'class': 'remove watch col-2',
             'data-name': newFavoriteMovie,
             'data-ref': key
         }); 

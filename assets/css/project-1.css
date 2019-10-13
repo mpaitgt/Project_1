@@ -135,10 +135,21 @@ body {
 
 #movie-medo, #music-medo, #favorites-list {
     overflow-y: scroll;
+    box-shadow: 10px 0px 28px -10px rgba(0,0,0,0.75);
+    background-color: white;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.favorites-btn:focus {
+    outline: none;
+}
+
+.custom-bg {
+    background-color: transparent;
+    border: none;
 }
 
 /* MODAL STYLING */
@@ -247,6 +258,19 @@ button {
 
 .remove, .like {
     text-align: right;
+}
+
+#rec-message {
+    margin-top: 50px;
+}
+
+.recommendations {
+    margin: 50px;
+    cursor: pointer;
+}
+
+.recommendations:hover {
+    transform: scale(1.5);
 }
 
 
