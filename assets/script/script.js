@@ -77,8 +77,9 @@ function movieMEDO() {
         var movieSummary = movieObject.overview;
         var movieRelease = movieObject.release_date;
         var releaseMoment = moment([movieRelease]).format('MMMM D YYYY');
+        console.log(movieRelease);
         console.log(releaseMoment);
-        var basePosterURL = 'http://image.tmdb.org/t/p/w185';
+        var basePosterURL = 'https://image.tmdb.org/t/p/w185';
         var moviePoster = movieObject.poster_path;
         var posterExt = basePosterURL + moviePoster;
 
@@ -103,7 +104,7 @@ function movieMEDO() {
 
             $('#youtube-content').empty();
             for (var j = 0; j <= 4; j++) {
-                var youTube = 'http://www.youtube.com/embed/' + userChoice[j].key;
+                var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
                 var newVideo = $('<iframe>').attr({
                     'src': youTube,
                     'height': '400px',
@@ -118,8 +119,8 @@ function movieMEDO() {
 function musicMEDO() {
     var artistPicked = $(this).attr('data-name');
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
-    var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
-    var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmDetails = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
 
     $.ajax({
         url: lastfmURL,
@@ -298,7 +299,7 @@ function favoriteMedia() {                  // when the like button fires, this 
         database.ref('Listen/' + key).remove();
 
         var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
-        var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
+        var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
     
         $.ajax({
             url: lastfmURL,
