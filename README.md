@@ -47,6 +47,9 @@ You can finally hang up the Office in here, just incase somehow you forgot that 
 
     - Just add water CSS animations
 
+* [Moment.js](https://momentjs.com/docs/)
+    - Parse, validate, manipulate, and display dates and times in JavaScript.
+
 * [Firebase](https://firebase.google.com/docs)
 
     - Firebase gives you functionality like analytics, databases, messaging and crash reporting so you can move quickly and focus on your users.
@@ -79,14 +82,29 @@ You can finally hang up the Office in here, just incase somehow you forgot that 
 ## Functionality
 
 * Currently, No Installation necessary.  Simply navigate to [the Medo webpage](https://mpaitgt.github.io/Project_1/) to begin using.
- * Google Chrome is our recommended web browser, but your preferred browser will work as well.
+* Google Chrome is our recommended web browser, but your preferred browser will work as well.
 * User can input an artist/movie's name and add them to their respective list
-* Clicking on a list item will generate the proper return info (music/movie)
-* User can LIKE a list item, which will:
-    * Dynamically generate a list of recommended musicians/movies
+* A list item will display the following:
+    * The tile of the artist/band
+    * The amount of time that has passed since the item was first added
+    * A like button 
+    * A removed button
+* Clicking on a list item will pop-up the proper return info
+    * Movies
+        * Movie Poster
+        * Release Date
+        * Synopsis
+        * Embedded Video Trailer
+    * Music
+        * Album Art
+        * Genres
+        * Biography
+        * Similar Artists
+* User can *LIKE* a list item, which will:
+    * Dynamically generate a list of recommended musicians/movies 
     * Add the item to the top-left Favorites dropdown medo list
-* Users can REMOVE [X] any list item they no longer wish to save
-* Interacting with the 
+* Users can *REMOVE* [X] any list item they no longer wish to save
+
     
 ----
 
