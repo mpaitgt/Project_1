@@ -1,18 +1,17 @@
 
 
-# MEDO: A MEDIA TO DO LIST 
+## MEDO: A MEDIA TO DO LIST 
 ### Alpha Version : 0.1.1
 
-## Table of contents
-* [What is Medo](#general)
-* [Technologies](#tech)
-* [Files-Included]
-* [Functionality]
-* [Upcomming]
+---- 
 
+## Table of Content
+{:no_toc}
+
+----
 
 ## What is Medo 
-(#general)
+{:toc}
 
 Have you ever been at a bar, and been talking about music or movies with a group of people?  Normally, conversations flow around the "Hey, have you seen this movie?!"  or "Did you ever hear of this band"? 
 
@@ -27,9 +26,11 @@ When you get those recommendations at a bar/social gather, all you have to do is
 
 You can put finally hang up the Office in here, just incase somehow you forgot that you've already watched every episode 20 times...
 
+----
+
 
 ## Technologies
-(#tech) 
+{:toc}
 
 * [Bootstrap 4](https://getbootstrap.com/)
 
@@ -55,8 +56,11 @@ You can put finally hang up the Office in here, just incase somehow you forgot t
 
     - Last.fm helps power our Listen list, providing you with an image of their top Album, genre list, a short Artist's bio, and similar Artists.  You will be directed to the Artist's Last.fm page for more information and top songs.
 
+----
 
 ## Files 
+{:toc}
+
 * root
     * index.html
     * README.MD
@@ -68,8 +72,10 @@ You can put finally hang up the Office in here, just incase somehow you forgot t
     * require.js
     * script.js
 
+----
 
 ## Functionality
+{:toc}
 
 * Currently, No Installation necessary.  Simply navigate to (www.Medo.com) [domain not purchased yet] to begin using.
 
@@ -81,10 +87,14 @@ You can put finally hang up the Office in here, just incase somehow you forgot t
 * Users can REMOVE [X] any list item they no longer wish to save
 * Interacting with the 
     
+----
 
 ## Upcomming Changes
+{:toc}
 
 * Username Authorization functionality
 * Ability to curate and save specific lists (ie HORROR MOVIES, MUSIC TO STUDY/RELAX/CHILL)
 * Spotify Integration to be able to listen to suggested songs within the MEDO page
 * Social sharing to allow Medo users to interact with one another, as well as share their lists with other Social Media Platforms
+
+----
