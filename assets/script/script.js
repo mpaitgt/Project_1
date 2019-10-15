@@ -118,7 +118,9 @@ function musicMEDO() {
     var artistPicked = $(this).attr('data-name');
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
     var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
-    var lastfmDetails = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmImage = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmTracks = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+
 
     $.ajax({
         url: lastfmURL,
@@ -148,7 +150,7 @@ function musicMEDO() {
         }
         
         $.ajax({
-            url: lastfmDetails,
+            url: lastfmImage,
             method: 'GET'
         }).then(function(data) {
             $('#band-name').text(bandName);
@@ -156,6 +158,25 @@ function musicMEDO() {
             $('#band-image').attr({
                 'src': bandPhoto
             })
+        })
+
+        $.ajax({
+            url: lastfmTracks,
+            method: 'GET'
+        }).then(function(tracks) {
+            var topTracks = tracks.toptracks.track;   // array
+            console.log(topTracks);
+            $('#top-tracks').empty();
+            for (var x = 0; x <= 4; x++) {
+                var trackHREF = topTracks[x].url;
+                var newLink = $('<a>').attr({
+                    'href': trackHREF,
+                    'target': '_blank'
+                });
+                var tracksLoop = $('<h6>').text(topTracks[x].name);
+                newLink.append(tracksLoop);
+                $('#top-tracks').append(newLink);
+            }
         })
     });
 }
