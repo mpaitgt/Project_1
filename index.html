@@ -90,7 +90,7 @@
             <h1 id="logo" class="medo-style mx-auto animated lightSpeedIn delay-.5s rounded">medo</h1>
         </div>
         <div class="row">
-                <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
+                <input type="text" id="search" class="col-lg-8 col-sm-10 col-xs-10 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
         </div>
 
 <!-- Instruction -->
@@ -104,30 +104,33 @@
 
 <!-- MEDO containers -->
     <div class="container">
-        <!-- Movie button -->
         <div class="row animated slideInLeft delay-1.25s">
-            <div class="col-lg-6 col-sm-12 mx-auto medo hvr-float-shadow rounded">
-                <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
-            </div>
-        <!-- Music button -->
-            <div class="col-lg-6 col-sm-12 mx-auto medo hvr-float-shadow rounded">
-                <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
-            </div>
-        </div>
-        <div class="row animated slideInRight delay-1.25s">
-        <!-- Movie List -->
-            <div class="col-lg-6 col-sm-12 mx-auto rounded">
-                <div class="">
-                    <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+            <!-- Movie button and list -->
+            <div class="col-lg-6 col-sm-12">
+                <div class="mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
+                </div>
+                <div class="animated slideInRight delay-1.25s">
+                    <div class="mx-auto rounded">
+                        <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
                 </div>
             </div>
-        <!-- Music List -->
-            <div class="col-lg-6 col-sm-12 mx-auto rounded">
-                <div class="">
-                    <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+            <!-- Music button and list -->
+            <div class="col-lg-6 col-sm-12">
+                <div class="mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
+                </div>
+                <div class="animated slideInRight delay-1.25s">
+                    <div class="mx-auto rounded">
+                        <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
     </div>
 
         <div class="mb-5"></div>

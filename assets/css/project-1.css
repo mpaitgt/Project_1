@@ -484,6 +484,15 @@ button {
 @media screen and (max-width: 1200px) {
     #search {
         font-size: 42px;
+    }
+}
 
+@media screen and (max-width: 670px) {
+    #search {
+        font-size: 30px;
+    }
+
+    .music-name, .movie-name {
+        font-size: 16px;
     }
 }
