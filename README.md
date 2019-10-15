@@ -5,32 +5,35 @@
 
 ---- 
 
-## Table of Content
-{:no_toc}
+ ## Table of contents
+* [What is Medo](#what-is-medo)
+* [Technologies](#technologies)
+* [Files Included](#files-included)
+* [Functionality](#functionality)
+* [Upcomming Changes](#upcomming-changes)
+* [Contributors](#contributors)
 
 ----
 
 ## What is Medo 
-{:toc}
+
 
 Have you ever been at a bar, and been talking about music or movies with a group of people?  Normally, conversations flow around the "Hey, have you seen this movie?!"  or "Did you ever hear of this band"? 
 
-Another dilema we often find ourselves in is our Constant Comfort Media picks.  How many times have you watched the Office now?  7 times?  What about that Motley Crew record?  Probably in the hundreds by now...
+Another dilema we often find ourselves in is our Constant Comfort Media picks.  How many times have you watched the Office now?  7 times?  What about that Motley Crew record?  Probably in the *hundreds* by now...
 
-This is where MEDO comes in.
+#### **This is where MEDO comes in.**
 
-A streamlined user-focused WEBAPP (mobile coming soon) to create a Media focused to-do list!
+A streamlined WEBAPP (mobile coming soon) to create a Media focused to-do list!
 
 
-When you get those recommendations at a bar/social gather, all you have to do is add them to your MeDo list! Your entries will provide small tidbits of info and ultimately help you determine if this media suites your fancy!  
+Now, when you get those recommendations at a bar, simply add them to your MeDo list! Your entries will provide small tidbits of info and ultimately help you determine if it suites your fancy!  
 
-You can put finally hang up the Office in here, just incase somehow you forgot that you've already watched every episode 20 times...
+You can finally hang up the Office in here, just incase somehow you forgot that you've already watched every episode 20 times...
 
 ----
 
-
 ## Technologies
-{:toc}
 
 * [Bootstrap 4](https://getbootstrap.com/)
 
@@ -59,7 +62,6 @@ You can put finally hang up the Office in here, just incase somehow you forgot t
 ----
 
 ## Files 
-{:toc}
 
 * root
     * index.html
@@ -75,10 +77,9 @@ You can put finally hang up the Office in here, just incase somehow you forgot t
 ----
 
 ## Functionality
-{:toc}
 
-* Currently, No Installation necessary.  Simply navigate to (www.Medo.com) [domain not purchased yet] to begin using.
-
+* Currently, No Installation necessary.  Simply navigate to [the Medo webpage](https://mpaitgt.github.io/Project_1/) to begin using.
+ * Google Chrome is our recommended web browser, but your preferred browser will work as well.
 * User can input an artist/movie's name and add them to their respective list
 * Clicking on a list item will generate the proper return info (music/movie)
 * User can LIKE a list item, which will:
@@ -90,11 +91,25 @@ You can put finally hang up the Office in here, just incase somehow you forgot t
 ----
 
 ## Upcomming Changes
-{:toc}
 
 * Username Authorization functionality
+* Completely Mobile Responsive 
 * Ability to curate and save specific lists (ie HORROR MOVIES, MUSIC TO STUDY/RELAX/CHILL)
 * Spotify Integration to be able to listen to suggested songs within the MEDO page
 * Social sharing to allow Medo users to interact with one another, as well as share their lists with other Social Media Platforms
+
+----
+
+## Contributors
+
+MEDO was inspired by the countless recommended bands and movies we've all forgotten, and all gas we wasted idling in our cars trying to find something to listen to while driving.
+
+Our initial ALPHA version was compiled as a group project with the efforts of the following individuals:
+
+* [@mpaitgt](https://github.com/mpaitgt)
+* [@cerpinconsafo](https://github.com/cerpinconsafo)
+* [@angeli](https://github.com/angeli)
+* [@Mikirtumov](https://github.com/Mikirtumov)
+* [@Sromero1015](https://github.com/Sromero1015)
 
 ----
