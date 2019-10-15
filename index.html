@@ -26,16 +26,28 @@
             <div class="modal-content custom-modal">
                 <div class="row">
                     <img id="movie-image" src="" alt="movie-poster" class="col-3 d-flex align-center">
+<<<<<<< HEAD
                     <div class="col-9">
                         <h2 id="movie-title"></h2>
                         <h4>Summary</h4>
                         <p id="movie-summary"></p>
                         <h4>Release Date: <span id="release-date"></span></h4>
                     </div>
+=======
+                        <div class="col-9">
+                            <h2 id="movie-title"></h2>
+                            <h4>Summary</h4>
+                            <p id="movie-summary"></p>
+                        </div>
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
                 </div>
-                <div class="row mx-auto">
-                    <h4>Video Content</h4>
-                    <div id="youtube-content"></div>
+                <div class="middle-content">
+                    <h4>Release Date</h4>
+                    <h4 id="release-date"></h4>
+                    <div class="row mx-auto">
+                        <h4>Video Content</h4>
+                        <div id="youtube-content" class="video-container"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,6 +57,7 @@
     <div id="musicModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
+<<<<<<< HEAD
                 <h2 id="band-name"></h2>
                 <img id="band-image" src="" alt="album-cover">
                 <div id="genre"></div>
@@ -52,10 +65,26 @@
                 <p id="band-bio"></p>
                 <h4>Similar Bands</h4>
                 <div id="similar-bands"></div>
+=======
+                <div class="row">
+                    <img id="band-image" src="" alt="album-cover" class="col-4">
+                    <div class="col-8">
+                        <h2 id="band-name"></h2>
+                        <div id="genre"></div>
+                    </div>
+                        <div class="middle-content">
+                        <h4>Band Bio</h4>
+                        <p id="band-bio"></p>
+                        <h4>Similar Bands</h4>
+                        <div id="similar-bands"></div>
+                    </div>
+                </div>
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Site Header and search bar -->
     <nav class="navbar navbar-expand-md navbar-light bg-faded">
         <ul class="navbar-nav mx-auto">
@@ -82,24 +111,51 @@
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
+=======
+<!-- Navigation bar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-faded">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item dropdown text-center">
+                <button class="nav-link dropdown-toggle favorites-btn" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Favorites
+                </button>
+                <div class="dropdown-menu custom-bg" aria-labelledby="navbarDropdownMenuLink">
+                    <ul id="favorites-list" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
+                </div>
+            </li>
+            <li>
+                <button id="clear-fave-btn" class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Clear
+                </button>
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
             </li>
         </ul>
     </nav>
 
+<<<<<<< HEAD
+=======
+<!-- Site Header and search bar -->
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     <div class="container-fluid">
         <div class="row site-head rounded">
             <h1 id="logo" class="medo-style mx-auto animated lightSpeedIn delay-.5s rounded">medo</h1>
         </div>
+<<<<<<< HEAD
         <div class="row col-lg-12">
             <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
+=======
+        <div class="row">
+                <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
         </div>
 
         <!-- Instruction -->
         <div class="row col-lg-12 mx-auto justify-content-center">
-            <p class="animated fadeIn delay-2s">Type in items for your
+            <p class="animated fadeIn delay-1s instruct-paragraph">Type in items for your
                 <span class="medo-inline rounded">MeDo</span> list above,<br> then click on the List you would like it to appear in!</p>
         </div>
 
+<<<<<<< HEAD
         <!-- MEDO containers -->
         <div class="container-fluid">
             <!-- Movie button -->
@@ -125,13 +181,31 @@
                         <ul id="music-medo" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
                     </div>
                 </div>
+=======
+        <div id="rec-message"></div>
+        <div id="recommended"></div>
+
+<!-- MEDO containers -->
+    <div class="container">
+        <!-- Movie button -->
+        <div class="row animated slideInLeft delay-1.25s">
+            <div class="col-lg-6 col-sm-12 mx-auto medo hvr-float-shadow rounded">
+                <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
+            </div>
+        <!-- Music button -->
+            <div class="col-lg-6 col-sm-12 mx-auto medo hvr-float-shadow rounded">
+                <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
             </div>
         </div>
-
-        <div class="row animated slideInLeft delay-1.25s">
-            <div class="col-4 mx-auto medo hvr-float-shadow rounded">
-                <h2 id="favorites" class=" medo-box text-center medo-style">Favorites</h2>
+        <div class="row animated slideInRight delay-1.25s">
+        <!-- Movie List -->
+            <div class="col-lg-6 col-sm-12 mx-auto rounded">
+                <div class="">
+                    <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                </div>
             </div>
+<<<<<<< HEAD
         </div>
         <div class="row animated slideInRight delay-1.25s"></div>
         <div class="col-4 mx-auto text-left rounded">
@@ -140,9 +214,20 @@
     </div>
 
     <div id="recommended"></div>
+=======
+        <!-- Music List -->
+            <div class="col-lg-6 col-sm-12 mx-auto rounded">
+                <div class="">
+                    <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 
     <div class="mb-5"></div>
 
+    </div>
 
     <footer class="footer mt-auto py-3">
         <div class="container-fluid padding">
@@ -153,6 +238,7 @@
             </div>
         </div>
     </footer>
+<<<<<<< HEAD
     <!-- <footer class="row col-lg-12 justify-content-center mx-auto py-4 ">
 <hr>Copyright Yo Mamma, 2019-Present. We'll find you!</footer> -->
 
@@ -162,6 +248,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="assets/script/script.js"></script>
+=======
+        
+
+<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<script src="assets/script/script.js"></script>
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 </body>
 
 </html>

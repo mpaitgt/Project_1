@@ -5,11 +5,13 @@ const musicBtn = $(document).on('click', '.music-name', musicMEDO);
 const movieBtn = $(document).on('click', '.movie-name', movieMEDO);
 const removeBtn = $(document).on('click', '.remove', removeItem);
 const likeBtn = $(document).on('click', '.like', favoriteMedia);
+const musicRecBtn = $(document).on('click', '.recommendations', musicMEDO);
+const movieRecBtn = $(document).on('click', '.recommendations', movieMEDO);
+const clearFaveBtn = $('#clear-fave-btn').on('click', clearFavorites);
 var musicSelection;
 var movieSelection;
 var musicArray = [];
 var movieArray = [];
-
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -26,10 +28,13 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-
 // Functions
 function addMovie() { // Adds a movie item to the music medo
     var userInput = $('#search').val();
+<<<<<<< HEAD
+=======
+    var dateAdded = moment().format();
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 
     if ($('#search').val() === '') {
         return;
@@ -38,6 +43,7 @@ function addMovie() { // Adds a movie item to the music medo
     } else {
         movieArray.push(userInput);
         database.ref('Watch/').push({
+<<<<<<< HEAD
             movie: userInput
         });
     }
@@ -45,6 +51,17 @@ function addMovie() { // Adds a movie item to the music medo
 
 function addMusic() { // Adds a music item to the music medo
     var userInput = $('#search').val();
+=======
+            movie: userInput,
+            date_added: dateAdded
+        });       
+    }   
+}  
+
+function addMusic() {                       // Adds a music item to the music medo
+    var userInput = $('#search').val(); 
+    var dateAdded = moment().format();
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 
     if ($('#search').val() === '') {
         return;
@@ -53,8 +70,14 @@ function addMusic() { // Adds a music item to the music medo
     } else {
         musicArray.push(userInput);
         database.ref('Listen/').push({
+<<<<<<< HEAD
             artist: userInput
         });
+=======
+            artist: userInput,
+            date_added: dateAdded
+        });       
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     }
 }
 
@@ -71,10 +94,11 @@ function movieMEDO() {
         var movieTitle = movieObject.title;
         var movieSummary = movieObject.overview;
         var movieRelease = movieObject.release_date;
-        var basePosterURL = 'http://image.tmdb.org/t/p/w185';
+        var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
+        var basePosterURL = 'https://image.tmdb.org/t/p/w185';
         var moviePoster = movieObject.poster_path;
         var posterExt = basePosterURL + moviePoster;
-        console.log(basePosterURL + moviePoster);
+    
         $('#movie-title').text(movieTitle);
         $('#movie-image').attr({
             'src': posterExt.toString(),
@@ -82,7 +106,7 @@ function movieMEDO() {
             'height': '25%'
         });
         $('#movie-summary').html(movieSummary);
-        $('#release-date').text(movieRelease);
+        $('#release-date').text(releaseMoment);
 
         var queryDetails = movieObject.id;
         var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey + '&language=en-US&page=1';
@@ -96,7 +120,7 @@ function movieMEDO() {
 
             $('#youtube-content').empty();
             for (var j = 0; j <= 4; j++) {
-                var youTube = 'http://www.youtube.com/embed/' + userChoice[j].key;
+                var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
                 var newVideo = $('<iframe>').attr({
                     'src': youTube,
                     'height': '400px',
@@ -105,25 +129,14 @@ function movieMEDO() {
                 $('#youtube-content').append(newVideo);
             }
         });
-
-        $.ajax({
-            url: recommendationsURL,
-            method: 'GET'
-        }).then(function(recResponse) {
-            console.log(recResponse);
-            var recObject = response.results;
-            for (var x = 0; x < recObject.length; x++) {
-
-            }
-        });
     });
 }
 
 function musicMEDO() {
     var artistPicked = $(this).attr('data-name');
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
-    var lastfmURL = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
-    var lastfmDetails = 'http://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmDetails = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
 
     $.ajax({
         url: lastfmURL,
@@ -159,9 +172,7 @@ function musicMEDO() {
             $('#band-name').text(bandName);
             var bandPhoto = data.topalbums.album[0].image[3]['#text'];
             $('#band-image').attr({
-                'src': bandPhoto,
-                'height': '250px',
-                'width': '250px'
+                'src': bandPhoto
             })
         })
     });
@@ -169,27 +180,52 @@ function musicMEDO() {
 
 database.ref('Listen/').on('child_added', function(data) { // LISTEN retrieves data from Firebase on page load
     var newArtist = data.val().artist;
+    var dateAdded = data.val().date_added;
+    var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
+<<<<<<< HEAD
     var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical');
     var newListen = $('<span>').attr({
         'class': 'music-name col-10',
         'data-name': newArtist,
+=======
+    var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
+    var newListen = $('<span>').attr({                  
+        'class': 'music-name',
+        'data-name': newArtist, 
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
         'data-ref': key,
         'data-toggle': "modal",
         'data-target': "#musicModal"
+<<<<<<< HEAD
     });
     var newRemove = $('<button>').text('X').attr({
         'class': 'remove listen justify-content-end',
+=======
+    });  
+    var newDate = $('<span>').text(dateMoment).attr('class', 'date-added');
+    var newRemove = $('<button>').text('X').attr({
+        'class': 'remove listen',
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
         'data-name': newArtist,
         'data-ref': key
     });
     var newLike = $('<button>').text('Like').attr({
+<<<<<<< HEAD
         'class': 'like listen justify-content-end',
         'data-name': newArtist,
         'data-ref': key
     });
     newListen.text(newArtist);
     newListItem.append(newListen, newLike, newRemove);
+=======
+        'class': 'like listen',
+        'data-name': newArtist,
+        'data-ref': key
+    }); 
+    newListen.text(newArtist);                                              
+    newListItem.append(newListen, newDate, newLike, newRemove);
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     $('#music-medo').prepend(newListItem);
     $('#search').val('');
 });
@@ -197,27 +233,47 @@ database.ref('Listen/').on('child_added', function(data) { // LISTEN retrieves d
 
 database.ref('Watch/').on('child_added', function(data) { // WATCH retrieves data from Firebase on page load
     var newMovie = data.val().movie;
+    var dateAdded = data.val().date_added;
+    var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
+<<<<<<< HEAD
     var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical');
     var newWatch = $('<span>').attr({
         'class': 'movie-name col-10',
         'data-name': newMovie,
+=======
+    var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
+    var newWatch = $('<span>').attr({                  
+        'class': 'movie-name',
+        'data-name': newMovie, 
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
         'data-ref': key,
         'data-toggle': "modal",
         'data-target': "#movieModal"
+<<<<<<< HEAD
     });
+=======
+    });     
+    var newDate = $('<span>').text(dateMoment).attr('class', 'date-added');
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     var newRemove = $('<button>').text('X').attr({
-        'class': 'remove watch col-1',
+        'class': 'remove watch',
         'data-name': newMovie,
         'data-ref': key
     });
     var newLike = $('<button>').text('Like').attr({
-        'class': 'like watch col-1',
+        'class': 'like watch',
         'data-name': newMovie,
         'data-ref': key
+<<<<<<< HEAD
     });
     newWatch.text(newMovie);
     newListItem.append(newWatch, newLike, newRemove);
+=======
+    }); 
+    newWatch.text(newMovie);                                              
+    newListItem.append(newWatch, newDate, newLike, newRemove);
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     $('#movie-medo').prepend(newListItem);
     $('#search').val('');
 });
@@ -230,17 +286,24 @@ database.ref('Favorites/').on('child_added', function(data) { // FAVORITES retri
     var category = data.val();
 
     if (category.favorite_artist) {
+<<<<<<< HEAD
         var newListItem = $('<button>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical');
         var newListen = $('<span>').attr({
             'class': 'music-name col-10',
             'data-name': newFavoriteArtist,
+=======
+        var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between align-items-center');
+        var newListen = $('<span>').attr({                  
+            'class': 'music-name',
+            'data-name': newFavoriteArtist, 
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
             'data-ref': key,
             'data-toggle': "modal",
             'data-target': "#musicModal"
         });
         var musicTag = $('<span>').text('listened').attr('class', 'listen-tag');
         var newRemove = $('<button>').text('X').attr({
-            'class': 'remove listen col-1',
+            'class': 'remove listen',
             'data-name': newFavoriteArtist,
             'data-ref': key
         });
@@ -248,17 +311,24 @@ database.ref('Favorites/').on('child_added', function(data) { // FAVORITES retri
         newListItem.append(newListen, musicTag, newRemove);
 
     } else if (category.favorite_movie) {
+<<<<<<< HEAD
         var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical');
         var newWatch = $('<span>').attr({
             'class': 'movie-name col-10',
             'data-name': newFavoriteMovie,
+=======
+        var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between align-items-center');
+        var newWatch = $('<span>').attr({                  
+            'class': 'movie-name',
+            'data-name': newFavoriteMovie, 
+>>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
             'data-ref': key,
             'data-toggle': "modal",
             'data-target': "#movieModal"
         });
         var movieTag = $('<span>').text('watched').attr('class', 'watch-tag');
         var newRemove = $('<button>').text('X').attr({
-            'class': 'remove watch col-1',
+            'class': 'remove watch',
             'data-name': newFavoriteMovie,
             'data-ref': key
         });
@@ -290,6 +360,12 @@ function favoriteMedia() { // when the like button fires, this function movies t
     var name = $(this).attr('data-name');
     var thisItem = $(this).closest('li');
     thisItem.detach();
+    var recText = $('<h2>').text('Since you liked ' + name + '').attr({
+        'id': 'rec-prompt'
+    });
+    $('#recommended').empty();
+    $('#rec-message').empty();
+    $('#rec-message').prepend(recText);
 
     if (thisItem.hasClass('music-item')) {
         database.ref('Favorites/').push({
@@ -297,42 +373,73 @@ function favoriteMedia() { // when the like button fires, this function movies t
         });
         database.ref('Listen/' + key).remove();
 
+        var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
+        var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
+    
+    // MUSIC RECOMMENDED AJAX CALL
+        $.ajax({
+            url: lastfmURL,
+            method: 'GET'
+        }).then(function(response) {
+            var similarBands = response.similarartists.artist;  
+        
+            for (var x = 0; x < 3; x++) {
+                var randomBand = Math.floor(Math.random() * similarBands.length);
+                var bandName = similarBands[randomBand].name;
+                var medoRec = $('<li>').text(bandName).addClass('recommendations animated slideInLeft delay-0.5s');
+                medoRec.attr({
+                    'data-name': bandName,
+                    'data-toggle': "modal", 
+                    'data-target': "#musicModal"
+                });
+                $('#recommended').append(medoRec);
+            };
+        });
+
     } else if (thisItem.hasClass('movie-item')) {
         database.ref('Favorites/').push({
             favorite_movie: name
         });
         database.ref('Watch/' + key).remove();
-    }
-    // when like button is clicked, use the ajax call to access the related artists
-    // store those related artists in the database
-    // pull the related artists from the database and display them prepended in the recommended id
-    $.ajax({
-        url: recommendationsURL,
-        method: 'GET'
-    }).then(function(recResponse) {
-        console.log(recResponse);
-        var recObject = response.results;
-        for (var x = 0; x < recObject.length; x++) {
 
-        }
-    });
+    // MOVIE RECOMMENDED AJAX CALL
+        var moviePicked = $(this).attr('data-name');
+        var APIkey = '95a6c9d4de568b3ebaa4ea26320798b4';
+        var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + APIkey + '&query=' + name;
+        
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function(response) {
+            var movieObject = response.results[0];
+    
+            // start here
+            var queryDetails = movieObject.id;
+            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
+            var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
+
+            $.ajax({
+                url: recommendationsURL,
+                method: 'GET'
+            }).then(function(recResponse) {
+                var recObject = recResponse.results;
+                for (var x = 0; x < 3; x++) {
+                    var randomMovie = Math.floor(Math.random() * recObject.length);
+                    var movieName = recObject[randomMovie].title;
+                    var medoRec = $('<li>').text(movieName).addClass('recommendations animated slideInLeft delay-0.5s');
+                    medoRec.attr({
+                        'data-name': movieName,
+                        'data-toggle': "modal", 
+                        'data-target': "#movieModal"
+                    });
+                    $('#recommended').append(medoRec);
+                };
+            });
+        });
+    }
 }
 
-// recommended function
-// make it an event listener that fires when the like button is pressed
-
-
-// detach the clicked list item and append it - not prepend as it was before - to the list
-// populate the recommended list by calling the musicMEDO function
-// may need to create an array so that these band names stay static on the page
-// rather than being pulled from the API on every page load
-// when the like button is clicked, grab the recommended artists from the JSON object with a for loop (grab 3)
-// push the three into an array (find a method that puts them first in the array)
-// have the array populate the recommended field
-// give each of the list items in the recommended field the music or movie medo class so that the modal works for them too
-// concatinate what category it is 
-// i.e.
-// userInput;
-// var category = $('<span>').attr('class', 'category'); - style this so that it stands out clearly as a marker
-// category.text(' Listen/Watch');
-// var newRec = userInput + category;
+function clearFavorites() {
+    database.ref('Favorites/').remove();
+    $('#favorites-list').empty();
+}
