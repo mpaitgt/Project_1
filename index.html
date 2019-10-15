@@ -27,10 +27,10 @@
                 <div class="row">
                     <img id="movie-image" src="" alt="movie-poster" class="col-3 d-flex align-center">
                         <div class="col-9">
-                        <h2 id="movie-title"></h2>
-                        <h4>Summary</h4>
+                            <h2 id="movie-title"></h2>
+                            <h4>Summary</h4>
                             <p id="movie-summary"></p>
-                    </div>
+                        </div>
                 </div>
                 <div class="middle-content">
                     <h4>Release Date</h4>
@@ -76,6 +76,11 @@
                     <ul id="favorites-list" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
                 </div>
             </li>
+            <li>
+                <button id="clear-fave-btn" class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Clear
+                </button>
+            </li>
         </ul>
     </nav>
 
@@ -101,25 +106,23 @@
     <div class="container">
         <!-- Movie button -->
         <div class="row animated slideInLeft delay-1.25s">
-            <div class="col-5 mx-auto medo hvr-float-shadow rounded">
+            <div class="col-lg-6 col-sm-12 mx-auto medo hvr-float-shadow rounded">
                 <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
             </div>
-            <div class="offset-1"></div>
         <!-- Music button -->
-            <div class="col-5 mx-auto medo hvr-float-shadow rounded">
+            <div class="col-lg-6 col-sm-12 mx-auto medo hvr-float-shadow rounded">
                 <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
             </div>
         </div>
         <div class="row animated slideInRight delay-1.25s">
         <!-- Movie List -->
-            <div class="col-5 mx-auto rounded">
+            <div class="col-lg-6 col-sm-12 mx-auto rounded">
                 <div class="">
                     <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
                 </div>
             </div>
-            <div class="offset-1"></div>
         <!-- Music List -->
-            <div class="col-5 mx-auto rounded">
+            <div class="col-lg-6 col-sm-12 mx-auto rounded">
                 <div class="">
                     <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
                 </div>

@@ -7,6 +7,7 @@ const removeBtn = $(document).on('click', '.remove', removeItem);
 const likeBtn = $(document).on('click', '.like', favoriteMedia);
 const musicRecBtn = $(document).on('click', '.recommendations', musicMEDO);
 const movieRecBtn = $(document).on('click', '.recommendations', movieMEDO);
+const clearFaveBtn = $('#clear-fave-btn').on('click', clearFavorites);
 var musicSelection;
 var movieSelection;
 var musicArray = [];
@@ -27,14 +28,10 @@ appId: "1:759891052026:web:28e21af9c79d0bc71bd043"
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-// $('.dropdown-menu').click(function(e) {
-//     e.stopPropagation();
-// });
-
 // Functions
 function addMovie() {                       // Adds a movie item to the music medo
     var userInput = $('#search').val();
-    var dateAdded = moment().format('LLLL');
+    var dateAdded = moment().format();
 
     if ($('#search').val() === '') {
         return;
@@ -51,7 +48,7 @@ function addMovie() {                       // Adds a movie item to the music me
 
 function addMusic() {                       // Adds a music item to the music medo
     var userInput = $('#search').val(); 
-    var dateAdded = moment().format('LLLL');
+    var dateAdded = moment().format();
 
     if ($('#search').val() === '') {
         return;
@@ -83,7 +80,7 @@ function movieMEDO() {
         var basePosterURL = 'https://image.tmdb.org/t/p/w185';
         var moviePoster = movieObject.poster_path;
         var posterExt = basePosterURL + moviePoster;
-
+    
         $('#movie-title').text(movieTitle);
         $('#movie-image').attr({
             'src': posterExt.toString(),
@@ -165,6 +162,8 @@ function musicMEDO() {
 
 database.ref('Listen/').on('child_added', function(data) {      // LISTEN retrieves data from Firebase on page load
     var newArtist = data.val().artist;
+    var dateAdded = data.val().date_added;
+    var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
     var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
     var newListen = $('<span>').attr({                  
@@ -173,7 +172,8 @@ database.ref('Listen/').on('child_added', function(data) {      // LISTEN retrie
         'data-ref': key,
         'data-toggle': "modal", 
         'data-target': "#musicModal"
-    });     
+    });  
+    var newDate = $('<span>').text(dateMoment).attr('class', 'date-added');
     var newRemove = $('<button>').text('X').attr({
         'class': 'remove listen',
         'data-name': newArtist,
@@ -185,7 +185,7 @@ database.ref('Listen/').on('child_added', function(data) {      // LISTEN retrie
         'data-ref': key
     }); 
     newListen.text(newArtist);                                              
-    newListItem.append(newListen, newLike, newRemove);
+    newListItem.append(newListen, newDate, newLike, newRemove);
     $('#music-medo').prepend(newListItem);
     $('#search').val('');
 });
@@ -193,6 +193,8 @@ database.ref('Listen/').on('child_added', function(data) {      // LISTEN retrie
 
 database.ref('Watch/').on('child_added', function(data) {      // WATCH retrieves data from Firebase on page load
     var newMovie = data.val().movie;
+    var dateAdded = data.val().date_added;
+    var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
     var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
     var newWatch = $('<span>').attr({                  
@@ -202,6 +204,7 @@ database.ref('Watch/').on('child_added', function(data) {      // WATCH retrieve
         'data-toggle': "modal", 
         'data-target': "#movieModal"
     });     
+    var newDate = $('<span>').text(dateMoment).attr('class', 'date-added');
     var newRemove = $('<button>').text('X').attr({
         'class': 'remove watch',
         'data-name': newMovie,
@@ -213,7 +216,7 @@ database.ref('Watch/').on('child_added', function(data) {      // WATCH retrieve
         'data-ref': key
     }); 
     newWatch.text(newMovie);                                              
-    newListItem.append(newWatch, newLike, newRemove);
+    newListItem.append(newWatch, newDate, newLike, newRemove);
     $('#movie-medo').prepend(newListItem);
     $('#search').val('');
 });
@@ -312,7 +315,7 @@ function favoriteMedia() {                  // when the like button fires, this 
             for (var x = 0; x < 3; x++) {
                 var randomBand = Math.floor(Math.random() * similarBands.length);
                 var bandName = similarBands[randomBand].name;
-                var medoRec = $('<h3>').text(bandName).addClass('recommendations animated slideInLeft delay-0.5s');
+                var medoRec = $('<li>').text(bandName).addClass('recommendations animated slideInLeft delay-0.5s');
                 medoRec.attr({
                     'data-name': bandName,
                     'data-toggle': "modal", 
@@ -353,20 +356,19 @@ function favoriteMedia() {                  // when the like button fires, this 
                     var randomMovie = Math.floor(Math.random() * recObject.length);
                     var movieName = recObject[randomMovie].title;
                     var medoRec = $('<li>').text(movieName).addClass('recommendations animated slideInLeft delay-0.5s');
-                    var newLike = $('<button>').text('Like').attr({
-                        'class': 'like',
-                        'data-name': movieName,
-                        'data-ref': key
-                    });
                     medoRec.attr({
                         'data-name': movieName,
                         'data-toggle': "modal", 
                         'data-target': "#movieModal"
                     });
-                    medoRec.append(newLike);
                     $('#recommended').append(medoRec);
                 };
             });
         });
     }
+}
+
+function clearFavorites() {
+    database.ref('Favorites/').remove();
+    $('#favorites-list').empty();
 }

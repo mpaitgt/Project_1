@@ -130,7 +130,6 @@ body {
 #movie-medo, #music-medo, #favorites-list {
     overflow-y: scroll;
     background-color: transparent;
-    height: 200px;
     box-shadow: 10px 0px 28px -10px rgba(0,0,0,0.75);
     background-color: #ffffff;
 }
@@ -150,10 +149,6 @@ body {
 
 .favorites-btn:focus {
     outline: none;
-}
-
-#favorites-list {
-    height: 400px;
 }
 
 .custom-bg {
@@ -253,6 +248,12 @@ li {
     letter-spacing: 0.1em;    
 }
 
+.date-added {
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+}
+
 button {
     background-color: transparent;
     border: none;
@@ -262,10 +263,18 @@ button {
 
 .remove, .like {
     text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.25s;
+}
+
+.remove:hover, .like:hover {
+    color: #ffffff;
+    transition: color 0.25s;
 }
 
 #rec-message {
-    margin-top: 50px;
     letter-spacing: 0.05em;
 }
 
@@ -470,4 +479,11 @@ button {
 .hvr-shutter-out-vertical:active:before {
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
+}
+
+@media screen and (max-width: 1200px) {
+    #search {
+        font-size: 42px;
+
+    }
 }
