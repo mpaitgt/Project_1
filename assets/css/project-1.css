@@ -22,11 +22,7 @@ body {
     overflow-x: hidden;
 }
 
-<<<<<<< HEAD
 .custom-control-label {
-=======
-.custom-control-label{
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     font-size: 40px;
     color: green;
     padding-top: 0px;
@@ -102,22 +98,6 @@ body {
     color: #2932506c;
 }
 
-<<<<<<< HEAD
-
-/*#search-btn {
-    margin: 20px 40px;
-    background-color: var(--navy);
-    border: none;
-    color: var(--gold);
-    text-transform: uppercase;
-    font-size: 42px;
-    font-weight: bold;
-    padding: 0px;
-    transition: background-color 0.5s, color 0.25s, border 0.5s;
-}*/
-
-=======
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 #search-btn:focus {
     background-color: var(--gold);
     color: var(--navy);
@@ -152,7 +132,7 @@ body {
 #favorites-list {
     overflow-y: scroll;
     background-color: transparent;
-    box-shadow: 10px 0px 28px -10px rgba(0,0,0,0.75);
+    box-shadow: 10px 0px 28px -10px rgba(0, 0, 0, 0.75);
     background-color: #ffffff;
 }
 
@@ -160,18 +140,6 @@ body {
     display: none;
 }
 
-<<<<<<< HEAD
-
-/* footer {
-    border-top: solid 4px var(--gold);
-    font-size: 10px;
-    background-color: var(--navy);
-    color: white;
-    width: 100%;
-    position: absolute !important;
-    bottom: 0 !important;   
-} */
-=======
 .favorites-btn {
     letter-spacing: 0.05em;
     font-size: 24px;
@@ -193,12 +161,16 @@ body {
 }
 
 @keyframes favorited {
-    0% {text-shadow: 2px 2px 17px var(--blue); 
-        transform: scale(1.5); 
-        transform-origin: top left}
-    100% {text-shadow: none; 
+    0% {
+        text-shadow: 2px 2px 17px var(--blue);
+        transform: scale(1.5);
+        transform-origin: top left
+    }
+    100% {
+        text-shadow: none;
         transform: scale(1.0);
-        transform-origin: top left}
+        transform-origin: top left
+    }
 }
 
 .custom-bg {
@@ -206,9 +178,11 @@ body {
     border: none;
 }
 
+
 /* MODAL STYLING */
 
-#band-name, #movie-title {
+#band-name,
+#movie-title {
     text-transform: uppercase;
     color: var(--blue);
     font-size: 40px;
@@ -246,7 +220,6 @@ body {
     margin: 0 auto;
     text-align: center;
 }
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 
 footer {
     border-top: solid 4px var(--gold);
@@ -300,7 +273,7 @@ li {
     cursor: pointer;
     font-size: 22px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;    
+    letter-spacing: 0.1em;
 }
 
 .date-added {
@@ -316,7 +289,8 @@ button {
     position: relative;
 }
 
-.remove, .like {
+.remove,
+.like {
     text-align: right;
     font-size: 16px;
     font-weight: bold;
@@ -324,7 +298,8 @@ button {
     transition: color 0.25s;
 }
 
-.remove:hover, .like:hover {
+.remove:hover,
+.like:hover {
     color: #ffffff;
     transition: color 0.25s;
 }
@@ -349,20 +324,24 @@ button {
     font-size: 26px;
     cursor: pointer;
     color: var(--blue);
-    text-shadow: 5px 5px 7px rgba(0,0,0,0.20);
+    text-shadow: 5px 5px 7px rgba(0, 0, 0, 0.20);
 }
 
 .recommendations:hover {
     transform: scale(1.5) !important;
 }
 
+
 /* Youtube videos */
+
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
-    padding-top: 30px; height: 0; overflow: hidden;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
 }
-    
+
 .video-container iframe,
 .video-container object,
 .video-container embed {
@@ -552,8 +531,8 @@ button {
     #search {
         font-size: 30px;
     }
-
-    .music-name, .movie-name {
+    .music-name,
+    .movie-name {
         font-size: 16px;
     }
 }

@@ -31,10 +31,7 @@ var database = firebase.database();
 // Functions
 function addMovie() { // Adds a movie item to the music medo
     var userInput = $('#search').val();
-<<<<<<< HEAD
-=======
     var dateAdded = moment().format();
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 
     if ($('#search').val() === '') {
         return;
@@ -43,25 +40,15 @@ function addMovie() { // Adds a movie item to the music medo
     } else {
         movieArray.push(userInput);
         database.ref('Watch/').push({
-<<<<<<< HEAD
-            movie: userInput
+            movie: userInput,
+            date_added: dateAdded
         });
     }
 }
 
 function addMusic() { // Adds a music item to the music medo
     var userInput = $('#search').val();
-=======
-            movie: userInput,
-            date_added: dateAdded
-        });       
-    }   
-}  
-
-function addMusic() {                       // Adds a music item to the music medo
-    var userInput = $('#search').val(); 
     var dateAdded = moment().format();
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 
     if ($('#search').val() === '') {
         return;
@@ -70,14 +57,9 @@ function addMusic() {                       // Adds a music item to the music me
     } else {
         musicArray.push(userInput);
         database.ref('Listen/').push({
-<<<<<<< HEAD
-            artist: userInput
-        });
-=======
             artist: userInput,
             date_added: dateAdded
-        });       
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
+        });
     }
 }
 
@@ -90,44 +72,7 @@ function movieMEDO() {
         url: queryURL,
         method: 'GET'
     }).then(function(response) {
-<<<<<<< HEAD
-        var movieObject = response.results[0];
-        var movieTitle = movieObject.title;
-        var movieSummary = movieObject.overview;
-        var movieRelease = movieObject.release_date;
-        var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
-        var basePosterURL = 'https://image.tmdb.org/t/p/w185';
-        var moviePoster = movieObject.poster_path;
-        var posterExt = basePosterURL + moviePoster;
-    
-        $('#movie-title').text(movieTitle);
-        $('#movie-image').attr({
-            'src': posterExt.toString(),
-            'width': '25%',
-            'height': '25%'
-        });
-        $('#movie-summary').html(movieSummary);
-        $('#release-date').text(releaseMoment);
 
-        var queryDetails = movieObject.id;
-        var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey + '&language=en-US&page=1';
-        var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
-
-        $.ajax({
-            url: youtubeURL,
-            method: 'GET'
-        }).then(function(response) {
-            var userChoice = response.videos.results;
-
-            $('#youtube-content').empty();
-            for (var j = 0; j <= 4; j++) {
-                var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
-                var newVideo = $('<iframe>').attr({
-                    'src': youTube,
-                    'height': '400px',
-                    'width': '600px'
-=======
-        
         if (response.results.length === 0) {
             $('#movie-title').text('This is not a movie!');
         } else {
@@ -140,20 +85,19 @@ function movieMEDO() {
             var basePosterURL = 'https://image.tmdb.org/t/p/w185';
             var moviePoster = movieObject.poster_path;
             var posterExt = basePosterURL + moviePoster;
-        
+
             $('#movie-title').text(movieTitle);
             $('#movie-image').attr({
                 'src': posterExt.toString(),
                 'class': 'shadow-lg float-left mr-5'
->>>>>>> 37394940e80d947ad62e679b1da56f6841a74562
-                });
+            });
             $('#movie-summary').html(movieSummary);
             $('#release-date').text(releaseMoment);
 
             var queryDetails = movieObject.id;
-            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
+            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey + '&language=en-US&page=1';
             var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
-        
+
             $.ajax({
                 url: youtubeURL,
                 method: 'GET'
@@ -187,56 +131,23 @@ function musicMEDO() {
         url: lastfmURL,
         method: 'GET'
     }).then(function(response) {
-<<<<<<< HEAD
-        var bandName = response.artist.name;
-        var bandBio = response.artist.bio.summary;
-        var genre = response.artist.tags.tag;
-        var similarBands = response.artist.similar.artist;
-
-        $('#band-bio').html(bandBio);
-        $('#genre').empty();
-        for (var j = 0; j < genre.length; j++) {
-            var genreLoop = $('<span>').text(genre[j].name + ' ');
-            $('#genre').append(genreLoop);
-        }
-        $('#similar-bands').empty();
-        for (var i = 0; i < similarBands.length; i++) {
-            var newHREF = response.artist.similar.artist[i].url;
-            var newLink = $('<a>').attr({
-                'href': newHREF,
-                'target': '_blank'
-            });
-            var bandLoop = $('<h6>').text(similarBands[i].name);
-            newLink.append(bandLoop);
-            $('#similar-bands').append(newLink);
-        }
-
-        $.ajax({
-            url: lastfmDetails,
-            method: 'GET'
-        }).then(function(data) {
-            $('#band-name').text(bandName);
-            var bandPhoto = data.topalbums.album[0].image[3]['#text'];
-            $('#band-image').attr({
-                'src': bandPhoto
-=======
 
         if (response.error) {
             $('#band-name').text('This is not a band');
         } else {
             var bandName = response.artist.name;
             var bandBio = response.artist.bio.summary;
-            var genre = response.artist.tags.tag;                       
-            var similarBands = response.artist.similar.artist;    
+            var genre = response.artist.tags.tag;
+            var similarBands = response.artist.similar.artist;
 
-            $('#band-bio').html(bandBio);                               
+            $('#band-bio').html(bandBio);
             $('#genre').empty();
-            for (var j = 0; j < genre.length; j++) {                    
+            for (var j = 0; j < genre.length; j++) {
                 var genreLoop = $('<span>').text(genre[j].name + ' ');
                 $('#genre').append(genreLoop);
             }
             $('#similar-bands').empty();
-            for (var i = 0; i < similarBands.length; i++) {             
+            for (var i = 0; i < similarBands.length; i++) {
                 var newHREF = response.artist.similar.artist[i].url;
                 var newLink = $('<a>').attr({
                     'href': newHREF,
@@ -246,7 +157,7 @@ function musicMEDO() {
                 newLink.append(bandLoop);
                 $('#similar-bands').append(newLink);
             }
-            
+
             $.ajax({
                 url: lastfmImage,
                 method: 'GET'
@@ -275,7 +186,6 @@ function musicMEDO() {
                     newLink.append(tracksLoop);
                     $('#top-tracks').append(newLink);
                 }
->>>>>>> 37394940e80d947ad62e679b1da56f6841a74562
             })
         }
     });
@@ -286,49 +196,27 @@ database.ref('Listen/').on('child_added', function(data) { // LISTEN retrieves d
     var dateAdded = data.val().date_added;
     var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
-<<<<<<< HEAD
-    var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical');
-    var newListen = $('<span>').attr({
-        'class': 'music-name col-10',
-        'data-name': newArtist,
-=======
     var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
-    var newListen = $('<span>').attr({                  
+    var newListen = $('<span>').attr({
         'class': 'music-name',
-        'data-name': newArtist, 
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
+        'data-name': newArtist,
         'data-ref': key,
         'data-toggle': "modal",
         'data-target': "#musicModal"
-<<<<<<< HEAD
     });
-    var newRemove = $('<button>').text('X').attr({
-        'class': 'remove listen justify-content-end',
-=======
-    });  
     var newDate = $('<span>').text(dateMoment).attr('class', 'date-added');
     var newRemove = $('<button>').text('X').attr({
         'class': 'remove listen',
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
         'data-name': newArtist,
         'data-ref': key
     });
     var newLike = $('<button>').text('Like').attr({
-<<<<<<< HEAD
-        'class': 'like listen justify-content-end',
+        'class': 'like listen',
         'data-name': newArtist,
         'data-ref': key
     });
     newListen.text(newArtist);
-    newListItem.append(newListen, newLike, newRemove);
-=======
-        'class': 'like listen',
-        'data-name': newArtist,
-        'data-ref': key
-    }); 
-    newListen.text(newArtist);                                              
     newListItem.append(newListen, newDate, newLike, newRemove);
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     $('#music-medo').prepend(newListItem);
     $('#search').val('');
 });
@@ -339,26 +227,15 @@ database.ref('Watch/').on('child_added', function(data) { // WATCH retrieves dat
     var dateAdded = data.val().date_added;
     var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
-<<<<<<< HEAD
-    var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical');
-    var newWatch = $('<span>').attr({
-        'class': 'movie-name col-10',
-        'data-name': newMovie,
-=======
     var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
-    var newWatch = $('<span>').attr({                  
+    var newWatch = $('<span>').attr({
         'class': 'movie-name',
-        'data-name': newMovie, 
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
+        'data-name': newMovie,
         'data-ref': key,
         'data-toggle': "modal",
         'data-target': "#movieModal"
-<<<<<<< HEAD
     });
-=======
-    });     
     var newDate = $('<span>').text(dateMoment).attr('class', 'date-added');
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     var newRemove = $('<button>').text('X').attr({
         'class': 'remove watch',
         'data-name': newMovie,
@@ -368,15 +245,9 @@ database.ref('Watch/').on('child_added', function(data) { // WATCH retrieves dat
         'class': 'like watch',
         'data-name': newMovie,
         'data-ref': key
-<<<<<<< HEAD
     });
     newWatch.text(newMovie);
-    newListItem.append(newWatch, newLike, newRemove);
-=======
-    }); 
-    newWatch.text(newMovie);                                              
     newListItem.append(newWatch, newDate, newLike, newRemove);
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
     $('#movie-medo').prepend(newListItem);
     $('#search').val('');
 });
@@ -389,17 +260,10 @@ database.ref('Favorites/').on('child_added', function(data) { // FAVORITES retri
     var category = data.val();
 
     if (category.favorite_artist) {
-<<<<<<< HEAD
-        var newListItem = $('<button>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical');
-        var newListen = $('<span>').attr({
-            'class': 'music-name col-10',
-            'data-name': newFavoriteArtist,
-=======
         var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between align-items-center');
-        var newListen = $('<span>').attr({                  
+        var newListen = $('<span>').attr({
             'class': 'music-name',
-            'data-name': newFavoriteArtist, 
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
+            'data-name': newFavoriteArtist,
             'data-ref': key,
             'data-toggle': "modal",
             'data-target': "#musicModal"
@@ -414,17 +278,10 @@ database.ref('Favorites/').on('child_added', function(data) { // FAVORITES retri
         newListItem.append(newListen, musicTag, newRemove);
 
     } else if (category.favorite_movie) {
-<<<<<<< HEAD
-        var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical');
-        var newWatch = $('<span>').attr({
-            'class': 'movie-name col-10',
-            'data-name': newFavoriteMovie,
-=======
         var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between align-items-center');
-        var newWatch = $('<span>').attr({                  
+        var newWatch = $('<span>').attr({
             'class': 'movie-name',
-            'data-name': newFavoriteMovie, 
->>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
+            'data-name': newFavoriteMovie,
             'data-ref': key,
             'data-toggle': "modal",
             'data-target': "#movieModal"
@@ -439,7 +296,7 @@ database.ref('Favorites/').on('child_added', function(data) { // FAVORITES retri
         newListItem.append(newWatch, movieTag, newRemove);
     }
 
-    $('.dropdown-item').prepend(newListItem).addClass();
+    $('#favorites-list').prepend(newListItem);
 });
 
 function removeItem() {
@@ -479,21 +336,21 @@ function favoriteMedia() { // when the like button fires, this function movies t
 
         var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
         var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
-    
-    // MUSIC RECOMMENDED AJAX CALL
+
+        // MUSIC RECOMMENDED AJAX CALL
         $.ajax({
             url: lastfmURL,
             method: 'GET'
         }).then(function(response) {
-            var similarBands = response.similarartists.artist;  
-        
+            var similarBands = response.similarartists.artist;
+
             for (var x = 0; x < 3; x++) {
                 var randomBand = Math.floor(Math.random() * similarBands.length);
                 var bandName = similarBands[randomBand].name;
                 var medoRec = $('<li>').text(bandName).addClass('recommendations animated slideInLeft delay-0.5s');
                 medoRec.attr({
                     'data-name': bandName,
-                    'data-toggle': "modal", 
+                    'data-toggle': "modal",
                     'data-target': "#musicModal"
                 });
                 $('#recommended').append(medoRec);
@@ -506,20 +363,20 @@ function favoriteMedia() { // when the like button fires, this function movies t
         });
         database.ref('Watch/' + key).remove();
 
-    // MOVIE RECOMMENDED AJAX CALL
+        // MOVIE RECOMMENDED AJAX CALL
         var moviePicked = $(this).attr('data-name');
         var APIkey = '95a6c9d4de568b3ebaa4ea26320798b4';
         var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + APIkey + '&query=' + name;
-        
+
         $.ajax({
             url: queryURL,
             method: 'GET'
         }).then(function(response) {
             var movieObject = response.results[0];
-    
+
             // start here
             var queryDetails = movieObject.id;
-            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
+            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey + '&language=en-US&page=1';
             var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
 
             $.ajax({
@@ -533,7 +390,7 @@ function favoriteMedia() { // when the like button fires, this function movies t
                     var medoRec = $('<li>').text(movieName).addClass('recommendations animated slideInLeft delay-0.5s');
                     medoRec.attr({
                         'data-name': movieName,
-                        'data-toggle': "modal", 
+                        'data-toggle': "modal",
                         'data-target': "#movieModal"
                     });
                     $('#recommended').append(medoRec);
