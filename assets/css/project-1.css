@@ -185,6 +185,22 @@ body {
     outline: none;
 }
 
+.favorites-text {
+    display: inline-block;
+    animation-name: favorited;
+    animation-duration: 0.5s;
+    animation-iteration-count: 2;
+}
+
+@keyframes favorited {
+    0% {text-shadow: 2px 2px 17px var(--blue); 
+        transform: scale(1.5); 
+        transform-origin: top left}
+    100% {text-shadow: none; 
+        transform: scale(1.0);
+        transform-origin: top left}
+}
+
 .custom-bg {
     background-color: transparent;
     border: none;
@@ -206,7 +222,6 @@ body {
     width: 100%;
     margin: 0 auto;
     font-weight: bold;
-    text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
 }
@@ -269,6 +284,12 @@ footer {
     margin: 0 auto;
 }
 
+#genre {
+    font-size: 24px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 ul {
     width: 100%;
 }
@@ -309,26 +330,30 @@ button {
 }
 
 #rec-message {
+    margin-top: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
     letter-spacing: 0.05em;
+    /* display: none; */
 }
 
 #recommended {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
+    /* display: none; */
 }
 
 .recommendations {
-    margin: 25px;
-    font-size: 30px;
+    margin: 15px;
+    font-size: 26px;
     cursor: pointer;
     color: var(--blue);
     text-shadow: 5px 5px 7px rgba(0,0,0,0.20);
 }
 
 .recommendations:hover {
-    transform: scale(1.5);
+    transform: scale(1.5) !important;
 }
 
 /* Youtube videos */
@@ -520,6 +545,15 @@ button {
 @media screen and (max-width: 1200px) {
     #search {
         font-size: 42px;
+    }
+}
 
+@media screen and (max-width: 670px) {
+    #search {
+        font-size: 30px;
+    }
+
+    .music-name, .movie-name {
+        font-size: 16px;
     }
 }

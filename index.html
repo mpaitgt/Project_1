@@ -24,6 +24,7 @@
     <div id="movieModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
+<<<<<<< HEAD
                 <div class="row">
                     <img id="movie-image" src="" alt="movie-poster" class="col-3 d-flex align-center">
 <<<<<<< HEAD
@@ -47,6 +48,24 @@
                     <div class="row mx-auto">
                         <h4>Video Content</h4>
                         <div id="youtube-content" class="video-container"></div>
+=======
+                <div id="movie-response" class="response-modal">
+                    <div class="row">
+                        <h2 id="movie-title" class="w-100"></h2>
+                        <div class="">
+                            <img id="movie-image" src="" alt="movie-poster" class="col-3 d-flex align-center">
+                            <h4 class="text-left font-weight-bold">Summary</h4>
+                            <p id="movie-summary"></p>
+                        </div>
+                    </div>
+                    <div class="middle-content">
+                        <h4>Release Date</h4>
+                        <h4 id="release-date"></h4>
+                        <div class="row mx-auto">
+                            <h4>Video Content</h4>
+                            <div id="youtube-content" class="video-container"></div>
+                        </div>
+>>>>>>> 37394940e80d947ad62e679b1da56f6841a74562
                     </div>
                 </div>
             </div>
@@ -67,16 +86,22 @@
                 <div id="similar-bands"></div>
 =======
                 <div class="row">
-                    <img id="band-image" src="" alt="album-cover" class="col-4">
-                    <div class="col-8">
-                        <h2 id="band-name"></h2>
-                        <div id="genre"></div>
+                    <h2 id="band-name" class="w-100"></h2>
+                    <div class="">
+                        <img id="band-image" src="" alt="album-cover">
+                        <h4 class='font-weight-bold text-left'>Band Bio</h4>
+                        <p id="band-bio" class="text-left"></p>
                     </div>
-                        <div class="middle-content">
-                        <h4>Band Bio</h4>
-                        <p id="band-bio"></p>
-                        <h4>Similar Bands</h4>
-                        <div id="similar-bands"></div>
+                    <div class="row middle-content">
+                        <div id="genre"></div>
+                        <div class="col-6">
+                            <h4>Similar Bands</h4>
+                            <div id="similar-bands"></div>
+                        </div>
+                        <div class="col-6">
+                            <h4>Top Tracks</h4>
+                            <div id="top-tracks"></div>
+                        </div>
                     </div>
                 </div>
 >>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
@@ -116,15 +141,15 @@
     <nav class="navbar navbar-expand-md navbar-light bg-faded">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item dropdown text-center">
-                <button class="nav-link dropdown-toggle favorites-btn" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Favorites
+                <button class="nav-link nav-item dropdown-toggle favorites-btn" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="favorites-text">Favorites</span>
                 </button>
                 <div class="dropdown-menu custom-bg" aria-labelledby="navbarDropdownMenuLink">
-                    <ul id="favorites-list" class="col-12 list-group list-group-flush px-1 pb-2"></ul>
+                    <ul id="favorites-list" class="list-group list-group-flush px-1 pb-2"></ul>
                 </div>
             </li>
-            <li>
-                <button id="clear-fave-btn" class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item">
+                <button id="clear-fave-btn" class="nav-link" href="http://example.com" id="" data-toggle="" aria-haspopup="true" aria-expanded="false">
                     Clear
                 </button>
 >>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
@@ -145,8 +170,12 @@
             <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
 =======
         <div class="row">
+<<<<<<< HEAD
                 <input type="text" id="search" class="col-lg-8 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
 >>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
+=======
+                <input type="text" id="search" class="col-lg-8 col-sm-10 col-xs-10 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
+>>>>>>> 37394940e80d947ad62e679b1da56f6841a74562
         </div>
 
         <!-- Instruction -->
@@ -187,8 +216,8 @@
 
 <!-- MEDO containers -->
     <div class="container">
-        <!-- Movie button -->
         <div class="row animated slideInLeft delay-1.25s">
+<<<<<<< HEAD
             <div class="col-lg-6 col-sm-12 mx-auto medo hvr-float-shadow rounded">
                 <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
             </div>
@@ -219,9 +248,34 @@
             <div class="col-lg-6 col-sm-12 mx-auto rounded">
                 <div class="">
                     <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+=======
+            <!-- Movie button and list -->
+            <div class="col-lg-6 col-sm-12">
+                <div class="mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
+                </div>
+                <div class="animated slideInRight delay-1.25s">
+                    <div class="mx-auto rounded">
+                        <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Music button and list -->
+            <div class="col-lg-6 col-sm-12">
+                <div class="mx-auto medo hvr-float-shadow rounded">
+                    <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
+                </div>
+                <div class="animated slideInRight delay-1.25s">
+                    <div class="mx-auto rounded">
+                        <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                    </div>
+>>>>>>> 37394940e80d947ad62e679b1da56f6841a74562
                 </div>
             </div>
         </div>
+
+
+
     </div>
 >>>>>>> 59f01f296fd50fa1c23b2d74c78577f26750ee78
 
