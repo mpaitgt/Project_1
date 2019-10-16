@@ -33,6 +33,12 @@ You can finally hang up the Office in here, just incase somehow you forgot that 
 
 ----
 
+## Link to the live game
+[Check out MEDO](https://mpaitgt.github.io/Project_1/)
+![](medo-example.gif)
+
+----
+
 ## Technologies
 
 * [Bootstrap 4](https://getbootstrap.com/)
