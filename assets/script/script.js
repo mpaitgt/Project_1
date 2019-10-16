@@ -72,45 +72,50 @@ function movieMEDO() {
         url: queryURL,
         method: 'GET'
     }).then(function(response) {
-        var movieObject = response.results[0];
-        var movieTitle = movieObject.title;
-        var movieSummary = movieObject.overview;
-        var movieRelease = movieObject.release_date;
-        var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
-        var basePosterURL = 'https://image.tmdb.org/t/p/w185';
-        var moviePoster = movieObject.poster_path;
-        var posterExt = basePosterURL + moviePoster;
-    
-        $('#movie-title').text(movieTitle);
-        $('#movie-image').attr({
-            'src': posterExt.toString(),
-            'width': '25%', 
-            'height': '25%'
-            });
-        $('#movie-summary').html(movieSummary);
-        $('#release-date').text(releaseMoment);
-
-        var queryDetails = movieObject.id;
-        var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
-        var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
-    
-        $.ajax({
-            url: youtubeURL,
-            method: 'GET'
-        }).then(function(response) {
-            var userChoice = response.videos.results;
-
-            $('#youtube-content').empty();
-            for (var j = 0; j <= 4; j++) {
-                var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
-                var newVideo = $('<iframe>').attr({
-                    'src': youTube,
-                    'height': '400px',
-                    'width': '600px'
+        
+        if (response.results.length === 0) {
+            $('#movie-title').text('This is not a movie!');
+        } else {
+            console.log(response);
+            var movieObject = response.results[0];
+            var movieTitle = movieObject.title;
+            var movieSummary = movieObject.overview;
+            var movieRelease = movieObject.release_date;
+            var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
+            var basePosterURL = 'https://image.tmdb.org/t/p/w185';
+            var moviePoster = movieObject.poster_path;
+            var posterExt = basePosterURL + moviePoster;
+        
+            $('#movie-title').text(movieTitle);
+            $('#movie-image').attr({
+                'src': posterExt.toString(),
+                'class': 'shadow-lg float-left mr-5'
                 });
-                $('#youtube-content').append(newVideo);
-            }
-        });
+            $('#movie-summary').html(movieSummary);
+            $('#release-date').text(releaseMoment);
+
+            var queryDetails = movieObject.id;
+            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey +'&language=en-US&page=1';
+            var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
+        
+            $.ajax({
+                url: youtubeURL,
+                method: 'GET'
+            }).then(function(response) {
+                var userChoice = response.videos.results;
+
+                $('#youtube-content').empty();
+                for (var j = 0; j <= 4; j++) {
+                    var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
+                    var newVideo = $('<iframe>').attr({
+                        'src': youTube,
+                        'height': '400px',
+                        'width': '600px'
+                    });
+                    $('#youtube-content').append(newVideo);
+                }
+            });
+        }
     });
 }
 
@@ -118,45 +123,71 @@ function musicMEDO() {
     var artistPicked = $(this).attr('data-name');
     var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
     var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
-    var lastfmDetails = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmImage = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+    var lastfmTracks = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+
 
     $.ajax({
         url: lastfmURL,
         method: 'GET'
     }).then(function(response) {
-        var bandName = response.artist.name;
-        var bandBio = response.artist.bio.summary;
-        var genre = response.artist.tags.tag;                       
-        var similarBands = response.artist.similar.artist;    
 
-        $('#band-bio').html(bandBio);                               
-        $('#genre').empty();
-        for (var j = 0; j < genre.length; j++) {                    
-            var genreLoop = $('<span>').text(genre[j].name + ' ');
-            $('#genre').append(genreLoop);
-        }
-        $('#similar-bands').empty();
-        for (var i = 0; i < similarBands.length; i++) {             
-            var newHREF = response.artist.similar.artist[i].url;
-            var newLink = $('<a>').attr({
-                'href': newHREF,
-                'target': '_blank'
-            });
-            var bandLoop = $('<h6>').text(similarBands[i].name);
-            newLink.append(bandLoop);
-            $('#similar-bands').append(newLink);
-        }
-        
-        $.ajax({
-            url: lastfmDetails,
-            method: 'GET'
-        }).then(function(data) {
-            $('#band-name').text(bandName);
-            var bandPhoto = data.topalbums.album[0].image[3]['#text'];
-            $('#band-image').attr({
-                'src': bandPhoto
+        if (response.error) {
+            $('#band-name').text('This is not a band');
+        } else {
+            var bandName = response.artist.name;
+            var bandBio = response.artist.bio.summary;
+            var genre = response.artist.tags.tag;                       
+            var similarBands = response.artist.similar.artist;    
+
+            $('#band-bio').html(bandBio);                               
+            $('#genre').empty();
+            for (var j = 0; j < genre.length; j++) {                    
+                var genreLoop = $('<span>').text(genre[j].name + ' ');
+                $('#genre').append(genreLoop);
+            }
+            $('#similar-bands').empty();
+            for (var i = 0; i < similarBands.length; i++) {             
+                var newHREF = response.artist.similar.artist[i].url;
+                var newLink = $('<a>').attr({
+                    'href': newHREF,
+                    'target': '_blank'
+                });
+                var bandLoop = $('<h6>').text(similarBands[i].name);
+                newLink.append(bandLoop);
+                $('#similar-bands').append(newLink);
+            }
+            
+            $.ajax({
+                url: lastfmImage,
+                method: 'GET'
+            }).then(function(data) {
+                $('#band-name').text(bandName);
+                var bandPhoto = data.topalbums.album[0].image[3]['#text'];
+                $('#band-image').attr({
+                    'src': bandPhoto,
+                    'class': 'shadow-lg float-left mr-5 mb-5'
+                })
             })
-        })
+
+            $.ajax({
+                url: lastfmTracks,
+                method: 'GET'
+            }).then(function(tracks) {
+                var topTracks = tracks.toptracks.track;
+                $('#top-tracks').empty();
+                for (var x = 0; x <= 4; x++) {
+                    var trackHREF = topTracks[x].url;
+                    var newLink = $('<a>').attr({
+                        'href': trackHREF,
+                        'target': '_blank'
+                    });
+                    var tracksLoop = $('<h6>').text(topTracks[x].name);
+                    newLink.append(tracksLoop);
+                    $('#top-tracks').append(newLink);
+                }
+            })
+        }
     });
 }
 
@@ -295,6 +326,7 @@ function favoriteMedia() {                  // when the like button fires, this 
     $('#recommended').empty();
     $('#rec-message').empty();
     $('#rec-message').prepend(recText);
+    $('#favorites-text').attr('class', 'favorites-text');
 
     if (thisItem.hasClass('music-item')) {
         database.ref('Favorites/').push({
