@@ -20,7 +20,7 @@
 
 <body class="d-flex flex-column h-100">
 
-<!-- Movie Modal -->
+    <!-- Movie Modal -->
     <div id="movieModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
@@ -43,8 +43,8 @@
             </div>
         </div>
     </div>
-    
-<!-- Music Modal -->
+
+    <!-- Music Modal -->
     <div id="musicModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-<!-- Navigation bar -->
+    <!-- Navigation bar -->
     <nav class="navbar navbar-expand-md navbar-light bg-faded">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -90,16 +90,16 @@
         </ul>
     </nav>
 
-<!-- Site Header and search bar -->
+    <!-- Site Header and search bar -->
     <div class="container-fluid">
         <div class="row site-head rounded">
             <h1 id="logo" class="medo-style mx-auto animated lightSpeedIn delay-.5s rounded">medo</h1>
         </div>
         <div class="row">
-                <input type="text" id="search" class="col-lg-8 col-sm-10 col-xs-10 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
+            <input type="text" id="search" class="col-lg-8 col-sm-10 col-xs-10 mx-auto animated fadeInUp delay-.5s rounded" autocomplete="off" placeholder="add a recommendation">
         </div>
 
-<!-- Instruction -->
+        <!-- Instruction -->
         <div class="row col-lg-12 mx-auto justify-content-center">
             <p class="animated fadeIn delay-1s instruct-paragraph">Type in items for your
                 <span class="medo-inline rounded">MeDo</span> list above,<br> then click on the List you would like it to appear in!</p>
@@ -108,36 +108,36 @@
         <div id="rec-message"></div>
         <div id="recommended"></div>
 
-<!-- MEDO containers -->
-    <div class="container">
-        <div class="row animated slideInLeft delay-1.25s">
-            <!-- Movie button and list -->
-            <div class="col-lg-6 col-sm-12">
-                <div class="mx-auto medo hvr-float-shadow rounded">
-                    <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
+        <!-- MEDO containers -->
+        <div class="container">
+            <div class="row animated slideInLeft delay-1.25s">
+                <!-- Movie button and list -->
+                <div class="col-lg-6 col-sm-12">
+                    <div class="mx-auto medo hvr-float-shadow rounded">
+                        <h2 id="movie-btn" class=" medo-box text-center medo-style">Watch</h2>
+                    </div>
+                    <div class="animated slideInRight delay-1.25s">
+                        <div class="mx-auto rounded">
+                            <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="animated slideInRight delay-1.25s">
-                    <div class="mx-auto rounded">
-                        <ul id="movie-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                <!-- Music button and list -->
+                <div class="col-lg-6 col-sm-12">
+                    <div class="mx-auto medo hvr-float-shadow rounded">
+                        <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
+                    </div>
+                    <div class="animated slideInRight delay-1.25s">
+                        <div class="mx-auto rounded">
+                            <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Music button and list -->
-            <div class="col-lg-6 col-sm-12">
-                <div class="mx-auto medo hvr-float-shadow rounded">
-                    <h2 id="music-btn" class="medo-box text-center  medo-style">Listen</h2>
-                </div>
-                <div class="animated slideInRight delay-1.25s">
-                    <div class="mx-auto rounded">
-                        <ul id="music-medo" class="list-group list-group-flush px-1 pb-2"></ul>
-                    </div>
-                </div>
-            </div>
+
+
+
         </div>
-
-
-
-    </div>
 
         <div class="mb-5"></div>
 
@@ -152,15 +152,15 @@
             </div>
         </div>
     </footer>
-        
 
-<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://momentjs.com/downloads/moment.min.js"></script>
-<script src="assets/script/script.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script src="assets/script/script.js"></script>
 </body>
 
 </html>
