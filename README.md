@@ -56,11 +56,11 @@ You can finally hang up the Office in here, just incase somehow you forgot that 
 
 * [TMDb](https://www.themoviedb.org/documentation/api?language=en-US)
 
-    - TMDb helps power our Watch (movies, series) list, providing you with the movie poster, release date, a short synopsis, and a trailer/short clip of the movie.
+    - The Movie Database (TMDb) is a community built movie and TV database.
 
 * [Last.fm](https://www.last.fm/api)
 
-    - Last.fm helps power our Listen list, providing you with an image of their top Album, genre list, a short Artist's bio, and similar Artists.  You will be directed to the Artist's Last.fm page for more information and top songs.
+    - Bringing together your favourite music services and join up listening, watching and sharing to connect your musical world. 
 
 ----
 
@@ -126,7 +126,7 @@ Our initial ALPHA version was compiled as a group project with the efforts of th
 
 * [@mpaitgt](https://github.com/mpaitgt)
 * [@cerpinconsafo](https://github.com/cerpinconsafo)
-* [@angeli](https://github.com/angeli)
+* [@AElliott10](https://github.com/AElliott10)
 * [@Mikirtumov](https://github.com/Mikirtumov)
 * [@Sromero1015](https://github.com/Sromero1015)
 
