@@ -24,20 +24,22 @@
     <div id="movieModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
-                <div class="row">
-                    <img id="movie-image" src="" alt="movie-poster" class="col-3 d-flex align-center">
-                        <div class="col-9">
-                            <h2 id="movie-title"></h2>
-                            <h4>Summary</h4>
+                <div id="movie-response" class="response-modal">
+                    <div class="row">
+                        <h2 id="movie-title" class="w-100"></h2>
+                        <div class="">
+                            <img id="movie-image" src="" alt="movie-poster" class="col-3 d-flex align-center">
+                            <h4 class="text-left font-weight-bold">Summary</h4>
                             <p id="movie-summary"></p>
                         </div>
-                </div>
-                <div class="middle-content">
-                    <h4>Release Date</h4>
-                    <h4 id="release-date"></h4>
-                    <div class="row mx-auto">
-                        <h4>Video Content</h4>
-                        <div id="youtube-content" class="video-container"></div>
+                    </div>
+                    <div class="middle-content">
+                        <h4>Release Date</h4>
+                        <h4 id="release-date"></h4>
+                        <div class="row mx-auto">
+                            <h4>Video Content</h4>
+                            <div id="youtube-content" class="video-container"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,14 +51,14 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content custom-modal">
                 <div class="row">
-                    <img id="band-image" src="" alt="album-cover" class="col-4">
-                    <div class="col-8">
-                        <h2 id="band-name"></h2>
-                        <div id="genre"></div>
+                    <h2 id="band-name" class="w-100"></h2>
+                    <div class="">
+                        <img id="band-image" src="" alt="album-cover">
+                        <h4 class='font-weight-bold text-left'>Band Bio</h4>
+                        <p id="band-bio" class="text-left"></p>
                     </div>
                     <div class="row middle-content">
-                        <h4>Band Bio</h4>
-                        <p id="band-bio"></p>
+                        <div id="genre"></div>
                         <div class="col-6">
                             <h4>Similar Bands</h4>
                             <div id="similar-bands"></div>
@@ -76,14 +78,14 @@
         <ul class="navbar-nav mx-auto">
             <li class="nav-item dropdown text-center">
                 <button class="nav-link nav-item dropdown-toggle favorites-btn" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Favorites
+                    <span id="favorites-text">Favorites</span>
                 </button>
                 <div class="dropdown-menu custom-bg" aria-labelledby="navbarDropdownMenuLink">
                     <ul id="favorites-list" class="list-group list-group-flush px-1 pb-2"></ul>
                 </div>
             </li>
             <li class="nav-item">
-                <button id="clear-fave-btn" class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="clear-fave-btn" class="nav-link" href="http://example.com" id="" data-toggle="" aria-haspopup="true" aria-expanded="false">
                     Clear
                 </button>
             </li>

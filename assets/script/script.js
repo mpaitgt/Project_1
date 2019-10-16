@@ -74,8 +74,9 @@ function movieMEDO() {
     }).then(function(response) {
         
         if (response.results.length === 0) {
-            $('#movie-title').text('This is not a movie');
+            $('#movie-title').text('This is not a movie!');
         } else {
+            console.log(response);
             var movieObject = response.results[0];
             var movieTitle = movieObject.title;
             var movieSummary = movieObject.overview;
@@ -88,8 +89,7 @@ function movieMEDO() {
             $('#movie-title').text(movieTitle);
             $('#movie-image').attr({
                 'src': posterExt.toString(),
-                'width': '25%', 
-                'height': '25%'
+                'class': 'shadow-lg float-left mr-5'
                 });
             $('#movie-summary').html(movieSummary);
             $('#release-date').text(releaseMoment);
@@ -165,7 +165,8 @@ function musicMEDO() {
                 $('#band-name').text(bandName);
                 var bandPhoto = data.topalbums.album[0].image[3]['#text'];
                 $('#band-image').attr({
-                    'src': bandPhoto
+                    'src': bandPhoto,
+                    'class': 'shadow-lg float-left mr-5 mb-5'
                 })
             })
 
@@ -325,6 +326,7 @@ function favoriteMedia() {                  // when the like button fires, this 
     $('#recommended').empty();
     $('#rec-message').empty();
     $('#rec-message').prepend(recText);
+    $('#favorites-text').attr('class', 'favorites-text');
 
     if (thisItem.hasClass('music-item')) {
         database.ref('Favorites/').push({
