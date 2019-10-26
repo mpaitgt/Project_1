@@ -72,48 +72,44 @@ function movieMEDO() {
     $.ajax({
         url: queryURL,
         method: 'GET'
-    }).then(getMovieInfo);
-}
-        
-function getMovieInfo(response) {
-    console.log(response);
-    var movieObject = response.results[0];
-    var movieTitle = movieObject.title;
-    var movieSummary = movieObject.overview;
-    var movieRelease = movieObject.release_date;
-    var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
-    var basePosterURL = 'https://image.tmdb.org/t/p/w185';
-    var moviePoster = movieObject.poster_path;
-    var posterExt = basePosterURL + moviePoster;
-    var queryDetails = movieObject.id;
-    var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
-
-    $('#movie-title').text(movieTitle);
-    $('#movie-image').attr({
-        'src': posterExt.toString(),
-        'class': 'shadow-lg float-left mr-5'
-    });
-    $('#movie-summary').html(movieSummary);
-    $('#release-date').text(releaseMoment);
-
-    // $.ajax({
-    //     url: youtubeURL,
-    //     method: 'GET'
-    // }).then(getYouTube);
-}
-
-function getYouTube(response) {
-    var userChoice = response.videos.results;
-    $('#youtube-content').empty();
-    for (var j = 0; j <= 4; j++) {
-        var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
-        var newVideo = $('<iframe>').attr({
-            'src': youTube,
-            'height': '400px',
-            'width': '600px'
+    }).then(function(response) {
+        console.log(response);
+        var movieObject = response.results[0];
+        var movieTitle = movieObject.title;
+        var movieSummary = movieObject.overview;
+        var movieRelease = movieObject.release_date;
+        var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
+        var basePosterURL = 'https://image.tmdb.org/t/p/w185';
+        var moviePoster = movieObject.poster_path;
+        var posterExt = basePosterURL + moviePoster;
+        var queryDetails = movieObject.id;
+        var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
+    
+        $('#movie-title').text(movieTitle);
+        $('#movie-image').attr({
+            'src': posterExt.toString(),
+            'class': 'shadow-lg float-left mr-5'
         });
-        $('#youtube-content').append(newVideo);
-    }
+        $('#movie-summary').html(movieSummary);
+        $('#release-date').text(releaseMoment);
+    
+        $.ajax({
+            url: youtubeURL,
+            method: 'GET'
+        }).then(function(response) {
+            var userChoice = response.videos.results;
+            $('#youtube-content').empty();
+            for (var j = 0; j <= 4; j++) {
+                var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
+                var newVideo = $('<iframe>').attr({
+                    'src': youTube,
+                    'height': '400px',
+                    'width': '600px'
+                });
+                $('#youtube-content').append(newVideo);
+            }
+        });
+    });
 }
 
 function musicMEDO() {
@@ -122,7 +118,6 @@ function musicMEDO() {
     var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
     var lastfmImage = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
     var lastfmTracks = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
-
 
     $.ajax({
         url: lastfmURL,
@@ -411,8 +406,3 @@ function clearFavorites() {
     database.ref('Favorites/').remove();
     $('#favorites-list').empty();
 }
-
-
-// if (response.results.length === 0) {
-//     $('#movie-title').text('This is not a movie!');
-// } else {}
