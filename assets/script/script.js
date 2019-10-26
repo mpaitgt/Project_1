@@ -12,6 +12,7 @@ var musicSelection;
 var movieSelection;
 var musicArray = [];
 var movieArray = [];
+var favoritesArray = [];
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -35,7 +36,7 @@ function addMovie() { // Adds a movie item to the music medo
 
     if ($('#search').val() === '') {
         return;
-    } else if (movieArray.includes(userInput)) {
+    } else if (movieArray.includes(userInput) || favoritesArray.includes(userInput)) {
         return;
     } else {
         movieArray.push(userInput);
@@ -52,7 +53,7 @@ function addMusic() { // Adds a music item to the music medo
 
     if ($('#search').val() === '') {
         return;
-    } else if (musicArray.includes(userInput)) {
+    } else if (musicArray.includes(userInput) || favoritesArray.includes(userInput)) {
         return;
     } else {
         musicArray.push(userInput);
@@ -71,52 +72,48 @@ function movieMEDO() {
     $.ajax({
         url: queryURL,
         method: 'GET'
-    }).then(function(response) {
+    }).then(getMovieInfo);
+}
+        
+function getMovieInfo(response) {
+    console.log(response);
+    var movieObject = response.results[0];
+    var movieTitle = movieObject.title;
+    var movieSummary = movieObject.overview;
+    var movieRelease = movieObject.release_date;
+    var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
+    var basePosterURL = 'https://image.tmdb.org/t/p/w185';
+    var moviePoster = movieObject.poster_path;
+    var posterExt = basePosterURL + moviePoster;
+    var queryDetails = movieObject.id;
+    var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
 
-        if (response.results.length === 0) {
-            $('#movie-title').text('This is not a movie!');
-        } else {
-            console.log(response);
-            var movieObject = response.results[0];
-            var movieTitle = movieObject.title;
-            var movieSummary = movieObject.overview;
-            var movieRelease = movieObject.release_date;
-            var releaseMoment = moment(movieRelease).format('MMMM D YYYY');
-            var basePosterURL = 'https://image.tmdb.org/t/p/w185';
-            var moviePoster = movieObject.poster_path;
-            var posterExt = basePosterURL + moviePoster;
-
-            $('#movie-title').text(movieTitle);
-            $('#movie-image').attr({
-                'src': posterExt.toString(),
-                'class': 'shadow-lg float-left mr-5'
-            });
-            $('#movie-summary').html(movieSummary);
-            $('#release-date').text(releaseMoment);
-
-            var queryDetails = movieObject.id;
-            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey + '&language=en-US&page=1';
-            var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
-
-            $.ajax({
-                url: youtubeURL,
-                method: 'GET'
-            }).then(function(response) {
-                var userChoice = response.videos.results;
-
-                $('#youtube-content').empty();
-                for (var j = 0; j <= 4; j++) {
-                    var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
-                    var newVideo = $('<iframe>').attr({
-                        'src': youTube,
-                        'height': '400px',
-                        'width': '600px'
-                    });
-                    $('#youtube-content').append(newVideo);
-                }
-            });
-        }
+    $('#movie-title').text(movieTitle);
+    $('#movie-image').attr({
+        'src': posterExt.toString(),
+        'class': 'shadow-lg float-left mr-5'
     });
+    $('#movie-summary').html(movieSummary);
+    $('#release-date').text(releaseMoment);
+
+    // $.ajax({
+    //     url: youtubeURL,
+    //     method: 'GET'
+    // }).then(getYouTube);
+}
+
+function getYouTube(response) {
+    var userChoice = response.videos.results;
+    $('#youtube-content').empty();
+    for (var j = 0; j <= 4; j++) {
+        var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
+        var newVideo = $('<iframe>').attr({
+            'src': youTube,
+            'height': '400px',
+            'width': '600px'
+        });
+        $('#youtube-content').append(newVideo);
+    }
 }
 
 function musicMEDO() {
@@ -196,6 +193,9 @@ database.ref('Listen/').on('child_added', function(data) { // LISTEN retrieves d
     var dateAdded = data.val().date_added;
     var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
+
+    musicArray.push(newArtist);
+
     var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
     var newListen = $('<span>').attr({
         'class': 'music-name',
@@ -221,12 +221,14 @@ database.ref('Listen/').on('child_added', function(data) { // LISTEN retrieves d
     $('#search').val('');
 });
 
-
 database.ref('Watch/').on('child_added', function(data) { // WATCH retrieves data from Firebase on page load
     var newMovie = data.val().movie;
     var dateAdded = data.val().date_added;
     var dateMoment = moment(dateAdded).fromNow();
     var key = data.key;
+
+    movieArray.push(newMovie);
+
     var newListItem = $('<li>').attr('class', 'movie-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between');
     var newWatch = $('<span>').attr({
         'class': 'movie-name',
@@ -252,12 +254,17 @@ database.ref('Watch/').on('child_added', function(data) { // WATCH retrieves dat
     $('#search').val('');
 });
 
-
 database.ref('Favorites/').on('child_added', function(data) { // FAVORITES retrieves data from Firebase on page load
     var newFavoriteArtist = data.val().favorite_artist;
     var newFavoriteMovie = data.val().favorite_movie;
     var key = data.key;
     var category = data.val();
+
+    if (newFavoriteArtist) {
+        favoritesArray.push(newFavoriteArtist);
+    } else if (newFavoriteMovie) {
+        favoritesArray.push(newFavoriteMovie);
+    }
 
     if (category.favorite_artist) {
         var newListItem = $('<li>').attr('class', 'music-item list-group-item hvr-shutter-out-vertical d-flex justify-content-between align-items-center');
@@ -315,7 +322,7 @@ function removeItem() {
     }
 };
 
-function favoriteMedia() { // when the like button fires, this function movies the media to the favorites section
+function favoriteMedia() { // when the like button fires, this function moves the media to the favorites section
     var key = $(this).attr('data-ref');
     var name = $(this).attr('data-name');
     var thisItem = $(this).closest('li');
@@ -404,3 +411,8 @@ function clearFavorites() {
     database.ref('Favorites/').remove();
     $('#favorites-list').empty();
 }
+
+
+// if (response.results.length === 0) {
+//     $('#movie-title').text('This is not a movie!');
+// } else {}
