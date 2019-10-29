@@ -1,18 +1,32 @@
 // Global variables and event listeners
-const movieSelector = $('#movie-btn').on('click', addMovie);
-const musicSelector = $('#music-btn').on('click', addMusic);
-const musicBtn = $(document).on('click', '.music-name', musicMEDO);
-const movieBtn = $(document).on('click', '.movie-name', movieMEDO);
+$('#movie-btn').on('click', addMovie);    // add movie to list
+$('#music-btn').on('click', addMusic);    // add music to list
+
+$(document).on('click', '.music-name', function() { // api call to display movie info
+    var artistPicked = $(this).attr('data-name');
+    musicMEDO(artistPicked, getBandImage);
+    musicMEDO(artistPicked, getTopTracks);
+});
+
+$(document).on('click', '.movie-name', function() { // api call to display music info
+    var moviePicked = $(this).attr('data-name');
+    movieMEDO(moviePicked, getYouTube);
+});
+
 const removeBtn = $(document).on('click', '.remove', removeItem);
-const likeBtn = $(document).on('click', '.like', favoriteMedia);
-const musicRecBtn = $(document).on('click', '.recommendations', musicMEDO);
-const movieRecBtn = $(document).on('click', '.recommendations', movieMEDO);
+
+const likeBtn = $(document).on('click', '.like', function() {
+    var favePick = $(this).attr('data-name');
+    var key = $(this).attr('data-ref');
+    favoriteMedia(favePick, key, getMovieRecommendations);
+});
+    
 const clearFaveBtn = $('#clear-fave-btn').on('click', clearFavorites);
-var musicSelection;
-var movieSelection;
 var musicArray = [];
 var movieArray = [];
 var favoritesArray = [];
+var omdbKey = '95a6c9d4de568b3ebaa4ea26320798b4';
+var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -37,6 +51,10 @@ function addMovie() { // Adds a movie item to the music medo
     if ($('#search').val() === '') {
         return;
     } else if (movieArray.includes(userInput) || favoritesArray.includes(userInput)) {
+        $('#recommended').empty();
+        var newMessage = $('<h1>');
+        newMessage.text('This movie is already included in one of your lists.');
+        $('#recommended').append(newMessage);
         return;
     } else {
         movieArray.push(userInput);
@@ -54,6 +72,10 @@ function addMusic() { // Adds a music item to the music medo
     if ($('#search').val() === '') {
         return;
     } else if (musicArray.includes(userInput) || favoritesArray.includes(userInput)) {
+        $('#rec-message').empty();
+        var newMessage = $('<h1>');
+        newMessage.text('This band is already included in one of your lists.');
+        $('#rec-message').append(newMessage);
         return;
     } else {
         musicArray.push(userInput);
@@ -64,16 +86,13 @@ function addMusic() { // Adds a music item to the music medo
     }
 }
 
-function movieMEDO() {
-    var moviePicked = $(this).attr('data-name');
-    var APIkey = '95a6c9d4de568b3ebaa4ea26320798b4';
-    var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + APIkey + '&query=' + moviePicked;
+function movieMEDO(movie, callback) {
+    var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + omdbKey + '&query=' + movie;
 
     $.ajax({
         url: queryURL,
         method: 'GET'
     }).then(function(response) {
-        console.log(response);
         var movieObject = response.results[0];
         var movieTitle = movieObject.title;
         var movieSummary = movieObject.overview;
@@ -83,8 +102,7 @@ function movieMEDO() {
         var moviePoster = movieObject.poster_path;
         var posterExt = basePosterURL + moviePoster;
         var queryDetails = movieObject.id;
-        var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
-    
+
         $('#movie-title').text(movieTitle);
         $('#movie-image').attr({
             'src': posterExt.toString(),
@@ -92,32 +110,13 @@ function movieMEDO() {
         });
         $('#movie-summary').html(movieSummary);
         $('#release-date').text(releaseMoment);
-    
-        $.ajax({
-            url: youtubeURL,
-            method: 'GET'
-        }).then(function(response) {
-            var userChoice = response.videos.results;
-            $('#youtube-content').empty();
-            for (var j = 0; j <= 4; j++) {
-                var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
-                var newVideo = $('<iframe>').attr({
-                    'src': youTube,
-                    'height': '400px',
-                    'width': '600px'
-                });
-                $('#youtube-content').append(newVideo);
-            }
-        });
+
+        callback(queryDetails);
     });
 }
 
-function musicMEDO() {
-    var artistPicked = $(this).attr('data-name');
-    var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
-    var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
-    var lastfmImage = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
-    var lastfmTracks = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
+function musicMEDO(artist, callback) {
+    var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artist + '&api_key=' + lastfmKEY + '&format=json';
 
     $.ajax({
         url: lastfmURL,
@@ -149,36 +148,7 @@ function musicMEDO() {
                 newLink.append(bandLoop);
                 $('#similar-bands').append(newLink);
             }
-
-            $.ajax({
-                url: lastfmImage,
-                method: 'GET'
-            }).then(function(data) {
-                $('#band-name').text(bandName);
-                var bandPhoto = data.topalbums.album[0].image[3]['#text'];
-                $('#band-image').attr({
-                    'src': bandPhoto,
-                    'class': 'shadow-lg float-left mr-5 mb-5'
-                })
-            })
-
-            $.ajax({
-                url: lastfmTracks,
-                method: 'GET'
-            }).then(function(tracks) {
-                var topTracks = tracks.toptracks.track;
-                $('#top-tracks').empty();
-                for (var x = 0; x <= 4; x++) {
-                    var trackHREF = topTracks[x].url;
-                    var newLink = $('<a>').attr({
-                        'href': trackHREF,
-                        'target': '_blank'
-                    });
-                    var tracksLoop = $('<h6>').text(topTracks[x].name);
-                    newLink.append(tracksLoop);
-                    $('#top-tracks').append(newLink);
-                }
-            })
+            callback(artist);
         }
     });
 }
@@ -317,12 +287,10 @@ function removeItem() {
     }
 };
 
-function favoriteMedia() { // when the like button fires, this function moves the media to the favorites section
-    var key = $(this).attr('data-ref');
-    var name = $(this).attr('data-name');
+function favoriteMedia(somePick, someKey, callback) { // when the like button fires, this function moves the media to the favorites section
     var thisItem = $(this).closest('li');
     thisItem.detach();
-    var recText = $('<h2>').text('Since you liked ' + name + '').attr({
+    var recText = $('<h2>').text('Since you liked ' + somePick + '').attr({
         'id': 'rec-prompt'
     });
     $('#recommended').empty();
@@ -330,76 +298,125 @@ function favoriteMedia() { // when the like button fires, this function moves th
     $('#rec-message').prepend(recText);
     $('#favorites-text').attr('class', 'favorites-text');
 
-    if (thisItem.hasClass('music-item')) {
+    if (thisItem.hasClass('music-item')) {      // if you're liking a music item
         database.ref('Favorites/').push({
-            favorite_artist: name
+            favorite_artist: somePick
         });
-        database.ref('Listen/' + key).remove();
+        database.ref('Listen/' + someKey).remove();
 
-        var lastfmKEY = 'd1540ed62dffa25c98967940f03afc6f';
-        var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
 
-        // MUSIC RECOMMENDED AJAX CALL
-        $.ajax({
-            url: lastfmURL,
-            method: 'GET'
-        }).then(function(response) {
-            var similarBands = response.similarartists.artist;
-
-            for (var x = 0; x < 3; x++) {
-                var randomBand = Math.floor(Math.random() * similarBands.length);
-                var bandName = similarBands[randomBand].name;
-                var medoRec = $('<li>').text(bandName).addClass('recommendations animated slideInLeft delay-0.5s');
-                medoRec.attr({
-                    'data-name': bandName,
-                    'data-toggle': "modal",
-                    'data-target': "#musicModal"
-                });
-                $('#recommended').append(medoRec);
-            };
-        });
-
-    } else if (thisItem.hasClass('movie-item')) {
+    } else if (thisItem.hasClass('movie-item')) {       // if you're liking a movie item
         database.ref('Favorites/').push({
-            favorite_movie: name
+            favorite_movie: somePick
         });
-        database.ref('Watch/' + key).remove();
-
-        // MOVIE RECOMMENDED AJAX CALL
-        var moviePicked = $(this).attr('data-name');
-        var APIkey = '95a6c9d4de568b3ebaa4ea26320798b4';
-        var queryURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + APIkey + '&query=' + name;
-
-        $.ajax({
-            url: queryURL,
-            method: 'GET'
-        }).then(function(response) {
-            var movieObject = response.results[0];
-
-            // start here
-            var queryDetails = movieObject.id;
-            var recommendationsURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '/recommendations?api_key=' + APIkey + '&language=en-US&page=1';
-            var youtubeURL = 'https://api.themoviedb.org/3/movie/' + queryDetails + '?api_key=' + APIkey + '&append_to_response=videos';
-
-            $.ajax({
-                url: recommendationsURL,
-                method: 'GET'
-            }).then(function(recResponse) {
-                var recObject = recResponse.results;
-                for (var x = 0; x < 3; x++) {
-                    var randomMovie = Math.floor(Math.random() * recObject.length);
-                    var movieName = recObject[randomMovie].title;
-                    var medoRec = $('<li>').text(movieName).addClass('recommendations animated slideInLeft delay-0.5s');
-                    medoRec.attr({
-                        'data-name': movieName,
-                        'data-toggle': "modal",
-                        'data-target': "#movieModal"
-                    });
-                    $('#recommended').append(medoRec);
-                };
-            });
-        });
+        database.ref('Watch/' + someKey).remove();
+        callback(somePick);
     }
+}
+
+function getYouTube(movieID) {
+    var youtubeURL = 'https://api.themoviedb.org/3/movie/' + movieID + '?api_key=' + omdbKey + '&append_to_response=videos';
+
+    $.ajax({
+        url: youtubeURL,
+        method: 'GET'
+    }).then(function(response) {
+        var userChoice = response.videos.results;
+        $('#youtube-content').empty();
+        for (var j = 0; j <= 4; j++) {
+            var youTube = 'https://www.youtube.com/embed/' + userChoice[j].key;
+            var newVideo = $('<iframe>').attr({
+                'src': youTube,
+                'height': '400px',
+                'width': '600px'
+            });
+            $('#youtube-content').append(newVideo);
+        }
+    });
+};
+
+function getMovieRecommendations(movieID) {
+    var movieRecommendationsURL = 'https://api.themoviedb.org/3/movie/' + movieID + '/recommendations?api_key=' + omdbKey + '&language=en-US&page=1';
+
+    $.ajax({
+        url: movieRecommendationsURL,
+        method: 'GET'
+    }).then(function(recResponse) {
+        var recObject = recResponse.results;
+        for (var x = 0; x < 3; x++) {
+            var randomMovie = Math.floor(Math.random() * recObject.length);
+            var movieName = recObject[randomMovie].title;
+            var medoRec = $('<li>').text(movieName).addClass('movie-name animated slideInLeft delay-0.5s');
+            medoRec.attr({
+                'data-name': movieName,
+                'data-toggle': "modal",
+                'data-target': "#movieModal"
+            });
+            $('#recommended').append(medoRec);
+        };
+    });
+}
+
+function getBandImage(artist) {
+    var lastfmImage = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artist + '&api_key=' + lastfmKEY + '&format=json';
+
+    $.ajax({
+        url: lastfmImage,
+        method: 'GET'
+    }).then(function(data) {
+        $('#band-name').text(artist);
+        var bandPhoto = data.topalbums.album[0].image[3]['#text'];
+        $('#band-image').attr({
+            'src': bandPhoto,
+            'class': 'shadow-lg float-left mr-5 mb-5'
+        })
+    })
+}
+
+function getTopTracks(artist) {
+    var lastfmTracks = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=' + artist + '&api_key=' + lastfmKEY + '&format=json';
+
+    $.ajax({
+        url: lastfmTracks,
+        method: 'GET'
+    }).then(function(tracks) {
+        var topTracks = tracks.toptracks.track;
+        $('#top-tracks').empty();
+        for (var x = 0; x <= 4; x++) {
+            var trackHREF = topTracks[x].url;
+            var newLink = $('<a>').attr({
+                'href': trackHREF,
+                'target': '_blank'
+            });
+            var tracksLoop = $('<h6>').text(topTracks[x].name);
+            newLink.append(tracksLoop);
+            $('#top-tracks').append(newLink);
+        }
+    })
+}
+
+function getMusicRecommendations() {
+    var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
+
+    // MUSIC RECOMMENDED AJAX CALL
+    $.ajax({
+        url: lastfmURL,
+        method: 'GET'
+    }).then(function(response) {
+        var similarBands = response.similarartists.artist;
+
+        for (var x = 0; x < 3; x++) {
+            var randomBand = Math.floor(Math.random() * similarBands.length);
+            var bandName = similarBands[randomBand].name;
+            var medoRec = $('<li>').text(bandName).addClass('music-name animated slideInLeft delay-0.5s');
+            medoRec.attr({
+                'data-name': bandName,
+                'data-toggle': "modal",
+                'data-target': "#musicModal"
+            });
+            $('#recommended').append(medoRec);
+        };
+    });
 }
 
 function clearFavorites() {
