@@ -1,6 +1,6 @@
 // Global variables and event listeners
-$('#movie-btn').on('click', addMovie);    // add movie to list
-$('#music-btn').on('click', addMusic);    // add music to list
+$('#movie-btn').on('click', addMovie);              // add movie to list
+$('#music-btn').on('click', addMusic);              // add music to list
 
 $(document).on('click', '.music-name', function() { // api call to display movie info
     var artistPicked = $(this).attr('data-name');
@@ -13,15 +13,21 @@ $(document).on('click', '.movie-name', function() { // api call to display music
     movieMEDO(moviePicked, getYouTube);
 });
 
-const removeBtn = $(document).on('click', '.remove', removeItem);
-
-const likeBtn = $(document).on('click', '.like', function() {
+$(document).on('click', '.like', function() {       // moves item to favorites and recommends similar stuff
     var favePick = $(this).attr('data-name');
     var key = $(this).attr('data-ref');
-    favoriteMedia(favePick, key, getMovieRecommendations);
-});
+    var thisItem = $(this).closest('li');
     
-const clearFaveBtn = $('#clear-fave-btn').on('click', clearFavorites);
+    if (thisItem.hasClass('music-item')) {
+        favoriteMedia(favePick, key, thisItem, getMusicRecommendations);
+    } else if (thisItem.hasClass('movie-item')) {
+        favoriteMedia(favePick, key, thisItem, getMovieRecommendations);
+    }
+});
+
+$(document).on('click', '.remove', removeItem);     // removes an item from your list
+$('#clear-fave-btn').on('click', clearFavorites);   // clears all the favorites
+
 var musicArray = [];
 var movieArray = [];
 var favoritesArray = [];
@@ -148,6 +154,7 @@ function musicMEDO(artist, callback) {
                 newLink.append(bandLoop);
                 $('#similar-bands').append(newLink);
             }
+
             callback(artist);
         }
     });
@@ -287,9 +294,8 @@ function removeItem() {
     }
 };
 
-function favoriteMedia(somePick, someKey, callback) { // when the like button fires, this function moves the media to the favorites section
-    var thisItem = $(this).closest('li');
-    thisItem.detach();
+function favoriteMedia(somePick, someKey, item, callback) { // moves the media to the favorites section
+    item.detach();
     var recText = $('<h2>').text('Since you liked ' + somePick + '').attr({
         'id': 'rec-prompt'
     });
@@ -298,14 +304,14 @@ function favoriteMedia(somePick, someKey, callback) { // when the like button fi
     $('#rec-message').prepend(recText);
     $('#favorites-text').attr('class', 'favorites-text');
 
-    if (thisItem.hasClass('music-item')) {      // if you're liking a music item
+    if (item.hasClass('music-item')) {      // if you're liking a music item
         database.ref('Favorites/').push({
             favorite_artist: somePick
         });
         database.ref('Listen/' + someKey).remove();
+        callback(somePick);
 
-
-    } else if (thisItem.hasClass('movie-item')) {       // if you're liking a movie item
+    } else if (item.hasClass('movie-item')) {       // if you're liking a movie item
         database.ref('Favorites/').push({
             favorite_movie: somePick
         });
@@ -334,28 +340,6 @@ function getYouTube(movieID) {
         }
     });
 };
-
-function getMovieRecommendations(movieID) {
-    var movieRecommendationsURL = 'https://api.themoviedb.org/3/movie/' + movieID + '/recommendations?api_key=' + omdbKey + '&language=en-US&page=1';
-
-    $.ajax({
-        url: movieRecommendationsURL,
-        method: 'GET'
-    }).then(function(recResponse) {
-        var recObject = recResponse.results;
-        for (var x = 0; x < 3; x++) {
-            var randomMovie = Math.floor(Math.random() * recObject.length);
-            var movieName = recObject[randomMovie].title;
-            var medoRec = $('<li>').text(movieName).addClass('movie-name animated slideInLeft delay-0.5s');
-            medoRec.attr({
-                'data-name': movieName,
-                'data-toggle': "modal",
-                'data-target': "#movieModal"
-            });
-            $('#recommended').append(medoRec);
-        };
-    });
-}
 
 function getBandImage(artist) {
     var lastfmImage = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artist + '&api_key=' + lastfmKEY + '&format=json';
@@ -395,12 +379,11 @@ function getTopTracks(artist) {
     })
 }
 
-function getMusicRecommendations() {
-    var lastfmURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
+function getMusicRecommendations(name) {
+    var musicRecommendationsURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=' + name + '&api_key=' + lastfmKEY + '&format=json';
 
-    // MUSIC RECOMMENDED AJAX CALL
     $.ajax({
-        url: lastfmURL,
+        url: musicRecommendationsURL,
         method: 'GET'
     }).then(function(response) {
         var similarBands = response.similarartists.artist;
@@ -413,6 +396,28 @@ function getMusicRecommendations() {
                 'data-name': bandName,
                 'data-toggle': "modal",
                 'data-target': "#musicModal"
+            });
+            $('#recommended').append(medoRec);
+        };
+    });
+}
+
+function getMovieRecommendations(movieID) {
+    var movieRecommendationsURL = 'https://api.themoviedb.org/3/movie/' + movieID + '/recommendations?api_key=' + omdbKey + '&language=en-US&page=1';
+
+    $.ajax({
+        url: movieRecommendationsURL,
+        method: 'GET'
+    }).then(function(recResponse) {
+        var recObject = recResponse.results;
+        for (var x = 0; x < 3; x++) {
+            var randomMovie = Math.floor(Math.random() * recObject.length);
+            var movieName = recObject[randomMovie].title;
+            var medoRec = $('<li>').text(movieName).addClass('movie-name animated slideInLeft delay-0.5s');
+            medoRec.attr({
+                'data-name': movieName,
+                'data-toggle': "modal",
+                'data-target': "#movieModal"
             });
             $('#recommended').append(medoRec);
         };
