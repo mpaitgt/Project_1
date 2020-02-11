@@ -74,7 +74,9 @@ function movieMEDO() {
     }).then(function(response) {
 
         if (response.results.length === 0) {
-            $('#movie-title').text('This is not a movie!');
+            $('.start-content').hide();
+            $('.middle-content').hide();
+            $('#movie-title').text('Sorry - we couldn\'t find that!');
         } else {
             console.log(response);
             var movieObject = response.results[0];
@@ -86,6 +88,8 @@ function movieMEDO() {
             var moviePoster = movieObject.poster_path;
             var posterExt = basePosterURL + moviePoster;
 
+            $('.start-content').show();
+            $('.middle-content').show();
             $('#movie-title').text(movieTitle);
             $('#movie-image').attr({
                 'src': posterExt.toString(),
@@ -126,20 +130,23 @@ function musicMEDO() {
     var lastfmImage = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
     var lastfmTracks = 'https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=' + artistPicked + '&api_key=' + lastfmKEY + '&format=json';
 
-
     $.ajax({
         url: lastfmURL,
         method: 'GET'
     }).then(function(response) {
 
         if (response.error) {
-            $('#band-name').text('This is not a band');
+            $('.start-content').hide();
+            $('.middle-content').hide();
+            $('#band-name').text('Sorry - we couldn\'t find that!');
         } else {
             var bandName = response.artist.name;
             var bandBio = response.artist.bio.summary;
             var genre = response.artist.tags.tag;
             var similarBands = response.artist.similar.artist;
 
+            $('.start-content').show();
+            $('.middle-content').show();
             $('#band-bio').html(bandBio);
             $('#genre').empty();
             for (var j = 0; j < genre.length; j++) {
