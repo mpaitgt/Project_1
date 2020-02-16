@@ -1,6 +1,6 @@
 
 
-## [MEDO: A MEDIA TO DO LIST](https://mpaitgt.github.io/Project_1/) 
+## [MEDO: A MEDIA TO DO LIST](https://mpaitgt.github.io/medo-frontend/) 
 ### Alpha Version : 0.1.1
 
 ---- 
@@ -34,7 +34,7 @@ You can finally hang up the Office in here, just incase somehow you forgot that 
 ----
 
 ## Link to the live game
-[Check out MEDO](https://mpaitgt.github.io/Project_1/)
+[Check out MEDO](https://mpaitgt.github.io/medo-frontend/)
 ![](medo-example.gif)
 
 ----
