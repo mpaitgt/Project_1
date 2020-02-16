@@ -30,7 +30,6 @@ body {
     margin-top: 19px;
 }
 
-
 /* ---------- Branded styling ---------- */
 
 .medo-style {
@@ -351,6 +350,14 @@ button {
     width: 100%;
     height: 100%;
 }
+
+.navbar-cstm {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    /* background: black; */
+}
+
 
 
 /* .page-load-items {
